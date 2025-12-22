@@ -1,48 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth cursor-none">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fly Renaissance | Underground United</title>
+    <title>EssentialSuds | Handcrafted Organic Soap</title>
     
+    <!-- Tailwind CSS (via CDN for standalone functionality) -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts: Montserrat for headings, Open Sans for body -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 
+    <!-- STRIPE PAYMENT SDK (Crucial for Security) -->
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <!-- Custom Config for Tailwind Colors/Fonts -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Oswald', 'sans-serif'],
-                    },
                     colors: {
-                        'neon-purple': '#a855f7',
-                    },
-                    backgroundSize: {
-                        '300%': '300%',
-                    },
-                    animation: {
-                        'gradient': 'gradient 8s ease infinite',
-                        'spin-slow': 'spin 15s linear infinite',
-                        'blob': 'blob 7s infinite',
-                    },
-                    keyframes: {
-                        gradient: {
-                            '0%, 100%': { backgroundPosition: '0% 50%' },
-                            '50%': { backgroundPosition: '100% 50%' },
-                        },
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        brand: {
+                            black: '#2c2725', // Softer black/brown for soap aesthetic
+                            gold: '#d4a373',  // Warm earthy gold
+                            cream: '#fefae0',
+                            sage: '#ccd5ae',
+                            light: '#faf9f6'
                         }
+                    },
+                    fontFamily: {
+                        sans: ['Open Sans', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif']
                     }
                 }
             }
@@ -50,737 +41,1014 @@
     </script>
 
     <style>
-        /* Custom scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #09090b; }
-        ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #a855f7; }
+        /* Custom Utilities */
+        body { font-family: 'Open Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; }
         
-        ::selection { background-color: #a855f7; color: black; }
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Scrollbar hiding for clean UI */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Slow spin for the logo burst */
+        .spin-slow { animation: spin 20s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* --- Advanced Kinetic Cursor Styles --- */
-        .cursor-dot,
-        .cursor-outline,
-        .cursor-outline-2 {
-            position: fixed;
-            top: 0;
-            left: 0;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            z-index: 9999;
-            pointer-events: none;
+        /* Floating Animation for Ingredients */
+        .float-anim { animation: float 6s ease-in-out infinite; }
+        .float-anim-delay-1 { animation-delay: 1s; }
+        .float-anim-delay-2 { animation-delay: 2s; }
+        .float-anim-delay-3 { animation-delay: 3s; }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
         }
 
-        /* The Center Core */
-        .cursor-dot {
+        .ingredient-card:hover {
+            transform: scale(1.15) rotate(5deg);
+            z-index: 50;
+        }
+
+        /* --- NEW INTERACTIVE STYLES --- */
+        
+        /* Soap Bubble Cursor Trail */
+        .bubble {
+            position: absolute;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.4) 60%, rgba(255, 255, 255, 0.1) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float-up 1.5s ease-out forwards;
+            z-index: 9999;
+            box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(0) scale(0.5); opacity: 0.8; }
+            50% { opacity: 0.6; }
+            100% { transform: translateY(-80px) scale(1.2); opacity: 0; }
+        }
+
+        /* Ingredient Confetti Particle */
+        .particle {
+            position: absolute;
             width: 8px;
             height: 8px;
-            background-color: #a855f7;
-            box-shadow: 0 0 15px #a855f7, 0 0 5px white;
-        }
-
-        /* Inner Rotating Ring */
-        .cursor-outline {
-            width: 40px;
-            height: 40px;
-            border: 2px dashed rgba(168, 85, 247, 0.6);
-            animation: rotateRight 8s linear infinite;
-            transition: width 0.2s, height 0.2s, border-color 0.2s;
-        }
-
-        /* Outer Counter-Rotating Ring */
-        .cursor-outline-2 {
-            width: 55px;
-            height: 55px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: 1px solid rgba(168, 85, 247, 0.5);
-            border-right: 1px solid rgba(168, 85, 247, 0.5);
-            animation: rotateLeft 6s linear infinite;
-            transition: width 0.2s, height 0.2s;
-        }
-
-        @keyframes rotateRight {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        @keyframes rotateLeft {
-            0% { transform: translate(-50%, -50%) rotate(360deg); }
-            100% { transform: translate(-50%, -50%) rotate(0deg); }
-        }
-
-        /* Hover States */
-        body:hover .cursor-outline.hovered {
-            width: 70px;
-            height: 70px;
-            border-color: #fff;
-            background-color: rgba(168, 85, 247, 0.05);
-            border-style: solid;
-        }
-        body:hover .cursor-outline-2.hovered {
-            width: 90px;
-            height: 90px;
-            border-color: rgba(168, 85, 247, 0.4);
-        }
-
-        /* Spark Particles */
-        .trail-particle {
-            position: fixed;
-            width: 4px;
-            height: 4px;
-            background-color: white;
             border-radius: 50%;
             pointer-events: none;
-            z-index: 9998;
-            /* Increased duration from 0.8s to 2s for longer life */
-            animation: sparkFall 2s ease-out forwards;
+            animation: particle-burst 0.8s ease-out forwards;
+            z-index: 40;
+        }
+        @keyframes particle-burst {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
         }
 
-        @keyframes sparkFall {
-            0% {
-                opacity: 1;
-                transform: translate(0, 0) scale(1);
-                background-color: white;
-            }
-            20% {
-                background-color: #a855f7; /* Turn purple sooner */
-            }
-            70% {
-                opacity: 0.8; /* Stay visible much longer */
-            }
-            100% {
-                opacity: 0;
-                transform: translate(var(--tx), 100px) scale(0); /* Fall further down (gravity) */
-                background-color: #a855f7;
-            }
+        /* Pop Animation for Info Box */
+        .pop-in {
+            animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes pop {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
-        /* Glitch Text Effect */
-        .glitch-text {
-            position: relative;
-        }
-        
-        .glitch-text::before,
-        .glitch-text::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .glitch-text::before {
-            left: 2px;
-            text-shadow: -1px 0 #ff00c1;
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim 5s infinite linear alternate-reverse;
-        }
-
-        .glitch-text::after {
-            left: -2px;
-            text-shadow: -1px 0 #00fff9;
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim2 5s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch-anim {
-            0% { clip: rect(14px, 9999px, 122px, 0); }
-            5% { clip: rect(66px, 9999px, 86px, 0); }
-            10% { clip: rect(6px, 9999px, 16px, 0); }
-            15% { clip: rect(97px, 9999px, 32px, 0); }
-            20% { clip: rect(32px, 9999px, 87px, 0); }
-            100% { clip: rect(54px, 9999px, 49px, 0); }
-        }
-
-        @keyframes glitch-anim2 {
-            0% { clip: rect(54px, 9999px, 50px, 0); }
-            5% { clip: rect(12px, 9999px, 78px, 0); }
-            10% { clip: rect(87px, 9999px, 3px, 0); }
-            15% { clip: rect(3px, 9999px, 92px, 0); }
-            20% { clip: rect(18px, 9999px, 54px, 0); }
-            100% { clip: rect(41px, 9999px, 12px, 0); }
-        }
-
-        /* Scroll Reveal Animation */
+        /* Scroll Reveal Effect */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
         }
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Button Ripple Effect */
+        .btn-ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        .ripple {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-anim 0.6s linear;
+            pointer-events: none;
+        }
+        @keyframes ripple-anim {
+            to { transform: scale(4); opacity: 0; }
+        }
+        
+        /* Cart Bump Animation */
+        @keyframes bump {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        .bump {
+            animation: bump 0.3s ease-in-out;
+        }
     </style>
 </head>
-<body class="bg-black text-white font-sans overflow-x-hidden selection:bg-neon-purple selection:text-black">
+<body class="bg-brand-light text-brand-black overflow-x-hidden cursor-default">
 
-    <div class="cursor-dot hidden md:block"></div>
-    <div class="cursor-outline hidden md:block"></div>
-    <div class="cursor-outline-2 hidden md:block"></div>
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo (Text for Nav) -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer group" onclick="app.navigate('home')">
+                    <span class="font-heading font-bold text-2xl tracking-widest text-brand-black group-hover:text-brand-gold transition-colors">ESSENTIALSUDS</span>
+                </div>
 
-    <div class="fixed inset-0 pointer-events-none opacity-[0.04] z-50 mix-blend-overlay" 
-         style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E')">
-    </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#" onclick="event.preventDefault(); app.scrollToSection('products')" class="text-sm font-medium hover:text-brand-gold transition-colors uppercase tracking-wide relative group">
+                        The Bar
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#" onclick="event.preventDefault(); app.scrollToSection('ingredients')" class="text-sm font-medium hover:text-brand-gold transition-colors uppercase tracking-wide relative group">
+                        Ingredients
+                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#" onclick="event.preventDefault(); app.scrollToSection('about')" class="text-sm font-medium hover:text-brand-gold transition-colors uppercase tracking-wide relative group">
+                        Our Story
+                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </div>
 
-    <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 border-b border-white/5 bg-transparent py-6">
-        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-            <div class="text-2xl font-black tracking-tighter uppercase italic font-display bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 hover-target cursor-pointer" onclick="window.scrollTo(0, 0)">
-                Fly Renaissance
+                <!-- Icons -->
+                <div class="flex items-center space-x-6">
+                    <button id="cart-btn" class="relative text-brand-black hover:text-brand-gold transition-colors transform hover:scale-110 duration-200" onclick="app.toggleCart()">
+                        <i class="fa-solid fa-bag-shopping text-xl"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-brand-gold text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center opacity-0 transition-opacity duration-300">0</span>
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button class="md:hidden text-brand-black text-xl" onclick="app.toggleMobileMenu()">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
             </div>
-
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#mission" class="text-sm font-bold uppercase tracking-widest hover:text-purple-400 transition-colors hover-target">Manifesto</a>
-                <a href="#events" class="text-sm font-bold uppercase tracking-widest hover:text-purple-400 transition-colors hover-target">Activations</a>
-                <a href="#artists" class="text-sm font-bold uppercase tracking-widest hover:text-purple-400 transition-colors hover-target">The Roster</a>
-                <a href="#shop" class="text-sm font-bold uppercase tracking-widest hover:text-purple-400 transition-colors hover-target">Shop</a>
-                
-                <button class="relative group hover-target">
-                    <i data-lucide="shopping-bag" class="w-6 h-6 hover:text-purple-400 transition-colors"></i>
-                    <span id="cart-badge" class="absolute -top-2 -right-2 bg-purple-600 text-[10px] font-bold w-4 h-4 hidden items-center justify-center rounded-full">0</span>
-                </button>
+        </div>
+        
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#" onclick="event.preventDefault(); app.scrollToSection('products'); app.toggleMobileMenu()" class="block py-2 text-base font-medium text-gray-800">The Bar</a>
+                <a href="#" onclick="event.preventDefault(); app.scrollToSection('ingredients'); app.toggleMobileMenu()" class="block py-2 text-base font-medium text-gray-800">Ingredients</a>
+                <a href="#" onclick="event.preventDefault(); app.scrollToSection('about'); app.toggleMobileMenu()" class="block py-2 text-base font-medium text-gray-800">Our Story</a>
             </div>
-
-            <button id="mobile-menu-btn" class="md:hidden text-white hover-target">
-                <i data-lucide="menu"></i>
-            </button>
         </div>
     </nav>
 
-    <div id="mobile-menu" class="fixed inset-0 z-30 bg-black pt-24 px-6 hidden md:hidden transition-opacity duration-300">
-        <div class="flex flex-col space-y-8">
-            <a href="#mission" class="mobile-link text-4xl font-black uppercase italic font-display tracking-tighter text-left border-b border-gray-800 pb-4">Manifesto</a>
-            <a href="#events" class="mobile-link text-4xl font-black uppercase italic font-display tracking-tighter text-left border-b border-gray-800 pb-4">Activations</a>
-            <a href="#artists" class="mobile-link text-4xl font-black uppercase italic font-display tracking-tighter text-left border-b border-gray-800 pb-4">The Roster</a>
-            <a href="#shop" class="mobile-link text-4xl font-black uppercase italic font-display tracking-tighter text-left border-b border-gray-800 pb-4">Shop</a>
+    <!-- MAIN CONTENT CONTAINER -->
+    <main id="main-content" class="pt-20">
+        <!-- Rendered via JS -->
+    </main>
+
+    <!-- CART DRAWER -->
+    <div id="cart-overlay" class="fixed inset-0 bg-black/50 z-[60] hidden transition-opacity duration-300 opacity-0" onclick="app.toggleCart()"></div>
+    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-white z-[70] transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
+        <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+            <h2 class="text-xl font-heading font-semibold">Your Basket</h2>
+            <button onclick="app.toggleCart()" class="text-gray-400 hover:text-brand-black transform hover:rotate-90 transition-transform duration-300">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
+        </div>
+        
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-6">
+            <!-- Cart items injected here -->
+        </div>
+
+        <div class="p-6 border-t border-gray-100 bg-gray-50">
+            <div class="flex justify-between mb-4 text-lg font-bold">
+                <span>Subtotal</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <p class="text-xs text-gray-500 mb-4 text-center">
+                <i class="fa-solid fa-lock text-brand-gold mr-1"></i> Payments secured by Stripe
+            </p>
+            <!-- UPDATED CHECKOUT BUTTON -->
+            <button id="checkout-btn" onclick="app.createRipple(event); app.processCheckout()" class="btn-ripple w-full bg-brand-black text-white py-4 font-bold tracking-widest hover:bg-brand-gold transition-colors duration-300 flex items-center justify-center gap-2">
+                <span>CHECKOUT</span>
+            </button>
         </div>
     </div>
 
-    <header class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-900/30 rounded-full blur-[100px] animate-blob mix-blend-screen"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-blue-900/30 rounded-full blur-[100px] animate-blob animation-delay-2000 mix-blend-screen"></div>
-        <div class="absolute bottom-1/4 left-1/3 w-80 h-80 bg-pink-900/20 rounded-full blur-[100px] animate-blob animation-delay-4000 mix-blend-screen"></div>
-
-        <div class="relative z-10 max-w-7xl mx-auto px-6 text-center reveal">
-            <div class="inline-block mb-4 px-4 py-1 border border-purple-500/50 rounded-full bg-purple-900/10 backdrop-blur-sm animate-pulse">
-                <span class="text-xs font-bold tracking-widest uppercase text-purple-300">Coming 2026</span>
-            </div>
-            <h1 class="text-6xl md:text-8xl lg:text-9xl font-black uppercase italic font-display tracking-tighter leading-[0.9] mb-6">
-                Underground<br/>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-white to-purple-500 animate-gradient bg-300% glitch-text" data-text="United">United</span>
-            </h1>
-            <p class="max-w-2xl mx-auto text-gray-400 text-lg md:text-xl mb-10 leading-relaxed reveal">
-                A multidisciplinary cultural collider. Music, Fashion, Art, and Culinary expression meeting in the third spaces of Austin.
-            </p>
-            <div class="flex flex-col md:flex-row items-center justify-center gap-4 reveal">
-                <a href="#events" class="hover-target w-full md:w-auto px-8 py-4 bg-white text-black font-black uppercase tracking-wider hover:bg-purple-400 hover:scale-105 transition-all duration-300 text-center shadow-[0_0_20px_rgba(255,255,255,0.3)]">
-                    Explore The Series
-                </a>
-                <a href="#mission" class="hover-target w-full md:w-auto px-8 py-4 border border-white/20 hover:border-white font-bold uppercase tracking-wider transition-colors text-center">
-                    Our Mission
-                </a>
+    <!-- PRODUCT DETAIL MODAL -->
+    <div id="product-modal" class="fixed inset-0 z-[80] hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="app.closeModal()"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white shadow-2xl rounded-sm sm:rounded-lg animate-fade-in">
+            <button onclick="app.closeModal()" class="absolute top-4 right-4 z-10 bg-white rounded-full p-2 shadow hover:bg-gray-100 transition-transform hover:rotate-90">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div id="modal-content" class="flex flex-col md:flex-row">
+                <!-- Content injected here -->
             </div>
         </div>
-        
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <i data-lucide="arrow-right" class="w-6 h-6 rotate-90 text-gray-500"></i>
-        </div>
-    </header>
+    </div>
 
-    <section id="mission" class="py-24 bg-zinc-950 relative border-t border-white/5">
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div class="reveal">
-                    <h2 class="text-4xl md:text-6xl font-black uppercase italic font-display mb-8 leading-none">
-                        Not Just An Organization.<br/>It's A <span class="text-purple-500">Movement.</span>
-                    </h2>
-                    <div class="space-y-6 text-gray-400 text-lg">
-                        <p>
-                            <strong class="text-white">Fly Renaissance</strong> operates at the intersection of music, art, fashion, automotive culture, and culinary expression. We propose a series of immersive activations that function as "Third Spaces"—sanctuaries for the underground that blur the lines between distinct creative industries.
-                        </p>
-                        <p>
-                            We reject the sterile and the corporate. Our activities reflect the raw, physical landscape of the city by utilizing non-traditional venues. From industrial rooftops to outdoor lots, we activate the underused spaces of Austin.
-                        </p>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="space-y-4 translate-y-8">
-                        <div class="bg-zinc-900 p-6 border border-white/5 hover:border-purple-500/50 transition-colors hover:-translate-y-2 duration-300 reveal">
-                            <i data-lucide="music" class="w-8 h-8 text-purple-400 mb-4"></i>
-                            <h3 class="font-bold text-xl mb-2">Sonic Architecture</h3>
-                            <p class="text-sm text-gray-500">High-energy showcases and producer battles.</p>
-                        </div>
-                        <div class="bg-zinc-900 p-6 border border-white/5 hover:border-purple-500/50 transition-colors hover:-translate-y-2 duration-300 reveal">
-                            <i data-lucide="zap" class="w-8 h-8 text-yellow-400 mb-4"></i>
-                            <h3 class="font-bold text-xl mb-2">Street Culture</h3>
-                            <p class="text-sm text-gray-500">Custom builds, car meets, and streetwear pop-ups.</p>
-                        </div>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="bg-zinc-900 p-6 border border-white/5 hover:border-purple-500/50 transition-colors hover:-translate-y-2 duration-300 reveal">
-                            <i data-lucide="layers" class="w-8 h-8 text-blue-400 mb-4"></i>
-                            <h3 class="font-bold text-xl mb-2">Visual Immersion</h3>
-                            <p class="text-sm text-gray-500">Tattoo parties, boat parties, and industrial runways.</p>
-                        </div>
-                        <div class="bg-zinc-900 p-6 border border-white/5 hover:border-purple-500/50 transition-colors hover:-translate-y-2 duration-300 reveal">
-                            <i data-lucide="user" class="w-8 h-8 text-green-400 mb-4"></i>
-                            <h3 class="font-bold text-xl mb-2">Underground United</h3>
-                            <p class="text-sm text-gray-500">Breaking silos between chefs, DJs, and designers.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="events" class="py-24 bg-black relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
-                <div>
-                    <h4 class="text-purple-500 font-bold uppercase tracking-widest mb-2">#ATXCreatives 2026</h4>
-                    <h2 class="text-5xl md:text-7xl font-black uppercase italic font-display tracking-tighter">The Activation Series</h2>
-                </div>
-                <p class="max-w-md text-gray-400 mt-6 md:mt-0">
-                    A full year of culturally significant events designed to highlight the artists and tastemakers who represent the true spirit of Austin.
+    <!-- FOOTER -->
+    <footer class="bg-brand-black text-white pt-16 pb-8 reveal">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-gray-700 pb-12">
+            <div>
+                <h3 class="font-heading font-bold text-2xl tracking-widest mb-6">ESSENTIALSUDS</h3>
+                <p class="text-gray-300 text-sm leading-relaxed">
+                    Handcrafted organic soap made with the finest essential oils and botanicals. Pure, sustainable, and luxurious.
                 </p>
+                <div class="flex space-x-4 mt-6">
+                    <a href="#" class="text-gray-400 hover:text-white transform hover:scale-125 transition-transform"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transform hover:scale-125 transition-transform"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transform hover:scale-125 transition-transform"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
             </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="group relative h-[450px] bg-zinc-900 border border-white/10 overflow-hidden hover:border-purple-500 transition-all duration-300 reveal hover-target cursor-none">
-                    <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?q=80&w=1974&auto=format&fit=crop" alt="Concert" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-10"></div>
-                    <div class="absolute bottom-0 left-0 p-6 z-20 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                        <div class="text-xs font-bold text-purple-400 mb-2 uppercase tracking-widest">Q1 2026</div>
-                        <h3 class="text-3xl font-black uppercase italic font-display mb-2 leading-none">Album<br>Releases</h3>
-                        <p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
-                            Immersive parties for Loud Lord Supes and Dii. Live performances, DJ sets, and limited merch drops.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="group relative h-[450px] bg-zinc-900 border border-white/10 overflow-hidden hover:border-green-500 transition-all duration-300 reveal hover-target cursor-none">
-                    <img src="https://images.unsplash.com/photo-1620336655174-3266d581335f?q=80&w=1974&auto=format&fit=crop" alt="Screen Printing" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-10"></div>
-                    <div class="absolute bottom-0 left-0 p-6 z-20 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                        <div class="text-xs font-bold text-green-400 mb-2 uppercase tracking-widest">Spring 2026</div>
-                        <h3 class="text-3xl font-black uppercase italic font-display mb-2 leading-none">Live<br>Upcycling</h3>
-                        <p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
-                            Screen printing activation. Bring your own garments or customize repurposed materials on-site.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="group relative h-[450px] bg-zinc-900 border border-white/10 overflow-hidden hover:border-blue-500 transition-all duration-300 reveal hover-target cursor-none">
-                     <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=1974&auto=format&fit=crop" alt="Fashion Show" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-10"></div>
-                    <div class="absolute bottom-0 left-0 p-6 z-20 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                        <div class="text-xs font-bold text-blue-400 mb-2 uppercase tracking-widest">Summer 2026</div>
-                        <h3 class="text-3xl font-black uppercase italic font-display mb-2 leading-none">The<br>Runway</h3>
-                        <p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
-                            Unconventional fashion show showcasing streetwear, independent designers, and visual artists.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="group relative h-[450px] bg-zinc-900 border border-white/10 overflow-hidden hover:border-yellow-500 transition-all duration-300 reveal hover-target cursor-none">
-                     <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop" alt="Culinary" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-10"></div>
-                    <div class="absolute bottom-0 left-0 p-6 z-20 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                        <div class="text-xs font-bold text-yellow-400 mb-2 uppercase tracking-widest">Launch</div>
-                        <h3 class="text-3xl font-black uppercase italic font-display mb-2 leading-none">"The<br>Itis"</h3>
-                        <p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
-                            Chef Eric Bennett's new culinary project. Soulful regional cuisine meeting bold flavors.
-                        </p>
-                    </div>
+            <div>
+                <h4 class="font-bold text-sm uppercase tracking-wider mb-6">Shop</h4>
+                <ul class="space-y-3 text-sm text-gray-400">
+                    <li><a href="#" onclick="app.scrollToSection('products')" class="hover:text-brand-gold transition-colors">Our Signature Bar</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-sm uppercase tracking-wider mb-6">Support</h4>
+                <ul class="space-y-3 text-sm text-gray-400">
+                    <li><a href="#" onclick="event.preventDefault(); app.openInfoModal('ingredients')" class="hover:text-brand-gold transition-colors">Ingredients List</a></li>
+                    <li><a href="#" onclick="event.preventDefault(); app.openInfoModal('sustainability')" class="hover:text-brand-gold transition-colors">Sustainability</a></li>
+                    <li><a href="#" onclick="event.preventDefault(); app.openInfoModal('shipping')" class="hover:text-brand-gold transition-colors">Shipping & Returns</a></li>
+                    <li><a href="#" onclick="event.preventDefault(); app.openInfoModal('contact')" class="hover:text-brand-gold transition-colors">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-sm uppercase tracking-wider mb-6">Stay Connected</h4>
+                <p class="text-gray-400 text-sm mb-4">Subscribe for release updates.</p>
+                <div class="flex border-b border-gray-600 pb-2">
+                    <input type="email" placeholder="Email Address" class="bg-transparent border-none outline-none text-white w-full placeholder-gray-500 focus:placeholder-white transition-all">
+                    <button class="text-brand-gold font-bold uppercase text-xs hover:text-white transition-colors">Join</button>
                 </div>
             </div>
         </div>
-    </section>
-
-    <section id="artists" class="py-24 bg-zinc-950 border-y border-white/5">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl md:text-6xl font-black uppercase italic font-display text-center mb-16 reveal">The Creatives</h2>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-black border border-white/10 p-8 hover:border-white/30 transition-all hover:bg-zinc-900/50 reveal group hover-target">
-                    <div class="w-32 h-32 mb-6 rounded-full overflow-hidden border-2 border-purple-500 mx-auto relative">
-                         <img src="https://images.unsplash.com/photo-1534083296181-a9667793d987?q=80&w=1974&auto=format&fit=crop" alt="Loud Lord Supes" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="text-center">
-                        <h3 class="text-2xl font-black uppercase mb-2">Loud Lord Supes</h3>
-                        <p class="text-purple-400 text-sm font-bold uppercase tracking-wider mb-4">Hip Hop / Lyricist</p>
-                        <p class="text-gray-500 text-sm leading-relaxed mb-6">
-                            Pushing the boundaries of the Austin soundscape. Featured artist for the Q1 2026 Album Release series.
-                        </p>
-                        <div class="flex justify-center space-x-4">
-                            <i data-lucide="music" class="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors"></i>
-                            <i data-lucide="instagram" class="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-black border border-white/10 p-8 hover:border-white/30 transition-all hover:bg-zinc-900/50 reveal group hover-target">
-                    <div class="w-32 h-32 mb-6 rounded-full overflow-hidden border-2 border-blue-500 mx-auto relative">
-                        <img src="https://images.unsplash.com/photo-1520697830682-bbb6e85e2b0b?q=80&w=2070&auto=format&fit=crop" alt="Dii" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="text-center">
-                        <h3 class="text-2xl font-black uppercase mb-2">Dii</h3>
-                        <p class="text-blue-400 text-sm font-bold uppercase tracking-wider mb-4">R&B / Soul</p>
-                        <p class="text-gray-500 text-sm leading-relaxed mb-6">
-                            A voice that defines the underground emotion. Headlining the immersive listening sessions.
-                        </p>
-                        <div class="flex justify-center space-x-4">
-                            <i data-lucide="music" class="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors"></i>
-                            <i data-lucide="instagram" class="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-black border border-white/10 p-8 hover:border-white/30 transition-all hover:bg-zinc-900/50 reveal group hover-target">
-                     <div class="w-32 h-32 mb-6 rounded-full overflow-hidden border-2 border-yellow-500 mx-auto relative">
-                        <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=1977&auto=format&fit=crop" alt="Eric Bennett" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="text-center">
-                        <h3 class="text-2xl font-black uppercase mb-2">Eric Bennett</h3>
-                        <p class="text-yellow-400 text-sm font-bold uppercase tracking-wider mb-4">Culinary Artist</p>
-                        <p class="text-gray-500 text-sm leading-relaxed mb-6">
-                            The mind behind "The Itis." Bringing bold flavors and soul food to the forefront of the creative landscape.
-                        </p>
-                        <div class="flex justify-center space-x-4">
-                            <i data-lucide="instagram" class="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-20 bg-gradient-to-b from-purple-900/20 to-black overflow-hidden relative">
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="absolute top-10 left-10 w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-            <div class="absolute top-40 right-20 w-3 h-3 bg-green-500 rounded-full animate-pulse delay-700"></div>
-            <div class="absolute bottom-20 left-1/2 w-2 h-2 bg-blue-500 rounded-full animate-pulse delay-1000"></div>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-6 relative reveal">
-            <div class="flex flex-col lg:flex-row items-center gap-12">
-                <div class="lg:w-1/2">
-                    <div class="inline-flex items-center space-x-2 text-green-400 border border-green-500/30 bg-green-900/10 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
-                        <i data-lucide="zap" class="w-4 h-4"></i>
-                        <span>Street Team Tech</span>
-                    </div>
-                    <h2 class="text-4xl md:text-5xl font-black uppercase italic font-display mb-6">The City Is Our Canvas</h2>
-                    <p class="text-gray-300 mb-8 text-lg">
-                        We bridge the physical and digital worlds. Look for our NFC-enabled posters and dynamic QR codes across East 6th, Red River, and UT Campus.
-                    </p>
-                    <ul class="space-y-4">
-                        <li class="flex items-center space-x-3 text-gray-400 group">
-                            <div class="w-1.5 h-1.5 bg-purple-500 group-hover:bg-green-400 group-hover:scale-150 transition-all"></div>
-                            <span class="group-hover:text-white transition-colors">Tap-to-open NFC Posters & Stickers</span>
-                        </li>
-                        <li class="flex items-center space-x-3 text-gray-400 group">
-                            <div class="w-1.5 h-1.5 bg-purple-500 group-hover:bg-green-400 group-hover:scale-150 transition-all"></div>
-                            <span class="group-hover:text-white transition-colors">Mobile Projection Drops at SXSW</span>
-                        </li>
-                        <li class="flex items-center space-x-3 text-gray-400 group">
-                            <div class="w-1.5 h-1.5 bg-purple-500 group-hover:bg-green-400 group-hover:scale-150 transition-all"></div>
-                            <span class="group-hover:text-white transition-colors">Citywide Creative Scavenger Hunts</span>
-                        </li>
-                        <li class="flex items-center space-x-3 text-gray-400 group">
-                            <div class="w-1.5 h-1.5 bg-purple-500 group-hover:bg-green-400 group-hover:scale-150 transition-all"></div>
-                            <span class="group-hover:text-white transition-colors">AR Location-Based Filters</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="lg:w-1/2 relative">
-                    <div class="aspect-square bg-zinc-900 border border-white/10 flex items-center justify-center relative group cursor-none hover-target">
-                        <div class="absolute inset-4 border-2 border-dashed border-gray-700 animate-spin-slow group-hover:border-green-500 transition-colors"></div>
-                        <div class="absolute inset-0 bg-purple-500/5 mix-blend-screen group-hover:bg-green-500/10 transition-colors"></div>
-                        <div class="text-center relative z-10">
-                            <div class="bg-white p-4 inline-block mb-4 transform group-hover:scale-110 transition-transform">
-                                <div class="w-32 h-32 bg-black flex items-center justify-center">
-                                    <i data-lucide="qr-code" class="w-20 h-20 text-white"></i>
-                                </div>
-                            </div>
-                            <p class="font-mono text-xs text-green-400 animate-pulse">SCAN TO UNLOCK EXCLUSIVE CONTENT</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="shop" class="py-24 bg-black">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex justify-between items-center mb-12 reveal">
-                <h2 class="text-4xl font-black uppercase italic font-display">The Supply</h2>
-                <button class="hover-target text-sm font-bold uppercase tracking-widest hover:text-purple-400 border-b border-transparent hover:border-purple-400 pb-1 transition-all">
-                    View All
-                </button>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="group reveal hover-target">
-                    <div class="bg-zinc-900 aspect-[4/5] mb-4 relative overflow-hidden cursor-none">
-                        <div class="absolute top-4 left-4 bg-purple-600 text-white text-[10px] font-bold px-2 py-1 uppercase z-20">New Drop</div>
-                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1780&auto=format&fit=crop" alt="Tee" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-500">
-                        
-                        <a href="https://buy.stripe.com/test_bJe00c7nt2dac3Yd1e5EY00" target="_blank" class="absolute bottom-0 left-0 w-full z-30 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hover-target">
-                            <div class="bg-white text-black font-bold uppercase py-4 text-center hover:bg-purple-400 hover:text-white transition-colors cursor-pointer">
-                                Buy Now
-                            </div>
-                        </a>
-                    </div>
-                    <h3 class="font-bold uppercase text-lg group-hover:text-purple-400 transition-colors">Underground United Tee</h3>
-                    <p class="text-gray-500">$45.00</p>
-                </div>
-
-                <div class="group reveal hover-target" style="transition-delay: 100ms">
-                    <div class="bg-zinc-900 aspect-[4/5] mb-4 relative overflow-hidden cursor-none">
-                        <img src="https://images.unsplash.com/photo-1629814408990-826d708f36a5?q=80&w=2070&auto=format&fit=crop" alt="USB" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-500">
-                        <button class="add-to-cart absolute bottom-0 left-0 w-full bg-white text-black font-bold uppercase py-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hover:bg-purple-400 hover:text-white z-20">
-                            Add to Cart
-                        </button>
-                    </div>
-                    <h3 class="font-bold uppercase text-lg group-hover:text-purple-400 transition-colors">3D Printed Mixtape USB</h3>
-                    <p class="text-gray-500">$25.00</p>
-                </div>
-
-                <div class="group reveal hover-target" style="transition-delay: 200ms">
-                    <div class="bg-zinc-900 aspect-[4/5] mb-4 relative overflow-hidden cursor-none">
-                        <img src="https://images.unsplash.com/photo-1572375992501-4b0892d50c69?q=80&w=1973&auto=format&fit=crop" alt="Poster" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-500">
-                        <button class="add-to-cart absolute bottom-0 left-0 w-full bg-white text-black font-bold uppercase py-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hover:bg-purple-400 hover:text-white z-20">
-                            Add to Cart
-                        </button>
-                    </div>
-                    <h3 class="font-bold uppercase text-lg group-hover:text-purple-400 transition-colors">Screen Print Poster #001</h3>
-                    <p class="text-gray-500">$30.00</p>
-                </div>
-
-                <div class="group reveal hover-target" style="transition-delay: 300ms">
-                    <div class="bg-zinc-900 aspect-[4/5] mb-4 relative overflow-hidden cursor-none">
-                        <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=1936&auto=format&fit=crop" alt="Cap" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-500">
-                        <button class="add-to-cart absolute bottom-0 left-0 w-full bg-white text-black font-bold uppercase py-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hover:bg-purple-400 hover:text-white z-20">
-                            Add to Cart
-                        </button>
-                    </div>
-                    <h3 class="font-bold uppercase text-lg group-hover:text-purple-400 transition-colors">Fly Renaissance Cap</h3>
-                    <p class="text-gray-500">$35.00</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-zinc-950 border-t border-white/10 pt-20 pb-10">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-start mb-16">
-                <div class="mb-10 md:mb-0">
-                    <div class="text-3xl font-black uppercase italic font-display mb-6">Fly Renaissance</div>
-                    <p class="max-w-sm text-gray-500 mb-6">
-                        Building inclusive platforms, strengthening networks, and contributing to the ongoing evolution of Austin’s creative identity.
-                    </p>
-                    <div class="flex space-x-6">
-                        <i data-lucide="instagram" class="w-6 h-6 text-gray-400 hover:text-white cursor-pointer hover-target"></i>
-                        <i data-lucide="twitter" class="w-6 h-6 text-gray-400 hover:text-white cursor-pointer hover-target"></i>
-                        <i data-lucide="disc" class="w-6 h-6 text-gray-400 hover:text-white cursor-pointer hover-target"></i>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-16">
-                    <div>
-                        <h4 class="font-bold uppercase text-sm text-gray-300 mb-6 tracking-widest">Sitemap</h4>
-                        <ul class="space-y-4 text-gray-500 text-sm">
-                            <li class="hover:text-white cursor-pointer hover-target">Home</li>
-                            <li class="hover:text-white cursor-pointer hover-target">Manifesto</li>
-                            <li class="hover:text-white cursor-pointer hover-target">Activations</li>
-                            <li class="hover:text-white cursor-pointer hover-target">Shop</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-bold uppercase text-sm text-gray-300 mb-6 tracking-widest">Connect</h4>
-                        <ul class="space-y-4 text-gray-500 text-sm">
-                            <li class="hover:text-white cursor-pointer hover-target">Contact Us</li>
-                            <li class="hover:text-white cursor-pointer hover-target">Street Team</li>
-                            <li class="hover:text-white cursor-pointer hover-target">Sponsorships</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 uppercase tracking-widest">
-                <div>© 2026 Fly Renaissance. Austin, TX.</div>
-                <div class="mt-4 md:mt-0">Built for the Underground</div>
-            </div>
+        <div class="text-center pt-8 text-gray-500 text-xs">
+            &copy; 2025 EssentialSuds. All rights reserved.
         </div>
     </footer>
 
+    <!-- JAVASCRIPT APPLICATION LOGIC -->
     <script>
-        // Initialize Icons
-        lucide.createIcons();
-
-        // --- Advanced Kinetic Cursor Logic ---
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorOutline = document.querySelector('.cursor-outline');
-        const cursorOutline2 = document.querySelector('.cursor-outline-2');
-        const hoverTargets = document.querySelectorAll('.hover-target, a, button, .group');
-
-        let mouseX = 0;
-        let mouseY = 0;
-        let outlineX = 0;
-        let outlineY = 0;
-        let lastMoveTime = Date.now();
-        let isIdle = false;
-
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            lastMoveTime = Date.now();
-            isIdle = false;
-
-            // Dot follows instantly
-            cursorDot.style.left = `${mouseX}px`;
-            cursorDot.style.top = `${mouseY}px`;
-            
-            // Create "Spark" Trail
-            if (Math.random() > 0.7) { 
-                createSpark(mouseX, mouseY);
-            }
-        });
-
-        // Animation Loop
-        function animateCursor() {
-            // Smooth outline movement
-            outlineX += (mouseX - outlineX) * 0.15; // Ease factor
-            outlineY += (mouseY - outlineY) * 0.15;
-
-            cursorOutline.style.left = `${outlineX}px`;
-            cursorOutline.style.top = `${outlineY}px`;
-            
-            cursorOutline2.style.left = `${outlineX}px`;
-            cursorOutline2.style.top = `${outlineY}px`;
-
-            // Idle Detection logic
-            if (Date.now() - lastMoveTime > 500) { 
-                // Constant "simmering" effect when stopped
-                if (Math.random() > 0.8) {
-                    const angle = Math.random() * Math.PI * 2;
-                    const radius = 25; 
-                    const sparkX = outlineX + Math.cos(angle) * radius;
-                    const sparkY = outlineY + Math.sin(angle) * radius;
-                    createSpark(sparkX, sparkY);
+        const app = (() => {
+            // --- STATE ---
+            const state = {
+                // REDUCED TO SINGLE PRODUCT
+                products: [
+                    {
+                        id: 1,
+                        name: "Texas Honey & Vanilla Oat",
+                        category: "bar",
+                        price: 12.00,
+                        // Using a dummy price ID for demonstration. 
+                        // In production, replace 'price_123...' with your actual Stripe Price ID.
+                        stripePriceId: "price_123456789", 
+                        image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?q=80&w=800&auto=format&fit=crop",
+                        shortDesc: "Local Texas honey and sweet almond oil blended with exfoliating rolled oats.",
+                        weight: "5 oz",
+                        skinType: "All Types / Dry",
+                        scent: "Warm / Sweet",
+                        ingredients: ["Colloidal Oats", "Texas Honey", "Sweet Almond Oil", "Vanilla Oil", "Rolled Oats"],
+                        rating: 5.0
+                    }
+                ],
+                cart: [],
+                activeCategory: 'all',
+                ingredients: {
+                    'honey': {
+                        title: "Local Texas Honey",
+                        desc: "A natural humectant that draws moisture to the skin. Packed with antioxidants, it helps repair skin barriers and gives a natural, warm glow.",
+                        icon: "fa-jar",
+                        color: "text-amber-500",
+                        bgColor: "bg-amber-100",
+                        particleColor: "#f59e0b"
+                    },
+                    'oats': {
+                        title: "Colloidal Oats",
+                        desc: "Finely ground oats that soothe itchiness and calm inflammation. Perfect for sensitive skin or eczema-prone areas.",
+                        icon: "fa-wheat-awn",
+                        color: "text-brand-sage",
+                        bgColor: "bg-[#e8f0d8]",
+                        particleColor: "#ccd5ae"
+                    },
+                    'almond': {
+                        title: "Sweet Almond Oil",
+                        desc: "Rich in Vitamin E and A, this lightweight oil penetrates deeply to soften skin without clogging pores. Improves complexion and skin tone.",
+                        icon: "fa-droplet",
+                        color: "text-yellow-600",
+                        bgColor: "bg-yellow-100",
+                        particleColor: "#ca8a04"
+                    },
+                    'vanilla': {
+                        title: "Vanilla Essential Oil",
+                        desc: "Beyond its comforting aroma, vanilla is rich in antioxidants that help reverse skin damage and soothe inflammation.",
+                        icon: "fa-spa",
+                        color: "text-brand-black",
+                        bgColor: "bg-gray-200",
+                        particleColor: "#2c2725"
+                    },
+                    'rolled': {
+                        title: "Rolled Oats",
+                        desc: "Whole oats provide gentle, natural exfoliation to buff away dead skin cells, revealing softer, smoother skin underneath.",
+                        icon: "fa-bowl-rice",
+                        color: "text-stone-600",
+                        bgColor: "bg-stone-200",
+                        particleColor: "#78716c"
+                    }
                 }
-            }
+            };
 
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        // Hover Effects
-        hoverTargets.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursorOutline.classList.add('hovered');
-                cursorOutline2.classList.add('hovered');
-            });
-            el.addEventListener('mouseleave', () => {
-                cursorOutline.classList.remove('hovered');
-                cursorOutline2.classList.remove('hovered');
-            });
-        });
-
-        function createSpark(x, y) {
-            const spark = document.createElement('div');
-            spark.classList.add('trail-particle');
-            document.body.appendChild(spark);
+            // --- INTERACTIVITY FUNCTIONS ---
             
-            spark.style.left = `${x}px`;
-            spark.style.top = `${y}px`;
+            const initCursorBubbles = () => {
+                let lastTime = 0;
+                document.addEventListener('mousemove', (e) => {
+                    const now = Date.now();
+                    if (now - lastTime < 100) return; 
+                    lastTime = now;
 
-            const tx = (Math.random() - 0.5) * 50 + 'px';
-            spark.style.setProperty('--tx', tx);
+                    const bubble = document.createElement('div');
+                    bubble.classList.add('bubble');
+                    const size = Math.random() * 15 + 5; 
+                    bubble.style.width = `${size}px`;
+                    bubble.style.height = `${size}px`;
+                    bubble.style.left = `${e.pageX}px`;
+                    bubble.style.top = `${e.pageY}px`;
+                    
+                    document.body.appendChild(bubble);
 
-            setTimeout(() => {
-                spark.remove();
-            }, 800);
-        }
+                    setTimeout(() => {
+                        bubble.remove();
+                    }, 1500);
+                });
+            };
 
-        // --- Navbar Scroll Effect ---
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-black/90', 'backdrop-blur-md', 'py-4', 'border-white/10');
-                navbar.classList.remove('bg-transparent', 'py-6', 'border-white/5');
-            } else {
-                navbar.classList.remove('bg-black/90', 'backdrop-blur-md', 'py-4', 'border-white/10');
-                navbar.classList.add('bg-transparent', 'py-6', 'border-white/5');
-            }
-        });
+            const initScrollReveal = () => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
 
-        // --- Scroll Reveal Animation ---
-        const revealElements = document.querySelectorAll('.reveal');
-        
-        const revealOnScroll = () => {
-            const windowHeight = window.innerHeight;
-            const elementVisible = 150;
+                document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            };
 
-            revealElements.forEach((el) => {
-                const elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - elementVisible) {
-                    el.classList.add('active');
+            const initIngredientParallax = () => {
+                const container = document.getElementById('ingredients-container');
+                if (!container) return;
+
+                container.addEventListener('mousemove', (e) => {
+                    const rect = container.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+                    const icons = container.querySelectorAll('.ingredient-card');
+                    icons.forEach((icon, index) => {
+                        const depth = (index + 1) * 15; // Varying depth
+                        const moveX = x * depth;
+                        const moveY = y * depth;
+                        icon.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
+                    });
+                });
+                
+                container.addEventListener('mouseleave', () => {
+                     const icons = container.querySelectorAll('.ingredient-card');
+                     icons.forEach(icon => {
+                         icon.style.transform = ''; // Reset to CSS animation
+                     });
+                });
+            };
+
+            // --- RENDER FUNCTIONS ---
+            
+            const renderHero = () => {
+                return `
+                    <section class="relative h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-brand-light via-[#f5f0e6] to-[#e8e4d9]">
+                        <div class="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none">
+                             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full spin-slow">
+                                <path fill="#2c2725" d="M44.7,-76.4C58.9,-69.2,71.8,-59.1,81.6,-46.6C91.4,-34.1,98.2,-19.2,95.8,-4.2C93.5,10.8,82,25.9,71,38.8C60,51.7,49.5,62.4,37.3,69.6C25.1,76.8,11.3,80.5,-1.9,83.8C-15.1,87.1,-28.8,90,-40.8,83.9C-52.8,77.8,-63.1,62.7,-71.3,47.8C-79.5,32.9,-85.6,18.2,-85.3,3.7C-85,-10.8,-78.3,-25.1,-69,-37.8C-59.7,-50.5,-47.8,-61.6,-34.7,-69.4C-21.6,-77.2,-7.3,-81.7,5.4,-91.1L10.8,-100.5" transform="translate(100 100)" />
+                             </svg>
+                        </div>
+
+                        <div class="relative z-10 max-w-7xl w-full px-6 flex flex-col items-center justify-center h-full text-center">
+                            <div class="mb-10 transform hover:scale-105 transition-transform duration-700 animate-fade-in cursor-pointer">
+                                <svg width="280" height="280" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-2xl">
+                                    <circle cx="150" cy="150" r="140" fill="none" stroke="#d4a373" stroke-width="2"/>
+                                    <circle cx="150" cy="150" r="130" fill="#fefae0" stroke="none"/>
+                                    <path d="M150 40 Q170 80 150 110 Q130 80 150 40" fill="#ccd5ae" opacity="0.8"/>
+                                    <path d="M150 40 Q180 60 190 90" fill="none" stroke="#ccd5ae" stroke-width="2"/>
+                                    <path d="M150 40 Q120 60 110 90" fill="none" stroke="#ccd5ae" stroke-width="2"/>
+                                    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="700" font-size="32" fill="#2c2725" letter-spacing="2">ESSENTIAL</text>
+                                    <text x="50%" y="68%" dominant-baseline="middle" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="400" font-size="24" fill="#d4a373" letter-spacing="8">SUDS</text>
+                                    <path d="M150 260 Q130 220 150 190 Q170 220 150 260" fill="#ccd5ae" opacity="0.8"/>
+                                </svg>
+                            </div>
+                            <div class="animate-fade-in mx-auto max-w-3xl">
+                                <h1 class="text-4xl md:text-6xl font-heading font-bold mb-6 leading-tight text-brand-black">The Perfect Bar.</h1>
+                                <p class="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed font-light">
+                                    One essential bar for a complete, luxurious cleanse. <br>Made with cold-pressed oils and pure botanicals.
+                                </p>
+                                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                                    <button onclick="app.createRipple(event); app.scrollToSection('products')" class="btn-ripple bg-brand-black text-white px-10 py-4 font-bold tracking-widest hover:bg-brand-gold hover:text-white transition-all duration-300 shadow-xl rounded-sm">
+                                        SHOP NOW
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                     <div class="bg-white py-10 border-b border-gray-100 reveal">
+                        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                            <div class="flex flex-col items-center group cursor-default">
+                                <i class="fa-solid fa-leaf text-3xl text-brand-gold mb-3 transform group-hover:scale-110 transition-transform"></i>
+                                <h4 class="font-bold text-sm uppercase text-brand-black">100% Vegan</h4>
+                                <p class="text-xs text-gray-500 mt-1">Plant-Based Ingredients</p>
+                            </div>
+                            <div class="flex flex-col items-center group cursor-default">
+                                <i class="fa-solid fa-hand-holding-heart text-3xl text-brand-gold mb-3 transform group-hover:scale-110 transition-transform"></i>
+                                <h4 class="font-bold text-sm uppercase text-brand-black">Handmade</h4>
+                                <p class="text-xs text-gray-500 mt-1">Small Batches</p>
+                            </div>
+                            <div class="flex flex-col items-center group cursor-default">
+                                <i class="fa-solid fa-ban text-3xl text-brand-gold mb-3 transform group-hover:scale-110 transition-transform"></i>
+                                <h4 class="font-bold text-sm uppercase text-brand-black">Paraben Free</h4>
+                                <p class="text-xs text-gray-500 mt-1">No Harsh Chemicals</p>
+                            </div>
+                            <div class="flex flex-col items-center group cursor-default">
+                                <i class="fa-solid fa-recycle text-3xl text-brand-gold mb-3 transform group-hover:scale-110 transition-transform"></i>
+                                <h4 class="font-bold text-sm uppercase text-brand-black">Eco-Friendly</h4>
+                                <p class="text-xs text-gray-500 mt-1">Plastic-Free Packaging</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            };
+
+            const renderProductsSection = () => {
+                const p = state.products[0];
+                return `
+                    <section id="products" class="py-20 bg-brand-light reveal">
+                        <div class="max-w-7xl mx-auto px-6">
+                            <div class="text-center max-w-3xl mx-auto mb-16">
+                                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">Our Signature Blend</h2>
+                                <p class="text-gray-500">Simple, effective, and luxurious. The only soap you'll ever need.</p>
+                            </div>
+                            
+                            <div class="flex justify-center">
+                                <div class="max-w-sm w-full group bg-white rounded-lg overflow-hidden border border-gray-100 hover:border-gray-200 hover:shadow-xl transition-all duration-300 flex flex-col transform hover:-translate-y-2">
+                                    <div class="relative overflow-hidden aspect-square cursor-pointer" onclick="app.openModal(${p.id})">
+                                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                                        <button onclick="event.stopPropagation(); app.createRipple(event); app.addToCart(${p.id})" class="btn-ripple absolute bottom-4 right-4 bg-brand-black text-white w-12 h-12 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-brand-gold shadow-lg">
+                                            <i class="fa-solid fa-plus text-lg"></i>
+                                        </button>
+                                    </div>
+                                    <div class="p-6 flex-grow flex flex-col">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h3 class="font-heading font-bold text-lg text-brand-black group-hover:text-brand-gold transition-colors cursor-pointer" onclick="app.openModal(${p.id})">${p.name}</h3>
+                                        </div>
+                                        <p class="text-sm text-gray-500 mb-4 line-clamp-2">${p.shortDesc}</p>
+                                        
+                                        <div class="flex items-center gap-2 mb-4 text-xs text-gray-400">
+                                            <span class="bg-brand-cream px-2 py-1 rounded text-brand-black font-medium">${p.skinType}</span>
+                                            <span>${p.weight}</span>
+                                        </div>
+
+                                        <div class="mt-auto flex items-center justify-between">
+                                            <span class="font-bold text-lg">$${p.price.toFixed(2)}</span>
+                                            <div class="text-xs text-brand-gold">
+                                                <i class="fa-solid fa-star"></i> ${p.rating}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                `;
+            };
+
+            const renderTechSection = () => `
+                <section id="ingredients" class="py-20 bg-white reveal">
+                    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-16">
+                        
+                        <!-- INTERACTIVE INGREDIENTS CONTAINER -->
+                        <div id="ingredients-container" class="w-full md:w-1/2 relative min-h-[450px] bg-brand-light rounded-xl p-8 flex items-center justify-center overflow-hidden border border-gray-100 shadow-inner group transition-colors duration-700">
+                            <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] transition-opacity group-hover:opacity-20 pointer-events-none"></div>
+                            
+                            <!-- Central Info Box -->
+                            <div id="ingredient-info" class="relative z-20 text-center max-w-xs transition-all duration-300 bg-white/90 backdrop-blur-md p-8 rounded-xl shadow-2xl border border-brand-cream scale-100">
+                                <h4 class="font-heading font-bold text-xl mb-3 text-brand-black">Nature's Best</h4>
+                                <p class="text-sm text-gray-600 leading-relaxed">Hover over the floating ingredients to discover their skin-loving benefits.</p>
+                            </div>
+
+                            <!-- Floating Icons -->
+                            <div class="ingredient-card absolute top-12 left-10 md:left-20 bg-white p-5 rounded-full shadow-lg cursor-pointer transition-all duration-300 float-anim border-4 border-white"
+                                 onmouseenter="app.showBenefit('honey', event)" onmouseleave="app.resetBenefit()">
+                                <i class="fa-solid fa-jar text-3xl text-amber-500"></i>
+                            </div>
+
+                            <div class="ingredient-card absolute bottom-24 left-4 md:left-12 bg-white p-5 rounded-full shadow-lg cursor-pointer transition-all duration-300 float-anim float-anim-delay-1 border-4 border-white"
+                                 onmouseenter="app.showBenefit('oats', event)" onmouseleave="app.resetBenefit()">
+                                <i class="fa-solid fa-wheat-awn text-3xl text-brand-sage"></i>
+                            </div>
+
+                            <div class="ingredient-card absolute top-10 right-12 md:right-24 bg-white p-5 rounded-full shadow-lg cursor-pointer transition-all duration-300 float-anim float-anim-delay-2 border-4 border-white"
+                                 onmouseenter="app.showBenefit('almond', event)" onmouseleave="app.resetBenefit()">
+                                <i class="fa-solid fa-droplet text-3xl text-yellow-500"></i>
+                            </div>
+
+                            <div class="ingredient-card absolute bottom-16 right-8 md:right-16 bg-white p-5 rounded-full shadow-lg cursor-pointer transition-all duration-300 float-anim float-anim-delay-3 border-4 border-white"
+                                 onmouseenter="app.showBenefit('vanilla', event)" onmouseleave="app.resetBenefit()">
+                                <i class="fa-solid fa-spa text-3xl text-brand-black"></i>
+                            </div>
+
+                             <div class="ingredient-card absolute top-1/2 right-4 transform -translate-y-1/2 bg-white p-4 rounded-full shadow-lg cursor-pointer transition-all duration-300 float-anim float-anim-delay-1 border-4 border-white"
+                                 onmouseenter="app.showBenefit('rolled', event)" onmouseleave="app.resetBenefit()">
+                                <i class="fa-solid fa-bowl-rice text-2xl text-stone-500"></i>
+                            </div>
+                        </div>
+
+                        <div class="w-full md:w-1/2">
+                            <span class="text-brand-gold font-bold tracking-widest uppercase text-sm mb-2 block">The Cold Process Method</span>
+                            <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6">Why Cold Process?</h2>
+                            <p class="text-gray-600 mb-6 leading-relaxed">
+                                We use the traditional cold process method which preserves the therapeutic benefits of our plant-based oils and butters. Unlike commercial soaps, our bars retain their natural glycerin, leaving your skin soft and moisturized.
+                            </p>
+                            <ul class="space-y-4 mb-8">
+                                <li class="flex items-start transform hover:translate-x-2 transition-transform duration-300">
+                                    <i class="fa-solid fa-check text-brand-gold mt-1 mr-3"></i>
+                                    <div>
+                                        <strong class="block text-brand-black">Natural Glycerin</strong>
+                                        <span class="text-sm text-gray-500">A natural humectant that draws moisture to the skin.</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start transform hover:translate-x-2 transition-transform duration-300">
+                                    <i class="fa-solid fa-check text-brand-gold mt-1 mr-3"></i>
+                                    <div>
+                                        <strong class="block text-brand-black">Cured for 6 Weeks</strong>
+                                        <span class="text-sm text-gray-500">Ensures a hard, long-lasting bar with rich lather.</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start transform hover:translate-x-2 transition-transform duration-300">
+                                    <i class="fa-solid fa-check text-brand-gold mt-1 mr-3"></i>
+                                    <div>
+                                        <strong class="block text-brand-black">Zero Detergents</strong>
+                                        <span class="text-sm text-gray-500">No sulfates, phthalates, or synthetic hardeners.</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <a href="#products" onclick="event.preventDefault(); app.scrollToSection('products')" class="text-brand-black font-bold border-b-2 border-brand-black pb-1 hover:text-brand-gold hover:border-brand-gold transition-colors">Buy The Bar</a>
+                        </div>
+                    </div>
+                </section>
+            `;
+
+            const renderAboutSection = () => `
+                <section id="about" class="py-24 bg-brand-cream text-brand-black text-center relative overflow-hidden reveal">
+                    <div class="max-w-4xl mx-auto px-6 relative z-10">
+                        <i class="fa-solid fa-spa text-4xl text-brand-gold mb-6 animate-pulse"></i>
+                        <h2 class="text-3xl md:text-5xl font-heading font-bold mb-8">Pure. Simple. Honest.</h2>
+                        <p class="text-xl text-gray-600 mb-10 leading-relaxed font-light">
+                            "We believe that what you put on your body is just as important as what you put in it. Our mission is to bring the spa experience to your daily routine with ingredients you can pronounce."
+                        </p>
+                    </div>
+                </section>
+            `;
+
+            // --- LOGIC ---
+
+            const updateCartUI = () => {
+                const cartContainer = document.getElementById('cart-items');
+                const cartTotal = document.getElementById('cart-total');
+                const cartCountBadge = document.getElementById('cart-count');
+                const cartBtn = document.getElementById('cart-btn');
+                
+                const totalItems = state.cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCountBadge.innerText = totalItems;
+                cartCountBadge.classList.toggle('opacity-0', totalItems === 0);
+
+                if (totalItems > 0) {
+                    cartBtn.classList.remove('bump');
+                    void cartBtn.offsetWidth; // trigger reflow
+                    cartBtn.classList.add('bump');
                 }
-            });
-        };
 
-        window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll();
+                if (state.cart.length === 0) {
+                    cartContainer.innerHTML = `
+                        <div class="text-center text-gray-500 mt-10">
+                            <i class="fa-solid fa-basket-shopping text-4xl mb-4 opacity-30"></i>
+                            <p>Your basket is empty.</p>
+                            <button onclick="app.toggleCart(); app.scrollToSection('products')" class="mt-4 text-brand-gold font-semibold hover:underline">Start Shopping</button>
+                        </div>
+                    `;
+                    cartTotal.innerText = "$0.00";
+                    return;
+                }
 
-        // --- Mobile Menu Toggle ---
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        let isMenuOpen = false;
+                let total = 0;
+                cartContainer.innerHTML = state.cart.map(item => {
+                    const product = state.products.find(p => p.id === item.id);
+                    total += product.price * item.quantity;
+                    return `
+                        <div class="flex gap-4 items-center animate-fade-in">
+                            <div class="w-20 h-20 flex-shrink-0 bg-gray-100 rounded overflow-hidden">
+                                <img src="${product.image}" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="font-bold text-sm text-brand-black">${product.name}</h4>
+                                <p class="text-xs text-gray-500 mb-2">$${product.price.toFixed(2)}</p>
+                                <div class="flex items-center border border-gray-200 w-max rounded-full">
+                                    <button onclick="app.updateQuantity(${item.id}, -1)" class="px-2 py-1 text-xs text-gray-500 hover:bg-gray-100 rounded-l-full"><i class="fa-solid fa-minus"></i></button>
+                                    <span class="px-2 text-xs font-semibold">${item.quantity}</span>
+                                    <button onclick="app.updateQuantity(${item.id}, 1)" class="px-2 py-1 text-xs text-gray-500 hover:bg-gray-100 rounded-r-full"><i class="fa-solid fa-plus"></i></button>
+                                </div>
+                            </div>
+                            <button onclick="app.removeFromCart(${item.id})" class="text-gray-300 hover:text-red-500 transition-colors">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                    `;
+                }).join('');
 
-        menuBtn.addEventListener('click', () => {
-            isMenuOpen = !isMenuOpen;
-            if (isMenuOpen) {
-                mobileMenu.classList.remove('hidden');
-                menuBtn.innerHTML = '<i data-lucide="x"></i>';
-            } else {
-                mobileMenu.classList.add('hidden');
-                menuBtn.innerHTML = '<i data-lucide="menu"></i>';
-            }
-            lucide.createIcons();
-        });
+                cartTotal.innerText = "$" + total.toFixed(2);
+            };
 
-        document.querySelectorAll('.mobile-link').forEach(link => {
-            link.addEventListener('click', () => {
-                isMenuOpen = false;
-                mobileMenu.classList.add('hidden');
-                menuBtn.innerHTML = '<i data-lucide="menu"></i>';
-                lucide.createIcons();
-            });
-        });
+            // --- PUBLIC API ---
+            return {
+                init: () => {
+                    const main = document.getElementById('main-content');
+                    main.innerHTML = renderHero() + renderProductsSection() + renderTechSection() + renderAboutSection();
+                    
+                    initCursorBubbles();
+                    initScrollReveal();
+                    initIngredientParallax();
+                },
 
-        // --- Cart Logic ---
-        let cartCount = 0;
-        const cartBadge = document.getElementById('cart-badge');
-        const addToCartBtns = document.querySelectorAll('.add-to-cart');
+                createRipple: (event) => {
+                    const button = event.currentTarget;
+                    const ripple = document.createElement("span");
+                    const diameter = Math.max(button.clientWidth, button.clientHeight);
+                    const radius = diameter / 2;
+                    const rect = button.getBoundingClientRect();
+                    ripple.style.width = ripple.style.height = `${diameter}px`;
+                    ripple.style.left = `${event.clientX - rect.left - radius}px`;
+                    ripple.style.top = `${event.clientY - rect.top - radius}px`;
+                    ripple.classList.add("ripple");
+                    const existingRipple = button.getElementsByClassName("ripple")[0];
+                    if (existingRipple) { existingRipple.remove(); }
+                    button.appendChild(ripple);
+                },
 
-        addToCartBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation(); 
+                createConfetti: (x, y, color) => {
+                    const particleCount = 12;
+                    for (let i = 0; i < particleCount; i++) {
+                        const particle = document.createElement('div');
+                        particle.classList.add('particle');
+                        particle.style.backgroundColor = color;
+                        particle.style.left = `${x}px`;
+                        particle.style.top = `${y}px`;
+                        
+                        const angle = Math.random() * Math.PI * 2;
+                        const velocity = 50 + Math.random() * 50;
+                        const tx = Math.cos(angle) * velocity;
+                        const ty = Math.sin(angle) * velocity;
+                        
+                        particle.style.setProperty('--tx', `${tx}px`);
+                        particle.style.setProperty('--ty', `${ty}px`);
+                        
+                        document.body.appendChild(particle);
+                        setTimeout(() => particle.remove(), 800);
+                    }
+                },
                 
-                cartCount++;
-                cartBadge.innerText = cartCount;
-                cartBadge.classList.remove('hidden');
-                cartBadge.classList.add('flex');
+                showBenefit: (key, event) => {
+                    const info = state.ingredients[key];
+                    const container = document.getElementById('ingredients-container');
+                    const infoBox = document.getElementById('ingredient-info');
+                    
+                    if(info && container && infoBox) {
+                        // Change Background
+                        container.className = `w-full md:w-1/2 relative min-h-[450px] rounded-xl p-8 flex items-center justify-center overflow-hidden border border-gray-100 shadow-inner group transition-colors duration-700 ${info.bgColor}`;
+                        
+                        // Update Info
+                        infoBox.innerHTML = `
+                            <div class="pop-in">
+                                <i class="fa-solid ${info.icon} text-4xl mb-3 ${info.color} block drop-shadow-sm"></i>
+                                <h4 class="font-heading font-bold text-xl mb-2 text-brand-black">${info.title}</h4>
+                                <p class="text-sm text-gray-700 font-medium">${info.desc}</p>
+                            </div>
+                        `;
+                        
+                        // Confetti Burst
+                        if(event) {
+                             const rect = event.currentTarget.getBoundingClientRect();
+                             const centerX = rect.left + rect.width / 2 + window.scrollX;
+                             const centerY = rect.top + rect.height / 2 + window.scrollY;
+                             app.createConfetti(centerX, centerY, info.particleColor);
+                        }
+                    }
+                },
                 
-                const originalText = btn.innerText;
-                btn.innerText = 'Added!';
-                btn.classList.add('bg-purple-600', 'text-white');
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.classList.remove('bg-purple-600', 'text-white');
-                }, 1000);
-            });
-        });
+                resetBenefit: () => {
+                    const container = document.getElementById('ingredients-container');
+                    const infoBox = document.getElementById('ingredient-info');
+                    if(container && infoBox) {
+                        // Reset Background
+                        container.className = `w-full md:w-1/2 relative min-h-[450px] bg-brand-light rounded-xl p-8 flex items-center justify-center overflow-hidden border border-gray-100 shadow-inner group transition-colors duration-700`;
+                        
+                        // Reset Info
+                        infoBox.innerHTML = `
+                            <div class="animate-fade-in">
+                                <h4 class="font-heading font-bold text-xl mb-3 text-brand-black">Nature's Best</h4>
+                                <p class="text-sm text-gray-600 leading-relaxed">Hover over the floating ingredients to discover their skin-loving benefits.</p>
+                            </div>
+                        `;
+                    }
+                },
+
+                setCategory: (cat) => { console.log("Single product mode active"); },
+
+                scrollToSection: (id) => {
+                    const el = document.getElementById(id);
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                },
+
+                toggleMobileMenu: () => {
+                    document.getElementById('mobile-menu').classList.toggle('hidden');
+                },
+
+                toggleCart: () => {
+                    const overlay = document.getElementById('cart-overlay');
+                    const drawer = document.getElementById('cart-drawer');
+                    const body = document.body;
+                    
+                    if (overlay.classList.contains('hidden')) {
+                        overlay.classList.remove('hidden');
+                        setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+                        drawer.classList.remove('translate-x-full');
+                        body.classList.add('overflow-hidden');
+                    } else {
+                        overlay.classList.add('opacity-0');
+                        drawer.classList.add('translate-x-full');
+                        body.classList.remove('overflow-hidden');
+                        setTimeout(() => overlay.classList.add('hidden'), 300);
+                    }
+                },
+                
+                navigate: (loc) => { window.scrollTo({ top: 0, behavior: 'smooth' }); },
+
+                addToCart: (id) => {
+                    const existing = state.cart.find(item => item.id === id);
+                    if (existing) { existing.quantity++; } else { state.cart.push({ id, quantity: 1 }); }
+                    updateCartUI();
+                    setTimeout(() => app.toggleCart(), 300);
+                },
+
+                updateQuantity: (id, change) => {
+                    const item = state.cart.find(i => i.id === id);
+                    if (item) {
+                        item.quantity += change;
+                        if (item.quantity <= 0) { app.removeFromCart(id); } else { updateCartUI(); }
+                    }
+                },
+
+                removeFromCart: (id) => {
+                    state.cart = state.cart.filter(i => i.id !== id);
+                    updateCartUI();
+                },
+
+                // STRIPE CHECKOUT HANDLER
+                processCheckout: async () => {
+                    const btn = document.getElementById('checkout-btn');
+                    const originalText = btn.innerHTML;
+                    
+                    // 1. Basic Validation
+                    if(state.cart.length === 0) {
+                        alert("Your basket is empty!");
+                        return;
+                    }
+
+                    // 2. Show Loading State
+                    btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...`;
+                    btn.disabled = true;
+
+                    // 3. Initialize Stripe
+                    // Replace 'pk_test_...' with your actual Stripe Publishable Key
+                    const stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx'); 
+
+                    // 4. Prepare Line Items
+                    // Map your cart items to Stripe's line_items format
+                    // NOTE: In a client-only integration, you typically use a pre-made Payment Link
+                    // OR you use 'price' IDs created in the Stripe Dashboard.
+                    const lineItems = state.cart.map(item => {
+                        const product = state.products.find(p => p.id === item.id);
+                        return {
+                            price: product.stripePriceId, // Use the Price ID from your state
+                            quantity: item.quantity
+                        };
+                    });
+
+                    // 5. Redirect to Checkout
+                    const { error } = await stripe.redirectToCheckout({
+                        lineItems: lineItems,
+                        mode: 'payment',
+                        successUrl: window.location.href + '?success=true',
+                        cancelUrl: window.location.href + '?canceled=true',
+                    });
+
+                    if (error) {
+                        console.error("Stripe Error:", error);
+                        alert("Payment redirection failed. Please try again.");
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    }
+                },
+
+                // NEW: Generic Info Modal Handler
+                openInfoModal: (type) => {
+                    const modal = document.getElementById('product-modal');
+                    const content = document.getElementById('modal-content');
+                    let html = '';
+
+                    if (type === 'shipping') {
+                        html = `
+                            <div class="w-full p-8 md:p-12 relative bg-white">
+                                <div class="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+                                    <i class="fa-solid fa-truck-fast text-9xl text-brand-gold"></i>
+                                </div>
+                                <h2 class="text-3xl font-heading font-bold mb-6 text-brand-black">Shipping & Returns</h2>
+                                
+                                <div class="space-y-6">
+                                    <div>
+                                        <h3 class="font-bold text-lg mb-2 text-brand-gold">Shipping Policy</h3>
+                                        <p class="text-gray-600 leading-relaxed">
+                                            We hand-pack and ship all orders within 1-2 business days from our Texas studio. 
+                                            We offer <span class="font-bold text-brand-black">free standard shipping</span> (3-5 business days) on all orders within the continental US.
+                                        </p>
+                                    </div>
+                                    
+                                    <div>
+                                        <h3 class="font-bold text-lg mb-2 text-brand-gold">Return Policy</h3>
+                                        <p class="text-gray-600 leading-relaxed">
+                                            Due to the personal nature of our products, we cannot accept returns on used soap bars. 
+                                            However, your satisfaction is our priority. If you are unsatisfied with your purchase for any reason, 
+                                            please contact us within 14 days of delivery for a full refund or replacement.
+                                        </p>
+                                    </div>
+                                </div>
+                                <button onclick="app.closeModal()" class="mt-8 w-full bg-gray-100 text-brand-black py-3 font-bold tracking-widest hover:bg-gray-200 transition-colors">CLOSE</button>
+                            </div>
+                        `;
+                    } else if (type === 'contact') {
+                        html = `
+                            <div class="w-full p-8 md:p-12 bg-white">
+                                <h2 class="text-3xl font-heading font-bold mb-2 text-brand-black">Get in Touch</h2>
+                                <p class="text-gray-600 mb-8">Have a question about our ingredients or a bulk order? Send us a note!</p>
+                                
+                                <form onsubmit="event.preventDefault(); alert('Message sent! We will get back to you shortly.'); app.closeModal();">
+                                    <div class="mb-4">
+                                        <label class="block text-xs font-bold uppercase text-brand-gold mb-2">Email Address</label>
+                                        <input type="email" class="w-full bg-gray-50 border border-gray-200 p-3 rounded focus:outline-none focus:border-brand-gold" required placeholder="you@example.com">
+                                    </div>
+                                    <div class="mb-6">
+                                        <label class="block text-xs font-bold uppercase text-brand-gold mb-2">Message</label>
+                                        <textarea class="w-full bg-gray-50 border border-gray-200 p-3 rounded h-32 focus:outline-none focus:border-brand-gold" required placeholder="How can we help?"></textarea>
+                                    </div>
+                                    <button class="btn-ripple w-full bg-brand-black text-white py-4 font-bold tracking-widest hover:bg-brand-gold transition-colors shadow-lg" onclick="app.createRipple(event)">
+                                        SEND MESSAGE
+                                    </button>
+                                </form>
+                            </div>
+                        `;
+                    } else if (type === 'ingredients') {
+                        html = `
+                            <div class="w-full p-8 md:p-12 bg-white">
+                                <h2 class="text-3xl font-heading font-bold mb-6 text-brand-black">Full Ingredients List</h2>
+                                <p class="text-gray-600 mb-6">Our Texas Honey & Vanilla Oat bar is made with just five active ingredients.</p>
+                                <ul class="space-y-4">
+                                    <li class="flex justify-between border-b border-gray-100 pb-2">
+                                        <span class="font-bold text-brand-black">Colloidal Oatmeal</span>
+                                        <span class="text-gray-500 text-sm">Soothes Itching</span>
+                                    </li>
+                                    <li class="flex justify-between border-b border-gray-100 pb-2">
+                                        <span class="font-bold text-brand-black">Raw Texas Honey</span>
+                                        <span class="text-gray-500 text-sm">Humectant / Moisture</span>
+                                    </li>
+                                    <li class="flex justify-between border-b border-gray-100 pb-2">
+                                        <span class="font-bold text-brand-black">Sweet Almond Oil</span>
+                                        <span class="text-gray-500 text-sm">Vitamin E / Softening</span>
+                                    </li>
+                                    <li class="flex justify-between border-b border-gray-100 pb-2">
+                                        <span class="font-bold text-brand-black">Vanilla Essential Oil</span>
+                                        <span class="text-gray-500 text-sm">Antioxidant / Scent</span>
+                                    </li>
+                                    <li class="flex justify-between border-b border-gray-100 pb-2">
+                                        <span class="font-bold text-brand-black">Rolled Oats</span>
+                                        <span class="text-gray-500 text-sm">Physical Exfoliation</span>
+                                    </li>
+                                </ul>
+                                <button onclick="app.closeModal()" class="mt-8 w-full bg-gray-100 text-brand-black py-3 font-bold tracking-widest hover:bg-gray-200 transition-colors">CLOSE</button>
+                            </div>
+                        `;
+                    } else if (type === 'sustainability') {
+                        html = `
+                            <div class="w-full p-8 md:p-12 bg-white text-center">
+                                <i class="fa-solid fa-earth-americas text-5xl text-brand-sage mb-6"></i>
+                                <h2 class="text-3xl font-heading font-bold mb-4 text-brand-black">Our Promise</h2>
+                                <p class="text-gray-600 leading-relaxed mb-6">
+                                    We believe luxury shouldn't cost the earth. That's why EssentialSuds is committed to:
+                                </p>
+                                <ul class="text-left space-y-3 mb-8 bg-brand-light p-6 rounded-lg">
+                                    <li class="flex items-center"><i class="fa-solid fa-check text-brand-gold mr-3"></i> 100% Plastic-Free Packaging</li>
+                                    <li class="flex items-center"><i class="fa-solid fa-check text-brand-gold mr-3"></i> Sustainably Sourced Oils</li>
+                                    <li class="flex items-center"><i class="fa-solid fa-check text-brand-gold mr-3"></i> Cruelty-Free & Vegan</li>
+                                    <li class="flex items-center"><i class="fa-solid fa-check text-brand-gold mr-3"></i> Recycled Paper Labels</li>
+                                </ul>
+                                <button onclick="app.closeModal()" class="w-full bg-brand-black text-white py-3 font-bold tracking-widest hover:bg-brand-gold transition-colors">BACK TO SHOP</button>
+                            </div>
+                        `;
+                    }
+
+                    content.innerHTML = html;
+                    modal.classList.remove('hidden');
+                    document.body.classList.add('overflow-hidden');
+                },
+
+                openModal: (id) => {
+                    const product = state.products.find(p => p.id === id);
+                    const modal = document.getElementById('product-modal');
+                    const content = document.getElementById('modal-content');
+
+                    content.innerHTML = `
+                        <div class="w-full md:w-1/2 relative bg-gray-100">
+                            <img src="${product.image}" class="w-full h-full object-cover min-h-[300px] md:min-h-[500px]">
+                        </div>
+                        <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col">
+                            <div class="mb-auto">
+                                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block">Signature Collection</span>
+                                <h2 class="text-3xl font-heading font-bold mb-2">${product.name}</h2>
+                                <div class="flex items-center gap-2 mb-6">
+                                    <span class="text-2xl text-brand-black font-semibold">$${product.price.toFixed(2)}</span>
+                                </div>
+                                <p class="text-gray-600 mb-8 leading-relaxed">
+                                    ${product.shortDesc} Hand-poured and cured to perfection.
+                                </p>
+                                
+                                <div class="grid grid-cols-2 gap-4 mb-8">
+                                    <div class="p-4 bg-gray-50 rounded border border-gray-100">
+                                        <span class="block text-xs text-gray-400 uppercase">Skin Type</span>
+                                        <span class="font-bold text-brand-black">${product.skinType}</span>
+                                    </div>
+                                    <div class="p-4 bg-gray-50 rounded border border-gray-100">
+                                        <span class="block text-xs text-gray-400 uppercase">Net Weight</span>
+                                        <span class="font-bold text-brand-black">${product.weight}</span>
+                                    </div>
+                                    <div class="p-4 bg-gray-50 rounded border border-gray-100">
+                                        <span class="block text-xs text-gray-400 uppercase">Scent Profile</span>
+                                        <span class="font-bold text-brand-black">${product.scent}</span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-8">
+                                    <h4 class="text-sm font-bold uppercase mb-2">Key Ingredients</h4>
+                                    <ul class="flex flex-wrap gap-2">
+                                        ${product.ingredients.map(ing => `<li class="text-xs bg-brand-cream text-brand-black px-3 py-1 rounded-full border border-brand-sage">${ing}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <button onclick="app.createRipple(event); app.addToCart(${product.id}); app.closeModal()" class="btn-ripple w-full bg-brand-black text-white py-4 font-bold tracking-widest hover:bg-brand-gold transition-colors shadow-lg">
+                                ADD TO BASKET
+                            </button>
+                        </div>
+                    `;
+
+                    modal.classList.remove('hidden');
+                    document.body.classList.add('overflow-hidden');
+                },
+
+                closeModal: () => {
+                    const modal = document.getElementById('product-modal');
+                    modal.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
+                }
+            };
+        })();
+
+        // Start App on Load
+        document.addEventListener('DOMContentLoaded', app.init);
     </script>
 </body>
 </html>
