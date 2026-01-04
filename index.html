@@ -170,7 +170,7 @@
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="#" onclick="event.preventDefault(); app.scrollToSection('products')" class="text-sm font-medium hover:text-brand-gold transition-colors uppercase tracking-wide relative group">
-                        The Bar
+                        The Shop
                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
                     </a>
                     <a href="#" onclick="event.preventDefault(); app.scrollToSection('ingredients')" class="text-sm font-medium hover:text-brand-gold transition-colors uppercase tracking-wide relative group">
@@ -200,7 +200,7 @@
         <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100">
             <div class="px-4 pt-2 pb-6 space-y-2">
-                <a href="#" onclick="event.preventDefault(); app.scrollToSection('products'); app.toggleMobileMenu()" class="block py-2 text-base font-medium text-gray-800">The Bar</a>
+                <a href="#" onclick="event.preventDefault(); app.scrollToSection('products'); app.toggleMobileMenu()" class="block py-2 text-base font-medium text-gray-800">The Shop</a>
                 <a href="#" onclick="event.preventDefault(); app.scrollToSection('ingredients'); app.toggleMobileMenu()" class="block py-2 text-base font-medium text-gray-800">Ingredients</a>
                 <a href="#" onclick="event.preventDefault(); app.scrollToSection('about'); app.toggleMobileMenu()" class="block py-2 text-base font-medium text-gray-800">Our Story</a>
             </div>
@@ -299,26 +299,99 @@
 
     <!-- JAVASCRIPT APPLICATION LOGIC -->
     <script>
+        // --- IMAGE ERROR HANDLER (Smart Loader) ---
+        // This function tries to fix the "double extension" issue (toy.jpg.jpg or toy.png.png) automatically
+        window.handleImageError = function(img) {
+            // Check if we already tried to fix it
+            if (img.dataset.triedFix === "true") {
+                // If the fix failed, load the generic placeholder from the web
+                img.onerror = null; 
+                img.src = "https://images.unsplash.com/photo-1618331835717-801e976710b2?q=80&w=800&auto=format&fit=crop";
+                return;
+            }
+
+            // Mark that we are trying to fix it
+            img.dataset.triedFix = "true";
+
+            // If the current source ends in .jpg or .png, try adding the extension again (the double extension issue)
+            if (img.src.endsWith('.jpg')) {
+                img.src = img.src + ".jpg";
+            } else if (img.src.endsWith('.png')) {
+                img.src = img.src + ".png";
+            } else {
+                // Otherwise just load the placeholder
+                img.src = "https://images.unsplash.com/photo-1618331835717-801e976710b2?q=80&w=800&auto=format&fit=crop";
+            }
+        };
+
         const app = (() => {
             // --- STATE ---
             const state = {
-                // REDUCED TO SINGLE PRODUCT
+                // EXPANDED PRODUCT LIST
                 products: [
                     {
                         id: 1,
                         name: "Texas Honey & Vanilla Oat",
                         category: "bar",
                         price: 12.00,
-                        // Using a dummy price ID for demonstration. 
-                        // In production, replace 'price_123...' with your actual Stripe Price ID.
                         stripePriceId: "price_123456789", 
                         image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?q=80&w=800&auto=format&fit=crop",
+                        // ADDED: Gallery images for Product 1 (Updated to Object format)
+                        images: [
+                            { src: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?q=80&w=800&auto=format&fit=crop", title: "Signature Bar" },
+                            { src: "https://images.unsplash.com/photo-1570194065650-d99fb4b8ccb0?q=80&w=800&auto=format&fit=crop", title: "Rich Lather" },
+                            { src: "https://images.unsplash.com/photo-1607006411601-776c8cc37d7b?q=80&w=800&auto=format&fit=crop", title: "Natural Texture" }
+                        ],
                         shortDesc: "Local Texas honey and sweet almond oil blended with exfoliating rolled oats.",
                         weight: "5 oz",
                         skinType: "All Types / Dry",
                         scent: "Warm / Sweet",
                         ingredients: ["Colloidal Oats", "Texas Honey", "Sweet Almond Oil", "Vanilla Oil", "Rolled Oats"],
                         rating: 5.0
+                    },
+                    {
+                        id: 2,
+                        name: "Organic Animal Soap w/ Toy",
+                        category: "kids",
+                        price: 14.50,
+                        stripePriceId: "price_animal_toy", 
+                        image: "toy.png", 
+                        // ADDED: Gallery images with specific Animal Descriptions
+                        images: [
+                            { src: "toy.png", title: "The Surprise Box", desc: "Handcrafted organic soap with a hidden animal toy surprise inside. Gentle, safe, and fun." },
+                            { src: "toy1.png", title: "Brave Lion", desc: "Rule the bath time jungle with the King of Beasts! This bar reveals a courageous Lion toy." },
+                            { src: "toy2.png", title: "Cuddly Bear", desc: "Unbearably cute! A cozy Bear toy makes washing hands a fuzzy, warm delight." },
+                            { src: "toy3.png", title: "Happy Hippo", desc: "Splish, splash, and smile! Find a cheerful Hippo friend hiding in the bubbles." },
+                            { src: "toy4.png", title: "Gentle Elephant", desc: "Stomp into sudsy fun! A wise and gentle Elephant is waiting to be discovered." }
+                        ],
+                        shortDesc: "Handcrafted organic soap with a hidden animal toy surprise inside. Gentle, safe, and fun.",
+                        weight: "4.5 oz",
+                        skinType: "Sensitive / Kids",
+                        scent: "Unscented / Mild Chamomile",
+                        ingredients: ["Organic Glycerin", "Coconut Oil", "Shea Butter", "Chamomile Extract", "Toy Inside"],
+                        rating: 4.9
+                    },
+                    {
+                        id: 3,
+                        name: "Citrus Orange Antibacterial Body Bar",
+                        category: "bar",
+                        price: 13.00,
+                        stripePriceId: "price_citrus_bar",
+                        image: "citrus.jpg",
+                        // NEW CITRUS PRODUCT GALLERY (WITH YOUR 4 NEW PNGs)
+                        images: [
+                            { src: "citrus.jpg", title: "Fresh Citrus Bar", desc: "Three bars of bright orange-yellow handmade soap wrapped in clear plastic. Packed with real orange zest and essential oils." },
+                            { src: "citrus1.png", title: "Zesty Details", desc: "A close-up of the bright yellow and orange layers, showing the handmade texture and vibrant color." },
+                            { src: "citrus2.png", title: "Fresh Ingredients", desc: "Showcasing the real lemons and oranges we use to create that authentic, uplifting scent." },
+                            { src: "citrus3.png", title: "Healing Power", desc: "Rich with Vitamin C and natural antibacterial properties to keep skin healthy and clean." },
+                            { src: "citrus4.png", title: "Gift Ready", desc: "Beautifully presented in a natural crate with crinkle paper—perfect for gifting or treating yourself." }
+                        ],
+                        shortDesc: "Sunshine in a Box. Packed with real orange zest and essential oils to fight bacteria.",
+                        weight: "100g (3.5 oz)",
+                        skinType: "All Types / Healing",
+                        scent: "Orange, Lemon & Bergamot",
+                        ingredients: ["Shea Butter", "Olive Oil", "Orange Zest", "Lemon Oil", "Bergamot Oil"],
+                        rating: 4.8
                     }
                 ],
                 cart: [],
@@ -497,42 +570,48 @@
             };
 
             const renderProductsSection = () => {
-                const p = state.products[0];
+                // MODIFIED: Now renders a grid of ALL products
                 return `
                     <section id="products" class="py-20 bg-brand-light reveal">
                         <div class="max-w-7xl mx-auto px-6">
                             <div class="text-center max-w-3xl mx-auto mb-16">
-                                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">Our Signature Blend</h2>
-                                <p class="text-gray-500">Simple, effective, and luxurious. The only soap you'll ever need.</p>
+                                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">The Collection</h2>
+                                <p class="text-gray-500">Simple, effective, and luxurious soaps for the whole family.</p>
                             </div>
                             
-                            <div class="flex justify-center">
-                                <div class="max-w-sm w-full group bg-white rounded-lg overflow-hidden border border-gray-100 hover:border-gray-200 hover:shadow-xl transition-all duration-300 flex flex-col transform hover:-translate-y-2">
-                                    <div class="relative overflow-hidden aspect-square cursor-pointer" onclick="app.openModal(${p.id})">
-                                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
-                                        <button onclick="event.stopPropagation(); app.createRipple(event); app.addToCart(${p.id})" class="btn-ripple absolute bottom-4 right-4 bg-brand-black text-white w-12 h-12 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-brand-gold shadow-lg">
-                                            <i class="fa-solid fa-plus text-lg"></i>
-                                        </button>
-                                    </div>
-                                    <div class="p-6 flex-grow flex flex-col">
-                                        <div class="flex justify-between items-start mb-2">
-                                            <h3 class="font-heading font-bold text-lg text-brand-black group-hover:text-brand-gold transition-colors cursor-pointer" onclick="app.openModal(${p.id})">${p.name}</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+                                ${state.products.map(p => `
+                                    <div class="max-w-sm w-full group bg-white rounded-lg overflow-hidden border border-gray-100 hover:border-gray-200 hover:shadow-xl transition-all duration-300 flex flex-col transform hover:-translate-y-2">
+                                        <div class="relative overflow-hidden aspect-square cursor-pointer" onclick="app.openModal(${p.id})">
+                                            <!-- UPDATED IMG TAG WITH SMART ERROR HANDLER -->
+                                            <img src="${p.image}" alt="${p.name}" 
+                                                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" 
+                                                onerror="window.handleImageError(this)">
+                                            
+                                            <button onclick="event.stopPropagation(); app.createRipple(event); app.addToCart(${p.id})" class="btn-ripple absolute bottom-4 right-4 bg-brand-black text-white w-12 h-12 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-brand-gold shadow-lg">
+                                                <i class="fa-solid fa-plus text-lg"></i>
+                                            </button>
                                         </div>
-                                        <p class="text-sm text-gray-500 mb-4 line-clamp-2">${p.shortDesc}</p>
-                                        
-                                        <div class="flex items-center gap-2 mb-4 text-xs text-gray-400">
-                                            <span class="bg-brand-cream px-2 py-1 rounded text-brand-black font-medium">${p.skinType}</span>
-                                            <span>${p.weight}</span>
-                                        </div>
+                                        <div class="p-6 flex-grow flex flex-col">
+                                            <div class="flex justify-between items-start mb-2">
+                                                <h3 class="font-heading font-bold text-lg text-brand-black group-hover:text-brand-gold transition-colors cursor-pointer" onclick="app.openModal(${p.id})">${p.name}</h3>
+                                            </div>
+                                            <p class="text-sm text-gray-500 mb-4 line-clamp-2">${p.shortDesc}</p>
+                                            
+                                            <div class="flex items-center gap-2 mb-4 text-xs text-gray-400">
+                                                <span class="bg-brand-cream px-2 py-1 rounded text-brand-black font-medium">${p.skinType}</span>
+                                                <span>${p.weight}</span>
+                                            </div>
 
-                                        <div class="mt-auto flex items-center justify-between">
-                                            <span class="font-bold text-lg">$${p.price.toFixed(2)}</span>
-                                            <div class="text-xs text-brand-gold">
-                                                <i class="fa-solid fa-star"></i> ${p.rating}
+                                            <div class="mt-auto flex items-center justify-between">
+                                                <span class="font-bold text-lg">$${p.price.toFixed(2)}</span>
+                                                <div class="text-xs text-brand-gold">
+                                                    <i class="fa-solid fa-star"></i> ${p.rating}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                `).join('')}
                             </div>
                         </div>
                     </section>
@@ -609,7 +688,7 @@
                                     </div>
                                 </li>
                             </ul>
-                            <a href="#products" onclick="event.preventDefault(); app.scrollToSection('products')" class="text-brand-black font-bold border-b-2 border-brand-black pb-1 hover:text-brand-gold hover:border-brand-gold transition-colors">Buy The Bar</a>
+                            <a href="#products" onclick="event.preventDefault(); app.scrollToSection('products')" class="text-brand-black font-bold border-b-2 border-brand-black pb-1 hover:text-brand-gold hover:border-brand-gold transition-colors">Shop The Collection</a>
                         </div>
                     </div>
                 </section>
@@ -849,9 +928,6 @@
                     const stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx'); 
 
                     // 4. Prepare Line Items
-                    // Map your cart items to Stripe's line_items format
-                    // NOTE: In a client-only integration, you typically use a pre-made Payment Link
-                    // OR you use 'price' IDs created in the Stripe Dashboard.
                     const lineItems = state.cart.map(item => {
                         const product = state.products.find(p => p.id === item.id);
                         return {
@@ -991,10 +1067,51 @@
                     const modal = document.getElementById('product-modal');
                     const content = document.getElementById('modal-content');
 
+                    // MODIFIED: Logic to handle new object-based image structure
+                    // If images don't exist, fallback to single image in object structure
+                    let images = [];
+                    if (product.images && product.images.length > 0) {
+                        // Check if it's already an object or a string
+                        if (typeof product.images[0] === 'string') {
+                             images = product.images.map(src => ({ src, title: "View", desc: product.shortDesc }));
+                        } else {
+                             images = product.images;
+                        }
+                    } else {
+                        images = [{ src: product.image, title: "Main View", desc: product.shortDesc }];
+                    }
+
+                    // Default description to first image or product short desc
+                    const initialDesc = images[0].desc || product.shortDesc;
+
                     content.innerHTML = `
-                        <div class="w-full md:w-1/2 relative bg-gray-100">
-                            <img src="${product.image}" class="w-full h-full object-cover min-h-[300px] md:min-h-[500px]">
+                        <div class="w-full md:w-1/2 bg-gray-100 flex flex-col">
+                            <div class="h-64 md:h-96 w-full relative group">
+                                 <!-- Main Image with ID for switching -->
+                                 <img id="modal-main-image" src="${images[0].src}" 
+                                      class="w-full h-full object-cover transition-opacity duration-300" 
+                                      onerror="window.handleImageError(this)">
+                                 
+                                 <!-- Dynamic Caption Overlay -->
+                                 <div class="absolute bottom-0 left-0 w-full bg-black/50 backdrop-blur-sm p-3 text-white text-center transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                     <span id="modal-image-caption" class="font-heading font-bold text-sm tracking-widest uppercase">${images[0].title}</span>
+                                 </div>
+                            </div>
+                            
+                            <!-- Thumbnail Gallery -->
+                            <div class="flex gap-2 p-4 overflow-x-auto bg-white border-t border-gray-100">
+                                ${images.map((img, index) => `
+                                    <div class="flex-shrink-0 w-20 h-20 cursor-pointer border-2 border-transparent hover:border-brand-gold rounded overflow-hidden transition-all relative group"
+                                         onclick="document.getElementById('modal-main-image').src = '${img.src}'; 
+                                                  document.getElementById('modal-image-caption').innerText = '${img.title}';
+                                                  document.getElementById('modal-product-desc').innerText = '${img.desc || product.shortDesc}';">
+                                        <img src="${img.src}" class="w-full h-full object-cover" onerror="window.handleImageError(this)">
+                                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                                    </div>
+                                `).join('')}
+                            </div>
                         </div>
+                        
                         <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col">
                             <div class="mb-auto">
                                 <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block">Signature Collection</span>
@@ -1002,8 +1119,8 @@
                                 <div class="flex items-center gap-2 mb-6">
                                     <span class="text-2xl text-brand-black font-semibold">$${product.price.toFixed(2)}</span>
                                 </div>
-                                <p class="text-gray-600 mb-8 leading-relaxed">
-                                    ${product.shortDesc} Hand-poured and cured to perfection.
+                                <p id="modal-product-desc" class="text-gray-600 mb-8 leading-relaxed">
+                                    ${initialDesc}
                                 </p>
                                 
                                 <div class="grid grid-cols-2 gap-4 mb-8">
