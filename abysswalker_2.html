@@ -1523,41 +1523,42 @@ const boss4Eyes = [], boss4EyeGlows = [], boss4Legs = [], boss4LegArmor = [],
   boss4Group.add(boss4Head);
 
   // the exposed core (phase-V weak point)
-  boss4Core = new THREE.Mesh(new THREE.SphereGeometry(1.05,18,16),
+  boss4Core = new THREE.Mesh(new THREE.SphereGeometry(1.15,18,16),
     new THREE.MeshBasicMaterial({color:0xc8ffb0}));
-  boss4Core.position.set(0,-.5,2.1); boss4Core.visible=false; boss4Group.add(boss4Core);
-  boss4CoreGlow = makeGlowSprite(0x7cff3a,7,.9);
+  boss4Core.position.set(0,-1.0,2.3); boss4Core.visible=false; boss4Group.add(boss4Core);
+  boss4CoreGlow = makeGlowSprite(0x7cff3a,8.5,.9);
   boss4CoreGlow.position.copy(boss4Core.position); boss4CoreGlow.visible=false; boss4Group.add(boss4CoreGlow);
 
   // eight legs arched over the arena
-  function makeLeg(sign, zoff, scale, front){
+  function makeLeg(sign, zoff, scale, front, yaw){
     const leg = new THREE.Group();
     const femur = new THREE.Mesh(new THREE.CylinderGeometry(.32,.5,6.5,7), chitin);
-    femur.position.set(sign*2.73,1.76,0); femur.rotation.z = -sign*1.0; leg.add(femur);
+    femur.position.set(sign*2.33,2.27,0); femur.rotation.z = -sign*.8; leg.add(femur);
     const knee = new THREE.Mesh(new THREE.SphereGeometry(.52,8,8), plate);
-    knee.position.set(sign*5.46,3.51,0); leg.add(knee);
+    knee.position.set(sign*4.66,4.53,0); leg.add(knee);
     const kneeSpike = new THREE.Mesh(new THREE.ConeGeometry(.2,1.1,6), seamWeb);
-    kneeSpike.position.set(sign*5.46,4.35,0); kneeSpike.rotation.z=-sign*.25; leg.add(kneeSpike);
-    const tibia = new THREE.Mesh(new THREE.CylinderGeometry(.16,.34,12,7), chitin);
-    tibia.position.set(sign*8.56,-1.63,0); tibia.rotation.z = -sign*2.6; leg.add(tibia);
+    kneeSpike.position.set(sign*4.66,5.37,0); kneeSpike.rotation.z=-sign*.25; leg.add(kneeSpike);
+    const tibia = new THREE.Mesh(new THREE.CylinderGeometry(.16,.36,13,7), chitin);
+    tibia.position.set(sign*7.14,-1.48,0); tibia.rotation.z = -sign*2.75; leg.add(tibia);
     const claw = new THREE.Mesh(new THREE.ConeGeometry(.22,1.6,6), fang);
-    claw.position.set(sign*11.4,-6.55,0); claw.rotation.z = -sign*2.6+Math.PI; leg.add(claw);
+    claw.position.set(sign*9.62,-7.49,0); claw.rotation.z = -sign*2.75+Math.PI; leg.add(claw);
     if(front){
       const armor = new THREE.Mesh(new THREE.BoxGeometry(3,.75,1.15), plate);
-      armor.position.set(sign*2.73,2.3,0); armor.rotation.z = -sign*1.0;
+      armor.position.set(sign*2.33,2.27,0); armor.rotation.z = -sign*.8;
       boss4LegArmor.push(armor); leg.add(armor);
     }
     leg.position.set(sign*1.6,.5,zoff);
+    leg.rotation.y = -sign*yaw; // fan the legs toward and away from the camera
     leg.scale.setScalar(scale);
     leg.userData = {sign, baseRX:0, baseRZ:0, spd:rand(.5,.9), ph:rand(0,6)};
     boss4Legs.push(leg); boss4Group.add(leg);
     return leg;
   }
   for(const side of [-1,1]){
-    makeLeg(side, 1.9, 1.0, true);
-    makeLeg(side, .8, .94, true);
-    makeLeg(side, -.5, .9, false);
-    makeLeg(side, -1.7, .84, false);
+    makeLeg(side, 1.9, 1.0, true, .55);
+    makeLeg(side, .8, .94, true, .22);
+    makeLeg(side, -.5, .9, false, -.16);
+    makeLeg(side, -1.7, .84, false, -.5);
   }
 
   boss4Group.position.set(0,BOSS4_Y,BOSS_Z);
@@ -3155,7 +3156,7 @@ function updateBoss4Death(dt){
   if(T>3.2 && boss4Core.visible){ // the core overloads
     const g=1+(T-3.2)*1.3;
     boss4Core.scale.setScalar(g);
-    boss4CoreGlow.scale.set(7*g,7*g,1);
+    boss4CoreGlow.scale.set(8.5*g,8.5*g,1);
   }
   const cp=_dcp, cl=_dcl;
   if(T<2.3){ cp.set(8,4.8,BOSS_Z+17); cl.set(0,BOSS4_Y,BOSS_Z); }
@@ -3211,7 +3212,7 @@ function updateBoss4Visuals(dt){
   if(boss4Core.visible){
     const hp=1+Math.sin(t*4.6)*.16;
     boss4Core.scale.setScalar(hp);
-    boss4CoreGlow.scale.set(7*hp,7*hp,1);
+    boss4CoreGlow.scale.set(8.5*hp,8.5*hp,1);
   }
   boss4.dripT-=dt;
   if(boss4.dripT<=0){ boss4.dripT=.2-(boss4.phase-1)*.03; boss4Drips(1); }
@@ -4383,7 +4384,7 @@ function startOrbScene(){
   setSpeech('','',false); hideCaption();
   orbObj=new THREE.Group();
   orbObj.add(new THREE.Mesh(new THREE.SphereGeometry(.34,14,14),
-    new THREE.MeshBasicMaterial({color:0xb9ff9a})));
+    new THREE.MeshBasicMaterial({color:0x8aff4d})));
   orbObj.add(makeGlowSprite(0x7cff3a,5,.9));
   orbObj.add(makeGlowSprite(0xd6ffb0,2.4,.95));
   orbObj.position.set(0,11,BOSS_Z+4);
@@ -4401,7 +4402,7 @@ function updateOrbScene(dt){
     orbLight.position.copy(orbObj.position);
     orbLight.intensity=lerp(.4,2.6,p);
     let s=1+Math.sin(t*7)*.08;
-    if(t>6.2){ orbLight.intensity=Math.min(10,orbLight.intensity+(t-6.2)*3); s*=1+(t-6.2)*.85; }
+    if(t>6.2){ orbLight.intensity=Math.min(6.5,orbLight.intensity+(t-6.2)*3); s*=1+(t-6.2)*.85; }
     orbObj.scale.setScalar(s);
     if(Math.random()<.6) sparks.spawn(orbObj.position.x,orbObj.position.y,orbObj.position.z,
       {n:1,speed:.9,color1:0x7cff3a,color2:0xd6ffb0,life:.7,gravity:.6,drag:1});
@@ -4552,7 +4553,7 @@ function prepareBoss4Fight(){
   for(const p of boss4AbdomenPlates) p.visible=true;
   for(const a of boss4LegArmor) a.visible=true;
   boss4Core.visible=false; boss4CoreGlow.visible=false;
-  boss4Core.scale.setScalar(1); boss4CoreGlow.scale.set(7,7,1);
+  boss4Core.scale.setScalar(1); boss4CoreGlow.scale.set(8.5,8.5,1);
   for(const e of boss4Eyes){ e.visible=true; e.material.color.setHex(0xd8fff2); }
   for(const g of boss4EyeGlows){ g.visible=true; g.material.color.setHex(0x35ffd8); }
   setBoss4Emissive(boss4GoldMat,.8);
