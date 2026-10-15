@@ -21,6 +21,7 @@ He's actually refusing to be saved: the thing hunting him is his wife, doing CPR
 | `docs/07_Art_Assets_Meshy.md` | Every asset with its Meshy prompt, triangle budgets, color rules, shaders |
 | `docs/08_Audio_ElevenLabs.md` | Voice casting with ElevenLabs voice IDs, SFX list, music, mixer setup |
 | `tools/extract_lines.py` | Turns the script into `dialogue.csv` (run it after every script edit) |
+| `tools/procgen/` | Builds the models Meshy didn't (props, characters, The Pull) as GLB + OBJ |
 | `tools/audio_manifest.json` | Prompt, length and loop setting for every sound effect and music cue |
 | `Unity/Assets/_Project/` | Unity scripts and data. Copy this folder into your Unity project's `Assets/`. |
 
@@ -30,7 +31,8 @@ He's actually refusing to be saved: the thing hunting him is his wife, doing CPR
 | --- | --- |
 | Story, script, dialogue | ✅ Written (v1) |
 | Level design, cutscenes, menus, secrets | ✅ Designed (v1) |
-| Art list + Meshy prompts | ✅ Written; `tools/meshy_generate.py` makes all 53 models once a Meshy API key is set |
+| Art list + Meshy prompts | ✅ Written |
+| 3D models | ✅ 25 from Meshy (Field, House, Classroom, Station) + 30 built in code (`tools/procgen`: rest of the props, all characters, Tomas, The Pull). Rigging and animation still to do. |
 | Voice casting + recording | ✅ All 11 roles cast; all 212 lines recorded and in `Audio/Resources/VO` |
 | Sound effects + music | ✅ 30 SFX in `Audio/SFX`, 6 music cues in `Audio/Music` (ElevenLabs) |
 | Core systems (save, scenes, beat, dialogue, subtitles) | ✅ Code written |

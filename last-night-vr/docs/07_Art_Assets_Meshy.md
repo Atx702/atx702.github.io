@@ -8,6 +8,11 @@
 ## Batch generation
 `tools/meshy_generate.py` makes every model in the prompt tables below through the Meshy API (mesh, then PBR textures) and saves GLB + FBX to `Unity/Assets/_Project/Art/Models/<Section>/`. It needs `MESHY_API_KEY` set. Run `--dry-run` first to see the list (53 models, about 1,600 credits). It can be stopped and re-run safely; progress is in `tools/meshy_tasks.json`. It makes one take per model; re-roll any you don't like with `--only "<Section>/<Asset>"` after deleting its entry.
 
+## Stand-in models (made in code)
+Meshy credits ran out after 25 of the 53 models, so the other **28 are built by `tools/procgen/`** (a small Python modeller; no Blender needed): the Station scarf and lost-property bin, all of the Kitchen, Hospital and Bedroom / Wren's room props, the six characters, plus **Tomas** (his body, for the bed and CPR scenes) and **The Pull** (2.6 m, white emissive silhouette, as the design asks). Run `python tools/procgen/build_models.py` to rebuild them; `python tools/procgen/preview.py sheet.png` renders a contact sheet.
+
+They are flat-coloured low-poly (150 to 6,000 triangles, well under budget) in the project palette, written as GLB plus OBJ/MTL (Unity reads OBJ natively). Characters are in A-pose, ready for Mixamo auto-rigging. They are placeholders in look, not final art: when you get more Meshy credits, run `python tools/meshy_generate.py`, and the Meshy FBX for a name will be used in preference (the builder skips any name that already has a Meshy file).
+
 ## Triangle budgets (Quest 3)
 | Type | Budget |
 | --- | --- |
