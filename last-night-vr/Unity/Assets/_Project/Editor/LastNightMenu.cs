@@ -142,6 +142,20 @@ namespace LastNight.EditorTools
                 EditorUtility.DisplayDialog("Last Night", $"Build {s.result} with {s.totalErrors} errors. See the Console.", "OK");
         }
 
+        /// <summary>Opens Core (the game's first scene) and presses Play: the whole game from the start, through Air Link or Link.</summary>
+        [MenuItem("Last Night/Play the Game (Air Link)", priority = 30)]
+        public static void PlayFromStart()
+        {
+            if (!System.IO.File.Exists($"{Kit.ScenesFolder}/Core.unity"))
+            {
+                EditorUtility.DisplayDialog("Last Night", "Build the scenes first: Last Night > 2. Build All Scenes.", "OK");
+                return;
+            }
+            if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
+            EditorSceneManager.OpenScene($"{Kit.ScenesFolder}/Core.unity", OpenSceneMode.Single);
+            EditorApplication.isPlaying = true;
+        }
+
         [MenuItem("Last Night/Open Core + Field (test in editor)", priority = 40)]
         public static void OpenForTesting()
         {
