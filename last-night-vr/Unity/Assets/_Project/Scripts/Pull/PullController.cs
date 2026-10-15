@@ -81,6 +81,8 @@ namespace LastNight.Pull
 
         public void SetMode(Mode m)
         {
+            // Directors may call this every frame; only a real change resets tracking.
+            if (m == mode && gameObject.activeSelf == (m != Mode.Dormant)) return;
             mode = m;
             unseenBeats = 0;
             targetLost = false;

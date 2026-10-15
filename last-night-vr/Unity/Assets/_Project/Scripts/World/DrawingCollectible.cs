@@ -28,9 +28,17 @@ namespace LastNight.World
 
             found = true;
             GameManager.Instance?.ReportDrawing(index);
-            if (!string.IsNullOrEmpty(lineOnFound)) DialoguePlayer.Instance?.Play(lineOnFound, transform);
+            if (!string.IsNullOrEmpty(lineOnFound)) DialoguePlayer.Instance?.PlayOnce(lineOnFound, transform);
             if (GameManager.Instance != null && GameManager.Instance.State.drawingsFound.Count == GameState.DrawingCount)
                 DialoguePlayer.Instance?.PlayOnce("EGG_002");
+        }
+
+        /// <summary>Chapter 5 corridor: lets the drawing be "seen" again on the next loop.
+        /// The gallery keeps it either way.</summary>
+        public void ResetForLoop()
+        {
+            found = false;
+            timer = 0f;
         }
     }
 }

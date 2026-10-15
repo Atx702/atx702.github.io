@@ -31,12 +31,31 @@ He's actually refusing to be saved: the thing hunting him is his wife, doing CPR
 | Level design, cutscenes, menus, secrets | ✅ Designed (v1) |
 | Art list + Meshy prompts | ✅ Written; models not generated yet |
 | Voice casting | 🟡 Voice + Maren cast and sampled; 9 roles to cast (including Wren) |
-| Core systems (save, scenes, beat, dialogue, subtitles) | ✅ Code written, **not yet compiled in Unity** |
-| Player mechanics (eyes closed, gaze, gestures) | ✅ Code written, not yet compiled |
-| The Pull AI | ✅ Code written, not yet compiled |
-| Chapter directors | 🟡 Prologue, Ch.6 shocks, Ch.7 reveal, Ch.8 endings done; Ch.1–5 to write |
-| Settings UI, pause menu, extras | 🔴 To do |
+| Core systems (save, scenes, beat, dialogue, subtitles) | ✅ Code written |
+| Player mechanics (eyes closed, gaze, gestures, mic humming) | ✅ Code written |
+| The Pull AI (sighting, stalk, chase, circle, doorway) | ✅ Code written |
+| Chapter directors (all 9 chapters + field + secret ending) | ✅ Code written |
+| Puzzles (boat sockets, speakers, chalk, timetable, kettle, radio, lamps, corridor loop, clock) | ✅ Code written |
+| Menus (boot, bed menu, settings, pause, extras, gallery, achievements, credits, easel) | ✅ Code written; the panels themselves still need laying out in Unity |
+| Easter eggs and achievements | ✅ Code written |
+| **Compile check** | 🟡 All scripts parse cleanly (Roslyn syntax check). Not yet compiled against Unity, so expect a handful of small API fixes on first import. |
 | Scenes, models, animation, VO recording | 🔴 To do (needs the Unity editor, Meshy, Blender) |
+
+## Script map
+
+| Folder | Scripts |
+| --- | --- |
+| `Core/` | GameManager, GameState, GameSettings, SaveSystem, ScreenFader, PlayerSpawnPoint, Bootstrap, Achievements, EaselMode |
+| `Audio/` | BeatClock (110 BPM compression rhythm, haptics) |
+| `Dialogue/` | DialogueDatabase (CSV), DialoguePlayer (queue, leak filter), SubtitleView |
+| `Player/` | EyesClosed, Gaze, GestureDetector |
+| `Pull/` | PullController |
+| `Interaction/` | SocketSet, Dial, PullChainLamp, GrabSignal, HumDetector, CrayonPaper, Crayon |
+| `Chapters/` | ChapterDirector (base), FieldDirector, Ch1–Ch6 directors, SecretEndingDirector, SpeakerBox, ChalkWord, KitchenKettle, CorridorLoop, CorridorLights, HospitalClock, DriftingFragment, WrensRoomToys |
+| `World/` | PrologueDirector, RevealDirector (Ch.7), EndingController (Ch.8), ShockScheduler, DialogueTrigger, ShyObject, MemoryDecay, LeakedObjectItem, DrawingCollectible, AnchorPortal, ChapterExit, IdleWatcher, StoppedClockEgg, ThrowWatcher |
+| `UI/` | BootFlow, MainMenuItem, SettingsMenu, SettingsApplier, PauseMenu, ExtrasMenu, AchievementRow, AchievementToast, CreditsRoll |
+
+Directors expose small public methods (`OnExit()`, `OnHandRaised()`, …). Wire them from trigger volumes and `UnityEvent`s in each scene; the field list at the top of each director says what to drag in.
 
 ## Unity setup (do this once)
 

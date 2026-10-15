@@ -92,6 +92,7 @@ namespace LastNight.Core
         public void ReturnToMainMenu()
         {
             playing = false;
+            EaselMode.Active = false;
             SaveSystem.Save(State);
             StartCoroutine(SwapScene(mainMenuScene, null));
         }
@@ -113,6 +114,17 @@ namespace LastNight.Core
         }
 
         public void LoadSecretEnding() => StartCoroutine(SwapScene(secretEndingScene, null));
+
+        /// <summary>Swap to any scene (used by endings). Runs on the GameManager, so it survives the caller's scene unloading.</summary>
+        public void SwapTo(string sceneName) => StartCoroutine(SwapScene(sceneName, null));
+
+        public void ReturnToMainMenuAfter(float seconds) => StartCoroutine(MenuAfter(seconds));
+
+        IEnumerator MenuAfter(float seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+            ReturnToMainMenu();
+        }
 
         // ---------- Progress reporting ----------
 

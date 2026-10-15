@@ -21,7 +21,11 @@ namespace LastNight.World
 
         int shocks;
 
-        IEnumerator Start()
+        // Start disabled in the scene; enabling the component starts the shocks, disabling stops them.
+        void OnEnable() => StartCoroutine(Loop());
+        void OnDisable() => StopAllCoroutines();
+
+        IEnumerator Loop()
         {
             while (true)
             {

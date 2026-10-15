@@ -32,6 +32,7 @@ namespace LastNight.World
 
         IEnumerator Start()
         {
+            if (EaselMode.Active) { enabled = false; yield break; } // free drawing, no story
             var d = DialoguePlayer.Instance;
             yield return d.PlayAndWait("CH8_001", wrenSpeaker);
             yield return d.PlayAndWait("CH8_002", wrenSpeaker);
