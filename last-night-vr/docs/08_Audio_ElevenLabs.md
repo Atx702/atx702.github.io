@@ -41,7 +41,19 @@ Every take also lives in the ElevenLabs flow "Last Night - voice samples" (`4xeF
 | Ambience | Wind beds per chapter |
 | Music | Sparse; only the Lantern melody and drones |
 
-## SFX list (ElevenLabs sound effects or recorded)
+## Sound effects and music: generated
+
+**All 30 sound effects and 6 music cues are generated** in ElevenLabs and saved in the Unity project:
+- `Unity/Assets/_Project/Audio/SFX/<ID>.mp3` (sound effects model `eleven_text_to_sound_v2`; ambiences and hums are made as seamless loops)
+- `Unity/Assets/_Project/Audio/Music/<ID>.mp3` (music model `eleven_music_v2_5`; all instrumental except MUS_Lantern_Hum, which hums the Little Lantern lyrics)
+
+Every prompt, length and loop setting is in `tools/audio_manifest.json`. All takes live in the ElevenLabs flow `0llPTruv4Ziz3CBXrk8G`, where you can re-roll any of them.
+
+To regenerate one sound: change its prompt in the manifest, generate it on the flow, replace its row in `tools/audio_sessions.txt` with the new session ID, delete the old `.mp3`, and run `python tools/fetch_audio.py <saved status json>` straight away (links expire after about 2 hours).
+
+In Unity, set looped files (wind, cicadas, rain, hum, underwater, static, drones) to **Load Type: Streaming** and tick **Loop** on their AudioSource. Short one-shots work best as **Decompress On Load**.
+
+## SFX list
 
 | ID | Sound | Notes |
 | --- | --- | --- |
@@ -73,6 +85,8 @@ Every take also lives in the ElevenLabs flow "Last Night - voice samples" (`4xeF
 | SFX_lantern_turn | Soft music-box mechanism | Ch.8 |
 | SFX_duck_squeak | Rubber duck squeak | Ch.8 |
 | SFX_memory_decay | Sand pouring + soft crackle | Every anchor |
+| SFX_footsteps_grass | Slow footsteps on soft grass | Field, the Pull's approach |
+| SFX_reversed_voice | Reversed, breathy whisper | Ch.6 distortion, easter eggs |
 
 ## Music
 | Cue | Use |

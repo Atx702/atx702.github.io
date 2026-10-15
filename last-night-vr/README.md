@@ -21,6 +21,7 @@ He's actually refusing to be saved: the thing hunting him is his wife, doing CPR
 | `docs/07_Art_Assets_Meshy.md` | Every asset with its Meshy prompt, triangle budgets, color rules, shaders |
 | `docs/08_Audio_ElevenLabs.md` | Voice casting with ElevenLabs voice IDs, SFX list, music, mixer setup |
 | `tools/extract_lines.py` | Turns the script into `dialogue.csv` (run it after every script edit) |
+| `tools/audio_manifest.json` | Prompt, length and loop setting for every sound effect and music cue |
 | `Unity/Assets/_Project/` | Unity scripts and data. Copy this folder into your Unity project's `Assets/`. |
 
 ## Status
@@ -31,6 +32,7 @@ He's actually refusing to be saved: the thing hunting him is his wife, doing CPR
 | Level design, cutscenes, menus, secrets | ✅ Designed (v1) |
 | Art list + Meshy prompts | ✅ Written; models not generated yet |
 | Voice casting + recording | ✅ All 11 roles cast; all 212 lines recorded and in `Audio/Resources/VO` |
+| Sound effects + music | ✅ 30 SFX in `Audio/SFX`, 6 music cues in `Audio/Music` (ElevenLabs) |
 | Core systems (save, scenes, beat, dialogue, subtitles) | ✅ Code written |
 | Player mechanics (eyes closed, gaze, gestures, mic humming) | ✅ Code written |
 | The Pull AI (sighting, stalk, chase, circle, doorway) | ✅ Code written |
@@ -114,7 +116,7 @@ All 212 lines are already recorded and saved as `Unity/Assets/_Project/Audio/Res
 | **M1 Graybox** | Core scene, Field with primitive anchors, Prologue playable with placeholder VO | You can walk from the bed to the rise and pick up the boat in a headset |
 | **M2 Mechanics** | Eyes closed, shy house, the Pull (stalk mode), save/load | Ch.1 and the Pull work in graybox |
 | **M3 All chapters graybox** | Directors for Ch.1–5, Ch.6–8 hooked up | Whole game playable start to finish in graybox (~65 min) |
-| **M4 Voice** ✅ | All 212 lines recorded in ElevenLabs | Done |
+| **M4 Voice + sound** ✅ | All 212 lines, 30 sound effects and 6 music cues made in ElevenLabs | Done |
 | **M5 Art** | Meshy assets cleaned in Blender, characters rigged, shaders | Every chapter dressed |
 | **M6 Cutscenes + animation** | All 14 timelines, character animation, lip-sync | All story beats staged |
 | **M7 Menus + settings** | Bed menu, pause, settings, extras, achievements | Every setting works |
