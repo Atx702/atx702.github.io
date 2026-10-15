@@ -1,0 +1,127 @@
+{
+  "Prologue_Field/Old_double_bed": {
+    "preview": "01a13e49-fdad-7296-ba88-3b697dcdb743",
+    "refine": "01a13e4a-f296-7002-b359-b821d2e6ae89",
+    "done": true
+  },
+  "Prologue_Field/Nightstand_and_digital_clock": {
+    "preview": "01a13e4b-a900-705f-a47d-87df46829957",
+    "refine": "01a13e4c-9dd9-74b6-b7ff-107227783ce5",
+    "done": true
+  },
+  "Prologue_Field/Floorboard_path_segment": {
+    "preview": "01a13e4d-9021-7740-80fa-0902467b357e",
+    "refine": "01a13e4e-4998-741e-b774-97fad772e10a",
+    "done": true
+  },
+  "Prologue_Field/Toy_sailboat": {
+    "preview": "01a13e4e-ffdc-75a1-a24e-f62f3abc27e4",
+    "refine": "01a13e4f-7e4c-727c-9362-8702d47b6bce",
+    "done": true
+  },
+  "Prologue_Field/Standalone_door_in_field": {
+    "preview": "01a13e50-3478-7783-ac2b-f0cfa94c9ec3",
+    "refine": "01a13e50-ed7d-72b1-9a00-ad54820d2c85",
+    "done": true
+  },
+  "Prologue_Field/Coat_rack_and_coat": {
+    "preview": "01a13e51-dee4-7377-88fd-7c9f5f4bd523",
+    "refine": "01a13e52-9a03-7767-ba8c-b64d7b532eb4",
+    "done": true
+  },
+  "Prologue_Field/Biscuit_the_dog": {
+    "preview": "01a13e53-8c11-749e-9c82-acb02e116a35",
+    "refine": "01a13e54-8045-75a6-b410-5dbd30f0c027",
+    "done": true
+  },
+  "House/House_exterior": {
+    "preview": "01a13e55-3653-733c-a364-ef55fb75855a",
+    "refine": "01a13e56-65a1-75bf-b00e-ba708d575842",
+    "done": true
+  },
+  "House/Kitchen_table_and_bowl": {
+    "preview": "01a13e57-5790-75e4-a8dd-f3e074437c2c",
+    "refine": "01a13e58-4c93-742b-8ca4-fea22119911e",
+    "done": true
+  },
+  "House/Child_s_bed_and_shelf": {
+    "preview": "01a13e59-02c3-772b-94b9-ad57bd6d37e9",
+    "refine": "01a13e59-c13b-76a9-b04c-f09e54041887",
+    "done": true
+  },
+  "House/Fridge": {
+    "preview": "01a13e5a-77fe-74a8-a522-3bbb431209eb",
+    "refine": "01a13e5b-3168-7611-925d-416af855e415",
+    "done": true
+  },
+  "House/Wooden_dock": {
+    "preview": "01a13e5c-232b-7414-b843-6b8b407b36e0",
+    "refine": "01a13e5c-dce0-751a-94d2-330b7e8ac20f",
+    "done": true
+  },
+  "House/Medical_glove_leak": {
+    "preview": "01a13e5d-ce7f-70d2-b881-62dd66ef6cea",
+    "refine": "01a13e5e-c3f8-7173-a5d2-ffe80bcf8e60",
+    "done": true
+  },
+  "House/Wind_chimes": {
+    "preview": "01a13e5f-7ac1-75d5-b9fe-885fad868b1d",
+    "refine": "01a13e60-6ff7-74e0-bafe-1e3b171c0f27",
+    "done": true
+  },
+  "Classroom/School_desk": {
+    "preview": "01a13e60-ea52-70ac-a0d9-2691ac0c571f",
+    "refine": "01a13e61-a7a1-7579-8d5e-1523e8947511",
+    "done": true
+  },
+  "Classroom/Chalkboard": {
+    "preview": "01a13e62-98f7-7469-adb4-24a6e952569f",
+    "refine": "01a13e63-19e0-7441-9287-e21461d74b75",
+    "done": true
+  },
+  "Classroom/Wall_clock": {
+    "preview": "01a13e63-d078-7181-b227-76149ca0ddde",
+    "refine": "01a13e65-0085-761e-9a39-92c63d93734b",
+    "done": true
+  },
+  "Classroom/Old_speaker_box": {
+    "preview": "01a13e66-a45e-7334-be7e-237026d64c4c",
+    "refine": "01a13e67-d32d-7448-8d4e-fb0e05a98684",
+    "done": true
+  },
+  "Classroom/Pulse_oximeter_clip_leak": {
+    "preview": "01a13e68-c4c7-76fa-be5c-d6d8d0d8a344",
+    "refine": "01a13e6a-e0f7-7408-8d84-3675698c96a7",
+    "done": true
+  },
+  "Classroom/Paper_airplane": {
+    "preview": "01a13e6b-9776-7188-8ffa-c9113f419fb8",
+    "refine": "01a13e6c-158e-77ce-9024-66b3bf9a7699",
+    "done": true
+  },
+  "Station/Platform_shelter": {
+    "preview": "01a13e6c-cbc9-7184-96e7-0248ca59620d",
+    "refine": "01a13e6d-c14b-7744-a5ad-2c03fabc081e",
+    "done": true
+  },
+  "Station/Bench": {
+    "preview": "01a13e6e-7787-719e-bc04-d7b493afdecd",
+    "refine": "01a13e6f-3038-709a-8705-a714e3b42056",
+    "done": true
+  },
+  "Station/Flip_timetable_board": {
+    "preview": "01a13e6f-e615-73d2-a2fd-511f51dba3bd",
+    "refine": "01a13e70-dc37-74e4-8e18-b133947aff96",
+    "done": true
+  },
+  "Station/Vending_machine": {
+    "preview": "01a13e71-cdb6-72cc-beda-d53f6abbf58f",
+    "refine": "01a13e73-3aca-70e4-aa27-7d1bf0b821e4",
+    "done": true
+  },
+  "Station/Train_car": {
+    "preview": "01a13e74-2c7e-73aa-b648-d252c96ae4c9",
+    "refine": "01a13e75-2164-753e-87df-186f24b11f4b",
+    "done": true
+  }
+}
