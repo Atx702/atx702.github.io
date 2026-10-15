@@ -13,7 +13,7 @@ Meshy credits ran out after 25 of the 53 models, so the other **28 are built by 
 
 They are flat-coloured low-poly (150 to 6,000 triangles, well under budget) in the project palette, written as GLB plus OBJ/MTL (Unity reads OBJ natively). Characters are in A-pose, ready for Mixamo auto-rigging. They are placeholders in look, not final art: when you get more Meshy credits, run `python tools/meshy_generate.py`, and the Meshy FBX for a name will be used in preference (the builder skips any name that already has a Meshy file).
 
-## Triangle budgets (Quest 3)
+## Triangle budgets (Quest 2)
 | Type | Budget |
 | --- | --- |
 | Small prop (mug, glove) | 300–1,500 |
