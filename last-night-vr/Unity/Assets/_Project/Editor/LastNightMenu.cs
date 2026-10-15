@@ -116,6 +116,36 @@ namespace LastNight.EditorTools
             Build(false);
         }
 
+        /// <summary>
+        /// Headless build for CI (GitHub Actions): set up, build every scene, build the APK, and exit with a
+        /// non-zero code on any failure. Writes Builds/LastNight.apk.
+        /// </summary>
+        public static void CiBuild()
+        {
+            try
+            {
+                QuestSetup.Apply(); // the input-backend restart isn't needed here: the player build recompiles with the new settings
+                var problems = BuildScenes();
+                if (problems.Count > 0) throw new Exception("Scene building failed: " + string.Join("; ", problems));
+                var scenes = EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray();
+                Directory.CreateDirectory(Path.GetDirectoryName(ApkPath));
+                var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
+                {
+                    scenes = scenes, locationPathName = ApkPath, target = BuildTarget.Android,
+                    targetGroup = BuildTargetGroup.Android, options = BuildOptions.None,
+                });
+                if (report.summary.result != BuildResult.Succeeded)
+                    throw new Exception($"Build {report.summary.result} with {report.summary.totalErrors} errors");
+                Debug.Log($"[Last Night] Built {ApkPath} ({report.summary.totalSize / (1024 * 1024)} MB)");
+                EditorApplication.Exit(0);
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+                EditorApplication.Exit(1);
+            }
+        }
+
         static void Build(bool run)
         {
             var scenes = EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray();

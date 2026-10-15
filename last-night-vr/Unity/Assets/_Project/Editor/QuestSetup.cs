@@ -149,6 +149,13 @@ namespace LastNight.EditorTools
             var openxr = OpenXRSettings.GetSettingsForBuildTargetGroup(group);
             if (openxr == null)
             {
+                // A fresh project (or a headless build) may not have created OpenXR's settings asset yet.
+                var t = System.Type.GetType("UnityEditor.XR.OpenXR.OpenXRPackageSettings, Unity.XR.OpenXR.Editor");
+                t?.GetMethod("GetOrCreateInstance", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static)?.Invoke(null, null);
+                openxr = OpenXRSettings.GetSettingsForBuildTargetGroup(group);
+            }
+            if (openxr == null)
+            {
                 Debug.LogWarning("[Last Night] OpenXR settings aren't created yet. Open Edit > Project Settings > XR Plug-in Management once, then run Set Up again.");
                 return;
             }

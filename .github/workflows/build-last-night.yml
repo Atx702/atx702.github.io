@@ -1,0 +1,81 @@
+# Builds the Last Night Quest 2 APK in the cloud and publishes it as a GitHub release you can download
+# straight from the Quest browser (or save to Google Drive).
+#
+# One-time setup (repo Settings > Secrets and variables > Actions > New repository secret):
+#   UNITY_EMAIL     your Unity account email
+#   UNITY_PASSWORD  your Unity account password
+#   UNITY_LICENSE   the contents of your Unity personal licence file (Unity_lic.ulf)
+# Then: Actions tab > "Build Last Night APK" > Run workflow, or push a commit whose message contains [build apk].
+name: Build Last Night APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [claude/loving-brown-hc782n]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    # Pushes only build when the commit message asks for it, so ordinary commits don't start a 1-hour build.
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[build apk]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - name: Free disk space (the Unity Android image is large)
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: false
+          docker-images: false
+
+      - name: Check out the project
+        uses: actions/checkout@v4
+        with:
+          lfs: false
+
+      - name: Cache Unity's Library folder (faster rebuilds)
+        uses: actions/cache@v4
+        with:
+          path: last-night-vr/Unity/Library
+          key: Library-Android-${{ hashFiles('last-night-vr/Unity/Packages/manifest.json') }}
+          restore-keys: Library-Android-
+
+      - name: Build the APK with Unity
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          projectPath: last-night-vr/Unity
+          targetPlatform: Android
+          androidExportType: androidPackage
+          buildMethod: LastNight.EditorTools.LastNightMenu.CiBuild
+          allowDirtyBuild: true
+
+      - name: Publish the APK as a release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: last-night-build-${{ github.run_number }}
+          name: Last Night (build ${{ github.run_number }})
+          target_commitish: ${{ github.sha }}
+          prerelease: true
+          body: |
+            Quest 2 APK built from commit ${{ github.sha }}.
+            Download LastNight.apk below (open this page in the Quest browser, or save it to Google Drive).
+          files: last-night-vr/Unity/Builds/LastNight.apk
+
+      - name: Keep the build log if it failed
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unity-logs
+          path: |
+            last-night-vr/Unity/Logs
+            last-night-vr/Unity/Builds
+          if-no-files-found: ignore
