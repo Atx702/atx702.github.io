@@ -82,9 +82,10 @@ namespace LastNight.EditorTools
             // The train and young Maren.
             var train = Kit.Model("Station", "Train_car", st, new Vector3(-90f, -1.4f, -2.3f), 90f, length: 16f, rootName: "Train");
             var window = Kit.Go("Train Window", train.transform, new Vector3(0, 2.6f, 1.6f));
-            var marenInTrain = Kit.Model("Characters", "Maren_age_22", train.transform, new Vector3(0, 1.0f, 0.5f), 0f, height: 1.68f, rootName: "Maren In Window");
+            var marenInTrain = Kit.Character("Maren_age_22", train.transform, new Vector3(0, 1.0f, 0.5f), 0f, Characters.PuppetAnimator.Move.Wave, 0.8f, "Maren In Window").gameObject;
             marenInTrain.SetActive(false);
-            var maren = Kit.Model("Characters", "Maren_age_22", st, new Vector3(1f, 0, -0.6f), 0f, height: 1.68f, rootName: "Maren (memory)");
+            var marenPuppet = Kit.Character("Maren_age_22", st, new Vector3(1f, 0, -0.6f), 0f, Characters.PuppetAnimator.Move.Carry, 0.7f, "Maren (memory)");
+            var maren = marenPuppet.gameObject;
             maren.SetActive(false);
             var arrive = Cut.New("CS_03_TrainArrives", train, 12f)
                 .Move(train.transform, 0f, 9f, new Vector3(-90f, -1.4f, -2.3f), new Vector3(0f, -1.4f, -2.3f))
@@ -133,6 +134,7 @@ namespace LastNight.EditorTools
             Kit.Set(d, "tileMemorySounds", tileSounds);
             Kit.Set(d, "trainArrives", arrive);
             Kit.Set(d, "marenMem", maren.transform);
+            Kit.Set(d, "marenPuppet", marenPuppet);
             Kit.Set(d, "scarf", scarfBody);
             Kit.Set(d, "scarfGrab", scarfSignal);
             Kit.Set(d, "gust", wind);

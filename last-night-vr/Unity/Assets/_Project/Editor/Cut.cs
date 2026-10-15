@@ -131,6 +131,20 @@ namespace LastNight.EditorTools
             return this;
         }
 
+        /// <summary>Switches a character to a move (walk, kneel, CPR...) for the length of the clip.</summary>
+        public Cut Pose(Characters.PuppetAnimator puppet, float start, float duration, Characters.PuppetAnimator.Move move, float cprRate = 0f)
+        {
+            var track = Track<PoseTrack>(puppet, "Pose " + puppet.name);
+            var clip = track.CreateClip<PoseClip>();
+            clip.start = start;
+            clip.duration = duration;
+            var pc = (PoseClip)clip.asset;
+            pc.move = move;
+            pc.cprRate = cprRate;
+            EditorUtility.SetDirty(pc);
+            return this;
+        }
+
         public PlayableDirector Done()
         {
             EditorUtility.SetDirty(timeline);

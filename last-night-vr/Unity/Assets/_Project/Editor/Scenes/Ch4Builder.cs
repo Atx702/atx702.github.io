@@ -106,12 +106,15 @@ namespace LastNight.EditorTools
             var roomLight = Kit.PointLight("Room Glow", k, new Vector3(0, 2.3f, 2f), new Color(1f, 0.9f, 0.7f), 0.6f, 6f);
 
             // Maren (memory) by the counter; the news.
-            var maren = Kit.Model("Characters", "Maren_age_22", k, new Vector3(1.4f, 0, 3.0f), 200f, height: 1.66f, rootName: "Maren (memory)");
+            var marenPuppet = Kit.Character("Maren_tonight", k, new Vector3(1.4f, 0, 3.0f), 200f, Characters.PuppetAnimator.Move.Lean, 0.8f, "Maren (memory)");
+            var maren = marenPuppet.gameObject;
             maren.SetActive(false);
             var marenVoice = Kit.Go("Maren Voice", k, new Vector3(-3.6f, 1.6f, 2f));
             var newsHost = Kit.Go("CS_04A", k);
             var news = Cut.New("CS_04A_ThirdMug", newsHost, 14f)
                 .Active(maren, 0f, 14f)
+                .Pose(marenPuppet, 0f, 9f, Characters.PuppetAnimator.Move.Lean)
+                .Pose(marenPuppet, 9f, 5f, Characters.PuppetAnimator.Move.HandsOverMouth)
                 .Active(thirdMug, 3f, 11f)
                 .Light(roomLight, 0f, 14f, 0.6f, 1.3f, null, new Color(1f, 0.85f, 0.55f))
                 .Sound("SFX_honey_drop", 9f)

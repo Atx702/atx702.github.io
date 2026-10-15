@@ -7,6 +7,7 @@ Writes <Name>.glb + <Name>.obj + <Name>.mtl into Unity/Assets/_Project/Art/Model
 Skips any model Meshy already made for that name (so a later Meshy run is never overwritten
 by these stand-ins unless you pass --force).
 """
+import json
 import sys
 from pathlib import Path
 
@@ -18,6 +19,21 @@ ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "Unity" / "Assets" / "_Project" / "Art" / "Models"
 RENAME = {"Mug": "Mugs", "Wedding_ring": "Wedding_ring_leak", "Patient_bracelet": "Patient_bracelet_leak"}
 BUDGET = {"Characters": 25000}
+
+
+def save_rigged(m, folder):
+    """One OBJ per joint (the meshes that hang from it, in model space) plus rig.json with joint positions.
+    Kit.Character in Unity hangs each part from its joint so PuppetAnimator can pose the body."""
+    from meshlib import Model
+    folder.mkdir(parents=True, exist_ok=True)
+    parts = {}
+    for (mesh, c, e), j in zip(m.parts, m.joint_tags):
+        parts.setdefault(j, Model(j)).add(mesh, c, e)
+    for j, part in parts.items():
+        part._save_obj(folder / f"{j}.obj", folder / f"{j}.mtl")
+    rig = {"name": m.name, "joints": [{"name": k, "parent": parent, "position": pos} for k, (parent, pos) in m.rig.items()],
+           "parts": sorted(parts)}
+    (folder / "rig.json").write_text(json.dumps(rig, indent=1))
 
 
 def main(argv):
@@ -33,6 +49,8 @@ def main(argv):
             print(f"skip {section}/{m.name} (Meshy model exists)")
             continue
         m.save(OUT / section)
+        if getattr(m, "rig", None):
+            save_rigged(m, OUT / section / m.name)
         lo, hi = m.bounds()
         size = hi - lo
         tris = m.tri_count()

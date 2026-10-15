@@ -65,6 +65,7 @@ The menu items can be run one at a time too: **1. Set Up Quest 2 Project**, **2.
 | `tools/check_wiring.py` | Checks every field name the scene builders wire up |
 | `tools/procgen/` | Builds the models Meshy didn't (props, characters, The Pull) as GLB + OBJ |
 | `tools/make_drawings.py` | Draws Wren's 12 crayon drawings |
+| `tools/procgen/pose_preview.py` | Renders every character move, to check poses without Unity |
 | `tools/extract_lines.py` | Turns the script into `dialogue.csv` (run it after every script edit) |
 | `tools/audio_manifest.json` | Prompt, length and loop setting for every sound effect and music cue |
 
@@ -76,14 +77,14 @@ The menu items can be run one at a time too: **1. Set Up Quest 2 Project**, **2.
 | Level design, cutscenes, menus, secrets | ✅ Designed (v1) |
 | Voice | ✅ All 11 roles cast; all 212 lines recorded |
 | Sound effects + music | ✅ 30 SFX, 6 music cues |
-| 3D models | ✅ 25 from Meshy + 30 built in code (characters are static meshes: they glide, they don't walk) |
+| 3D models | ✅ 25 from Meshy + 30 built in code |
 | Game code (systems, Pull AI, all chapter directors, puzzles, menus, easter eggs) | ✅ Written |
 | **Compiles against Unity 6** | ✅ Every script compiles against the real Unity 6000.0.84f1 engine and package libraries, for both the editor and the Android/Quest build (`tools/unity_compile_check.py`) |
 | Scenes | ✅ All 12 generated from code by **Last Night > Build All Scenes** |
 | Cutscenes | ✅ 10 Timeline cutscenes generated from code |
 | Quest 2 project setup and APK build | ✅ One menu item |
 | **Tested in a headset** | 🔴 Not yet. Nothing here has been run inside Unity or on a Quest, so expect a round of fixes on the first run (see below) |
-| Character rigging and animation | 🔴 To do (Mixamo auto-rig works on the A-pose characters) |
+| Character animation | ✅ Every character is jointed (17 joints) and posed in code by `PuppetAnimator`: idle breathing, walking, kneeling, CPR on the beat, sitting, waving, arms up, held, laughing and more. No lip-sync. |
 | Extras menu (gallery, chapter select, achievements list) | 🟡 Credits page only; the code for the rest exists |
 
 ## First run: what to expect
@@ -104,6 +105,6 @@ When something is off, copy the Console error (or describe what you see) and it 
 | M3 All chapters | Directors for Ch.1-8, all scenes | ✅ Generated |
 | M4 Voice + sound | 212 lines, 30 SFX, 6 music cues | ✅ Done |
 | M5 Art | Meshy + procedural models in every chapter | ✅ First pass |
-| M6 Cutscenes + animation | Timelines (done), character rigging and animation (to do) | 🟡 |
+| M6 Cutscenes + animation | Timelines and procedural character animation | ✅ First pass |
 | M7 Menus + settings | Bed menu, pause, settings, boot | ✅ (Extras partial) |
 | M8 Headset test + polish | First run on Quest 2, fixes, comfort pass, 72 fps | 🔴 Next |

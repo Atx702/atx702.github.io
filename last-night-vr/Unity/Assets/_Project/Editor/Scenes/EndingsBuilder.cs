@@ -25,7 +25,8 @@ namespace LastNight.EditorTools
             Kit.PointLight("Morning", r, new Vector3(1.8f, 2f, 1.5f), new Color(1f, 0.93f, 0.8f), 1.5f, 7f);
             var bed = Kit.Model("Hospital", "Gurney", r, new Vector3(0, 0, 1.2f), 0f, length: 1.9f, rootName: "Bed");
             Kit.Spawn(r, new Vector3(-0.2f, 0, 0.2f), 20f);
-            var maren = Kit.Model("Characters", "Maren_age_22", r, new Vector3(1.1f, -0.45f, 1.0f), -90f, height: 1.66f, rootName: "Maren");
+            var marenPuppet = Kit.Character("Maren_tonight", r, new Vector3(1.2f, 0, 1.0f), -90f, Characters.PuppetAnimator.Move.SitTalk, 0.8f, "Maren");
+            var maren = marenPuppet.gameObject;
             Kit.Model("Hospital", "Waiting_chair", r, new Vector3(1.25f, 0, 1.0f), -90f, height: 0.95f);
             var speaker = Kit.Go("Maren Speaker", maren.transform, new Vector3(0, 1.3f, 0));
             var monitor = Kit.Sound(r, "Monitor", new Vector3(-0.9f, 1.4f, 2.2f), "SFX_monitor_beep", loop: true, volume: 0.35f);
@@ -35,6 +36,7 @@ namespace LastNight.EditorTools
             var d = Kit.Go("Director").AddComponent<SecretEndingDirector>();
             Kit.Set(d, "chapter", Chapter.LittleLantern);
             Kit.Set(d, "maren", speaker.transform);
+            Kit.Set(d, "marenPuppet", marenPuppet);
             Kit.Set(d, "handsOut", Kit.Gesture(d.transform, GestureDetector.Kind.HandsOut, d.OnHandOut));
             Kit.Set(d, "monitorSteady", monitor);
             Kit.Set(d, "morningMusic", music);

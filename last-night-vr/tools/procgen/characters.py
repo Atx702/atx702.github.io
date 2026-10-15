@@ -52,28 +52,46 @@ def humanoid(name, height, skin, top, bottom, *, sleeve="short", shoes=None, hai
     rng = np.random.default_rng(seed)
     m = Model(name)
     s = height / 1.75  # base proportions are for 1.75 m
-    P = []  # (mesh, colour, emissive?) built at 1.75 m then scaled
+    P = []  # (mesh, colour, emissive?, joint) built at 1.75 m then scaled
+    cur = ["hips"]  # the joint the next pieces hang from
 
     def add(mesh, c, e=False):
-        P.append((mesh, c, e))
+        P.append((mesh, c, e, cur[0]))
+
+    def side(sx):  # generator +x becomes the character's left once imported (Unity mirrors X)
+        return "L" if sx > 0 else "R"
+
+    rig = {"root": (None, (0, 0, 0)), "hips": ("root", (0, 0.95, 0)), "spine": ("hips", (0, 1.06, 0)),
+           "chest": ("spine", (0, 1.22, 0)), "neck": ("chest", (0, 1.46, 0)), "head": ("neck", (0, 1.56, 0))}
 
     w = build
     # --- legs (hip -> knee -> ankle -> toe)
     for sx in (-1, 1):
         hip, knee, ankle = (sx * 0.09 * w, 0.92, 0.0), (sx * 0.095 * w, 0.5, 0.01), (sx * 0.095 * w, 0.08, 0.0)
+        k = side(sx)
+        rig["thigh_" + k] = ("hips", hip)
+        rig["shin_" + k] = ("thigh_" + k, knee)
+        rig["foot_" + k] = ("shin_" + k, ankle)
+        cur[0] = "thigh_" + k
         add(limb(hip, knee, 0.082 * w, 0.062 * w), bottom)
-        add(limb(knee, ankle, 0.06 * w, 0.045 * w), bottom)
         add(sphere(0.07 * w, 10, 6).move(*hip), bottom)
+        cur[0] = "shin_" + k
+        add(limb(knee, ankle, 0.06 * w, 0.045 * w), bottom)
         add(sphere(0.06 * w, 10, 6).move(*knee), bottom)
+        cur[0] = "foot_" + k
         foot_col = shoes if shoes else skin
         add(box(0.09, 0.07, 0.24).move(sx * 0.095 * w, 0.035, 0.05), foot_col)
         add(box(0.085, 0.04, 0.09).move(sx * 0.095 * w, 0.02, 0.16), foot_col)
     # --- torso
+    cur[0] = "hips"
     add(ellipsoid(0.17 * w, 0.14, 0.1 * w, 14, 8).move(0, 0.97, 0), bottom)  # hips
+    cur[0] = "spine"
     add(ellipsoid(0.15 * w, 0.17, 0.095 * w, 14, 8).move(0, 1.12, 0), top)  # waist
+    cur[0] = "chest"
     add(ellipsoid(0.19 * w, 0.2, 0.11 * w, 14, 8).move(0, 1.3, 0), top)  # chest
-    add(cyl(0.045, 0.05, 0.12, 8).move(0, 1.52, 0), skin)  # neck
     add(ellipsoid(0.205 * w, 0.045, 0.1 * w, 12, 6).move(0, 1.43, 0), top)  # shoulders
+    cur[0] = "neck"
+    add(cyl(0.045, 0.05, 0.12, 8).move(0, 1.52, 0), skin)  # neck
     # --- arms (A-pose, 35 degrees from vertical)
     ang = np.radians(35)
     d = np.array([np.sin(ang), -np.cos(ang), 0.02])
@@ -82,14 +100,22 @@ def humanoid(name, height, skin, top, bottom, *, sleeve="short", shoes=None, hai
         el = sh + np.array([sx * d[0], d[1], d[2]]) * 0.29
         wr = el + np.array([sx * d[0], d[1], d[2]]) * 0.27
         long_sleeve = sleeve == "long"
+        k = side(sx)
+        rig["upperarm_" + k] = ("chest", tuple(sh))
+        rig["forearm_" + k] = ("upperarm_" + k, tuple(el))
+        rig["hand_" + k] = ("forearm_" + k, tuple(wr))
+        cur[0] = "upperarm_" + k
         add(limb(sh, el, 0.052, 0.042), top if sleeve in ("short", "long", "rolled") else skin)
-        add(limb(el, wr, 0.042, 0.032), top if long_sleeve else skin)
         add(sphere(0.052, 8, 6).move(*sh), top)
-        hand = wr + np.array([sx * d[0], d[1], d[2]]) * 0.04
-        add(ellipsoid(0.04, 0.055, 0.022, 8, 6).rot(0, 0, sx * -35).move(*hand), gloves if gloves else skin)
+        cur[0] = "forearm_" + k
+        add(limb(el, wr, 0.042, 0.032), top if long_sleeve else skin)
         if sleeve == "rolled":
             add(torus(0.043, 0.012, 10, 5).rot(0, 0, sx * -55).move(*(el + (wr - el) * 0.02)), top)
+        cur[0] = "hand_" + k
+        hand = wr + np.array([sx * d[0], d[1], d[2]]) * 0.04
+        add(ellipsoid(0.04, 0.055, 0.022, 8, 6).rot(0, 0, sx * -35).move(*hand), gloves if gloves else skin)
     # --- head
+    cur[0] = "head"
     hs = head_scale
     hc = (0, 1.66, 0.01)
     add(ellipsoid(0.095 * hs, 0.118 * hs, 0.105 * hs, 16, 10).move(*hc), skin)
@@ -118,18 +144,24 @@ def humanoid(name, height, skin, top, bottom, *, sleeve="short", shoes=None, hai
     elif hairstyle == "curly":
         for c in hair_curls(hc[0], hc[1] + 0.02, hc[2] - 0.01, 0.12 * hs, 38, rng):
             add(c, hair)
-    # --- outfit extras
+    # --- outfit extras (a stiff coat hangs from the hips; collar and scarf from the chest)
+    cur[0] = "hips"
     if coat:
         add(lathe([(0.2 * w, 1.42), (0.215 * w, 1.1), (0.25 * w, 0.62), (0.265 * w, 0.52)], 16, False, False), coat)
         add(box(0.01, 0.9, 0.2).move(0, 0.95, 0.2), coat)
+        cur[0] = "chest"
         add(ellipsoid(0.2 * w, 0.05, 0.12 * w, 12, 6).move(0, 1.46, 0), coat)  # collar
     if scarf:
+        cur[0] = "chest"
         add(torus(0.075, 0.03, 14, 6).move(0, 1.5, 0), scarf)
         add(box(0.09, 0.4, 0.03).rot(8, 0, 0).move(0.04, 1.3, 0.13), scarf)  # hanging end
         add(box(0.09, 0.3, 0.03).rot(-5, 0, 0).move(-0.04, 1.35, 0.14), scarf)
-    for mesh, c, e in P:
+    m.joint_tags = []
+    for mesh, c, e, j in P:
         mesh.scale(s)
         m.add(mesh, c, e)
+        m.joint_tags.append(j)
+    m.rig = {k: (parent, [float(v) * s for v in pos]) for k, (parent, pos) in rig.items()}
     return m
 
 
@@ -145,6 +177,7 @@ def maren_age_22():
     s = 1.68 / 1.75
     for i, c in enumerate(("green", "blue", "darkwood")):
         m.add(box(0.2, 0.04, 0.27).rot(0, 12 * i, 0).move(0.06, (1.12 + i * 0.045) * s, 0.2 * s), c)
+        m.joint_tags.append("chest")
     return m
 
 

@@ -63,12 +63,15 @@ namespace LastNight.EditorTools
             Kit.Block("Real Floor", real.transform, new Vector3(0, -0.05f, 0), new Vector3(5f, 0.1f, 5f), new Color(0.42f, 0.36f, 0.32f), false);
             Kit.PointLight("Real Lamp", real.transform, new Vector3(1.2f, 1.6f, 1f), new Color(1f, 0.85f, 0.65f), 1.6f, 6f);
             Kit.PointLight("Real Cold", real.transform, new Vector3(-1f, 2f, -1f), new Color(0.7f, 0.8f, 1f), 0.8f, 6f);
-            var tomas = Kit.Model("Characters", "Tomas", real.transform, new Vector3(-0.1f, 0.15f, 0.9f), 0f, height: 1.8f, rootName: "Tomas (body)");
-            tomas.transform.localRotation = Quaternion.Euler(-90f, 0f, 0f);
-            var maren = Kit.Model("Characters", "Maren_tonight", real.transform, new Vector3(0.45f, -0.55f, 0.05f), -90f, height: 1.68f, rootName: "Maren (CPR)");
-            maren.transform.localRotation = Quaternion.Euler(20f, -90f, 0f);
-            var okafor = Kit.Model("Characters", "Okafor", real.transform, new Vector3(-2.2f, 0, -2f), 30f, height: 1.85f, rootName: "Okafor");
-            var lind = Kit.Model("Characters", "Lind", real.transform, new Vector3(-2.2f, 0, -2.4f), 30f, height: 1.68f, rootName: "Lind");
+            // Tomas lies on his back, head toward -z; his chest is around z -0.4.
+            var tomasPuppet = Kit.Character("Tomas", real.transform, new Vector3(-0.1f, 0.15f, 0.9f), 0f, Characters.PuppetAnimator.Move.Still, 0f, "Tomas (body)");
+            tomasPuppet.transform.localRotation = Quaternion.Euler(-90f, 0f, 0f);
+            var marenPuppet = Kit.Character("Maren_tonight", real.transform, new Vector3(0.42f, 0, -0.4f), -90f, Characters.PuppetAnimator.Move.Cpr, 0f, "Maren (CPR)");
+            var okaforPuppet = Kit.Character("Okafor", real.transform, new Vector3(-2.2f, 0, -2f), 30f, Characters.PuppetAnimator.Move.Idle, 0f, "Okafor");
+            var lindPuppet = Kit.Character("Lind", real.transform, new Vector3(-2.2f, 0, -2.4f), 30f, Characters.PuppetAnimator.Move.Carry, 0f, "Lind");
+            var maren = marenPuppet.gameObject;
+            var okafor = okaforPuppet.gameObject;
+            var lind = lindPuppet.gameObject;
             var defib = Kit.Model("Bedroom_Wren_s_room", "Defibrillator_monitor", real.transform, new Vector3(-0.6f, 0, -0.3f), 0f, length: 0.5f, rootName: "Defibrillator");
             var bag = Kit.Model("Bedroom_Wren_s_room", "Paramedic_bag", real.transform, new Vector3(-1.1f, 0, 0.4f), 20f, length: 0.5f, rootName: "Bag");
             okafor.SetActive(false); lind.SetActive(false); defib.SetActive(false); bag.SetActive(false);
@@ -77,9 +80,19 @@ namespace LastNight.EditorTools
             var monitor = Kit.Sound(real.transform, "Monitor", Vector3.zero, "SFX_monitor_beep", volume: 0.5f);
             // CPR at 110 BPM slowed to 30%: about 0.55 compressions a second.
             var cut = Cut.New("CS_07_TheFloor", real, 150f)
-                .Bob(maren.transform, 0f, 150f, 0.07f, 0.55f)
-                .Active(okafor, 40f, 110f).Move(okafor.transform, 40f, 6f, new Vector3(-2.2f, 0, -2f), new Vector3(-0.5f, -0.4f, -0.4f))
-                .Active(lind, 46f, 104f).Move(lind.transform, 46f, 6f, new Vector3(-2.2f, 0, -2.4f), new Vector3(0.9f, -0.5f, 1.4f))
+                // CPR at 110 BPM slowed to 30%. At 58 s Okafor takes over and Maren falls back.
+                .Pose(marenPuppet, 0f, 58f, Characters.PuppetAnimator.Move.Cpr, 0.55f)
+                .Pose(marenPuppet, 58f, 92f, Characters.PuppetAnimator.Move.HandsOverMouth)
+                .Move(maren.transform, 58f, 2f, new Vector3(0.42f, 0, -0.4f), new Vector3(0.95f, 0, -0.2f), new Vector3(0, -90, 0), new Vector3(0, -110, 0))
+                .Active(okafor, 40f, 110f)
+                .Move(okafor.transform, 40f, 7f, new Vector3(-2.2f, 0, -2f), new Vector3(-0.42f, 0, -0.4f), new Vector3(0, 30, 0), new Vector3(0, 90, 0))
+                .Pose(okaforPuppet, 40f, 7f, Characters.PuppetAnimator.Move.Walk)
+                .Pose(okaforPuppet, 47f, 11f, Characters.PuppetAnimator.Move.Kneel)
+                .Pose(okaforPuppet, 58f, 92f, Characters.PuppetAnimator.Move.Cpr, 0.55f)
+                .Active(lind, 46f, 104f)
+                .Move(lind.transform, 46f, 7f, new Vector3(-2.2f, 0, -2.4f), new Vector3(-0.1f, 0, -1.45f), new Vector3(0, 30, 0), new Vector3(0, 0, 0))
+                .Pose(lindPuppet, 46f, 7f, Characters.PuppetAnimator.Move.Carry)
+                .Pose(lindPuppet, 53f, 97f, Characters.PuppetAnimator.Move.BagValve)
                 .Active(bag, 44f, 106f)
                 .Active(defib, 52f, 98f)
                 .Sound("SFX_defib_charge", 70f, monitor)

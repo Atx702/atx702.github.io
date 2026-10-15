@@ -22,6 +22,7 @@ namespace LastNight.Chapters
         [Header("Train and Maren")]
         [SerializeField] PlayableDirector trainArrives;     // CS_03
         [SerializeField] Transform marenMem;                // young Maren
+        [SerializeField] Characters.PuppetAnimator marenPuppet;
         [SerializeField] Rigidbody scarf;                   // memory scarf (grabbable)
         [SerializeField] GrabSignal scarfGrab;
         [SerializeField] WindZone gust;
@@ -80,6 +81,7 @@ namespace LastNight.Chapters
             Time.fixedDeltaTime = 0.02f;
             gust.gameObject.SetActive(false);
             Achievement("SCARF_GUY");
+            if (marenPuppet != null) StartCoroutine(LaughThenStand());
 
             yield return SayFrom(marenMem, "CH3_008", "CH3_009");
             yield return Say("TOMAS_002");
@@ -128,6 +130,13 @@ namespace LastNight.Chapters
             yield return Until(() => atExit);
             pull.SetMode(PullController.Mode.Dormant);
             yield return Finish();
+        }
+
+        IEnumerator LaughThenStand()
+        {
+            marenPuppet.Play(Characters.PuppetAnimator.Move.Laugh);
+            yield return new WaitForSeconds(3.5f);
+            marenPuppet.Play(Characters.PuppetAnimator.Move.Carry);
         }
 
         void OnDisable()

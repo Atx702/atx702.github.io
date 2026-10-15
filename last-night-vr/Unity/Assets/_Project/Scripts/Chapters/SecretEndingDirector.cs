@@ -15,6 +15,7 @@ namespace LastNight.Chapters
     {
         [SerializeField] Transform maren;
         [SerializeField] Animator marenAnimator;
+        [SerializeField] Characters.PuppetAnimator marenPuppet;
         [SerializeField] GestureDetector handsOut;          // Kind = HandsOut
         [SerializeField] GameObject handRing;
         [SerializeField] AudioSource monitorSteady;         // normal sinus rhythm beeps
@@ -40,7 +41,9 @@ namespace LastNight.Chapters
             handsOut.gameObject.SetActive(true);
             yield return Until(() => handOut);
             if (marenAnimator != null) marenAnimator.SetTrigger("RingOn");
+            if (marenPuppet != null) marenPuppet.Play(Characters.PuppetAnimator.Move.Reach);
             yield return Wait(2.5f);
+            if (marenPuppet != null) marenPuppet.Play(Characters.PuppetAnimator.Move.SitTalk);
             if (handRing != null) handRing.SetActive(true);
             yield return Wait(3f);
 

@@ -31,7 +31,8 @@ namespace LastNight.EditorTools
             var light = Kit.PointLight("Ceiling Light", r, new Vector3(0, 2.3f, 2f), new Color(1f, 0.85f, 0.6f), 1.4f, 7f);
 
             // Wren, sitting on the floor drawing.
-            var wren = Kit.Model("Characters", "Wren", r, new Vector3(0.5f, -0.3f, 2.4f), 180f, height: 1.2f, rootName: "Wren");
+            var wrenPuppet = Kit.Character("Wren", r, new Vector3(0.5f, 0, 2.4f), 180f, Characters.PuppetAnimator.Move.SitFloorDraw, 0.6f, "Wren");
+            var wren = wrenPuppet.gameObject;
             Kit.FitCollider(wren);
             var wrenGrab = Kit.Grabbable(wren, 18f, gravity: false, kinematic: true);
             wrenGrab.selectMode = UnityEngine.XR.Interaction.Toolkit.Interactables.InteractableSelectMode.Multiple;
@@ -109,7 +110,7 @@ namespace LastNight.EditorTools
             // Cutscenes.
             var drawingCut = Cut.New("CS_08_TheDrawing", Kit.Go("CS_08", r), 6f)
                 .Active(held, 0.5f, 5.5f)
-                .Move(wren.transform, 0f, 1.5f, new Vector3(0.5f, -0.3f, 2.4f), new Vector3(0.5f, -0.2f, 2.4f))
+                .Pose(wrenPuppet, 0f, 6f, Characters.PuppetAnimator.Move.HoldUp)
                 .Done();
             var fogSheet = Kit.Block("Fog In The Window", r, new Vector3(0, 1.4f, 4.2f), new Vector3(1.5f, 1.4f, 0.05f), Color.white, false);
             fogSheet.GetComponent<Renderer>().sharedMaterial = Kit.Mat(new Color(0.95f, 0.95f, 0.92f), 1.5f);
@@ -153,6 +154,7 @@ namespace LastNight.EditorTools
             Kit.Set(ending, "stayCutscene", stay);
             Kit.Set(ending, "wakeCutscene", wake);
             Kit.Set(ending, "drawingCutscene", drawingCut);
+            Kit.Set(ending, "wrenPuppet", wrenPuppet);
 
             Kit.Save(scene, "Ch8_WrensRoom");
         }

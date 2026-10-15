@@ -557,6 +557,86 @@ namespace LastNight.EditorTools
             return sp;
         }
 
+        [Serializable]
+        class RigJoint { public string name; public string parent; public float[] position; }
+
+        [Serializable]
+        class RigFile { public string name; public RigJoint[] joints; public string[] parts; }
+
+        /// <summary>
+        /// A jointed character from Art/Models/Characters/{name}/ (one OBJ per body part + rig.json):
+        /// joints are built at their bind positions, each part hangs from its joint, and a PuppetAnimator
+        /// poses them. Falls back to the single static mesh if the rig folder is missing.
+        /// </summary>
+        public static Characters.PuppetAnimator Character(string name, Transform parent, Vector3 pos, float yaw,
+            Characters.PuppetAnimator.Move move = Characters.PuppetAnimator.Move.Idle, float lookAtPlayer = 0.5f, string rootName = null)
+        {
+            var folder = $"{ModelsFolder}/Characters/{name}";
+            var rigAsset = AssetDatabase.LoadAssetAtPath<TextAsset>($"{folder}/rig.json");
+            var root = Go(rootName ?? name, parent, pos, yaw);
+            var puppet = root.AddComponent<Characters.PuppetAnimator>();
+            if (rigAsset == null)
+            {
+                Debug.LogWarning($"[Last Night] No rig for {name}; using the static model.");
+                Object.DestroyImmediate(puppet);
+                Object.DestroyImmediate(root);
+                var stat = Model("Characters", name, parent, pos, yaw, rootName: rootName);
+                return stat.AddComponent<Characters.PuppetAnimator>();
+            }
+            var rig = JsonUtility.FromJson<RigFile>(rigAsset.text);
+
+            // Unity's OBJ import mirrors X. Detect it from where the left upper arm actually landed.
+            float mirror = 1f;
+            var armAsset = AssetDatabase.LoadAssetAtPath<GameObject>($"{folder}/upperarm_L.obj");
+            var armJoint = Array.Find(rig.joints, j => j.name == "upperarm_L");
+            if (armAsset != null && armJoint != null)
+            {
+                var probe = (GameObject)PrefabUtility.InstantiatePrefab(armAsset);
+                var b = LocalBounds(probe, probe.transform);
+                Object.DestroyImmediate(probe);
+                if (Mathf.Sign(b.center.x) != Mathf.Sign(armJoint.position[0])) mirror = -1f;
+            }
+
+            var bindPos = new Dictionary<string, Vector3>();
+            foreach (var j in rig.joints) bindPos[j.name] = new Vector3(j.position[0] * mirror, j.position[1], j.position[2]);
+            var made = new Dictionary<string, Transform> { ["root"] = root.transform };
+            Transform Make(string jn)
+            {
+                if (made.TryGetValue(jn, out var t)) return t;
+                var info = Array.Find(rig.joints, j => j.name == jn);
+                var p = Make(info.parent ?? "root");
+                var go = new GameObject(jn);
+                go.transform.SetParent(p, false);
+                go.transform.localPosition = bindPos[jn] - (info.parent != null ? bindPos[info.parent] : Vector3.zero);
+                made[jn] = go.transform;
+                return go.transform;
+            }
+            foreach (var j in rig.joints) Make(j.name);
+
+            // Each part's vertices are in model space: place at the model origin, then hang it from its joint.
+            foreach (var part in rig.parts)
+            {
+                var asset = AssetDatabase.LoadAssetAtPath<GameObject>($"{folder}/{part}.obj");
+                if (asset == null || !made.ContainsKey(part)) continue;
+                var inst = (GameObject)PrefabUtility.InstantiatePrefab(asset, root.transform);
+                PrefabUtility.UnpackPrefabInstance(inst, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+                inst.name = part + " mesh";
+                inst.transform.localPosition = Vector3.zero;
+                inst.transform.localRotation = Quaternion.identity;
+                inst.transform.localScale = Vector3.one;
+                ConvertMaterials(inst, $"Characters/{name}", part);
+                inst.transform.SetParent(made[part], true);
+            }
+
+            var joints = new List<Object>();
+            foreach (var jn in Characters.PuppetAnimator.JointNames) joints.Add(made.TryGetValue(jn, out var t) ? t : null);
+            Set(puppet, "joints", joints);
+            Set(puppet, "move", move);
+            Set(puppet, "lookAtPlayer", lookAtPlayer);
+            Dynamic(root);
+            return puppet;
+        }
+
         /// <summary>The Pull: Maren's stretched silhouette, white and glowing. Starts dormant (inactive).</summary>
         public static PullController Pull(Transform parent, Vector3 pos, float yaw = 0f, Transform circleCenter = null)
         {

@@ -68,4 +68,5 @@ def main():
     print("wrote", out, len(models), "models")
 
 
-main()
+if __name__ == "__main__":
+    main()

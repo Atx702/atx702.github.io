@@ -1,0 +1,186 @@
+{
+ "name": "Okafor",
+ "joints": [
+  {
+   "name": "root",
+   "parent": null,
+   "position": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "hips",
+   "parent": "root",
+   "position": [
+    0.0,
+    1.0042857142857142,
+    0.0
+   ]
+  },
+  {
+   "name": "spine",
+   "parent": "hips",
+   "position": [
+    0.0,
+    1.1205714285714286,
+    0.0
+   ]
+  },
+  {
+   "name": "chest",
+   "parent": "spine",
+   "position": [
+    0.0,
+    1.2897142857142858,
+    0.0
+   ]
+  },
+  {
+   "name": "neck",
+   "parent": "chest",
+   "position": [
+    0.0,
+    1.5434285714285714,
+    0.0
+   ]
+  },
+  {
+   "name": "head",
+   "parent": "neck",
+   "position": [
+    0.0,
+    1.6491428571428572,
+    0.0
+   ]
+  },
+  {
+   "name": "thigh_R",
+   "parent": "hips",
+   "position": [
+    -0.10275428571428573,
+    0.9725714285714286,
+    0.0
+   ]
+  },
+  {
+   "name": "shin_R",
+   "parent": "thigh_R",
+   "position": [
+    -0.10846285714285715,
+    0.5285714285714286,
+    0.010571428571428572
+   ]
+  },
+  {
+   "name": "foot_R",
+   "parent": "shin_R",
+   "position": [
+    -0.10846285714285715,
+    0.08457142857142858,
+    0.0
+   ]
+  },
+  {
+   "name": "thigh_L",
+   "parent": "hips",
+   "position": [
+    0.10275428571428573,
+    0.9725714285714286,
+    0.0
+   ]
+  },
+  {
+   "name": "shin_L",
+   "parent": "thigh_L",
+   "position": [
+    0.10846285714285715,
+    0.5285714285714286,
+    0.010571428571428572
+   ]
+  },
+  {
+   "name": "foot_L",
+   "parent": "shin_L",
+   "position": [
+    0.10846285714285715,
+    0.08457142857142858,
+    0.0
+   ]
+  },
+  {
+   "name": "upperarm_R",
+   "parent": "chest",
+   "position": [
+    -0.22834285714285718,
+    1.5117142857142856,
+    0.0
+   ]
+  },
+  {
+   "name": "forearm_R",
+   "parent": "upperarm_R",
+   "position": [
+    -0.4041850046299064,
+    1.2605856732794034,
+    0.0061314285714285715
+   ]
+  },
+  {
+   "name": "hand_R",
+   "parent": "forearm_R",
+   "position": [
+    -0.5679001074626765,
+    1.0267762754952026,
+    0.01184
+   ]
+  },
+  {
+   "name": "upperarm_L",
+   "parent": "chest",
+   "position": [
+    0.22834285714285718,
+    1.5117142857142856,
+    0.0
+   ]
+  },
+  {
+   "name": "forearm_L",
+   "parent": "upperarm_L",
+   "position": [
+    0.4041850046299064,
+    1.2605856732794034,
+    0.0061314285714285715
+   ]
+  },
+  {
+   "name": "hand_L",
+   "parent": "forearm_L",
+   "position": [
+    0.5679001074626765,
+    1.0267762754952026,
+    0.01184
+   ]
+  }
+ ],
+ "parts": [
+  "chest",
+  "foot_L",
+  "foot_R",
+  "forearm_L",
+  "forearm_R",
+  "hand_L",
+  "hand_R",
+  "head",
+  "hips",
+  "neck",
+  "shin_L",
+  "shin_R",
+  "spine",
+  "thigh_L",
+  "thigh_R",
+  "upperarm_L",
+  "upperarm_R"
+ ]
+}

@@ -104,7 +104,8 @@ namespace LastNight.EditorTools
 
             // CS_01: the water rises past your eyes, Elio comes, the water falls.
             var rising = Kit.Block("Rising Water", lake.transform, new Vector3(3f, -0.4f, 22f), new Vector3(30f, 0.06f, 30f), new Color(0.2f, 0.3f, 0.36f), false);
-            var elio = Kit.Model("Characters", "Elio", lake.transform, new Vector3(3f, 0.36f, 34f), 180f, height: 1.78f, rootName: "Elio");
+            var elioPuppet = Kit.Character("Elio", lake.transform, new Vector3(3f, 0.36f, 34f), 180f, lookAtPlayer: 0.7f, rootName: "Elio");
+            var elio = elioPuppet.gameObject;
             elio.SetActive(false);
             var under = Kit.Sound(lake.transform, "Underwater", new Vector3(3f, 1.5f, 27f), null, spatial: false);
             var lakeMemory = Kit.Memory(lake);
@@ -113,6 +114,8 @@ namespace LastNight.EditorTools
                 .Move(rising.transform, 26f, 8f, new Vector3(3f, 2.6f, 22f), new Vector3(3f, -0.4f, 22f))
                 .Active(elio, 14f, 26f)
                 .Move(elio.transform, 14f, 7f, new Vector3(3f, 0.36f, 34f), new Vector3(3f, 0.36f, 28.9f))
+                .Pose(elioPuppet, 14f, 7f, Characters.PuppetAnimator.Move.Walk)
+                .Pose(elioPuppet, 21f, 19f, Characters.PuppetAnimator.Move.ReachDown)
                 .Sound("SFX_underwater", 2f, under, 0.8f)
                 .Sound("SFX_gasp", 30f)
                 .Done();

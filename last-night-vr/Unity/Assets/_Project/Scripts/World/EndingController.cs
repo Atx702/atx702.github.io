@@ -29,6 +29,7 @@ namespace LastNight.World
         [Tooltip("CS_08: Wren holds up her drawing. Played after the intro (or after the lantern song).")]
         [SerializeField] PlayableDirector drawingCutscene;
         [SerializeField] float drawingDelay = 25f;
+        [SerializeField] Characters.PuppetAnimator wrenPuppet;
 
         bool choiceOpen, ended, everHeld, playerOnBed;
         float holdTimer, sitTimer, waitTimer;
@@ -69,7 +70,8 @@ namespace LastNight.World
             yield return d.PlayAndWait("CH8_007", wrenSpeaker);
             yield return d.PlayAndWait("CH8_008", wrenSpeaker);
             yield return d.PlayAndWait("CH8_009", wrenSpeaker);
-            choiceOpen = true; // Wren raises her arms (animator trigger on her side)
+            choiceOpen = true;
+            if (wrenPuppet != null) wrenPuppet.Play(Characters.PuppetAnimator.Move.ArmsUp); // asks to be picked up
         }
 
         public void PlayerSatOnBed(bool seated) => playerOnBed = seated;
@@ -81,6 +83,7 @@ namespace LastNight.World
             if (wren.isSelected)
             {
                 everHeld = true;
+                if (wrenPuppet != null) wrenPuppet.Play(Characters.PuppetAnimator.Move.Held);
                 holdTimer += Time.deltaTime;
                 sitTimer = playerOnBed ? sitTimer + Time.deltaTime : 0f;
                 if (holdTimer >= holdToStaySeconds || sitTimer >= sitToStaySeconds) StartCoroutine(Stay());
@@ -89,7 +92,12 @@ namespace LastNight.World
 
             holdTimer = 0f;
             sitTimer = 0f;
-            if (everHeld) { StartCoroutine(Wake()); return; }
+            if (everHeld)
+            {
+                if (wrenPuppet != null) wrenPuppet.Play(Characters.PuppetAnimator.Move.Idle); // set down, she stands
+                StartCoroutine(Wake());
+                return;
+            }
 
             waitTimer += Time.deltaTime;
             if (waitTimer > hesitateSeconds) { waitTimer = float.MinValue; DialoguePlayer.Instance.Play("CH8_010"); }

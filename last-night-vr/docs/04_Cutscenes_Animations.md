@@ -25,6 +25,27 @@
 | CS_SECRET | Morning | 3 min | Secret | Hospital room, Maren's monologue, ring, field at morning. | Animation (Maren), Audio, Scene load |
 | CS_CREDITS | Credits | 2 min | End | Credits drift past as paper drawings in the empty field. | UI, Audio |
 
+## How characters are animated (implemented)
+
+The characters are built from rigid body parts hung on a 17-joint skeleton (hips, spine, chest, neck, head, upper arm, forearm and hand on each side, thigh, shin and foot on each side). `tools/procgen` exports each part as its own mesh plus a `rig.json`, and `Kit.Character` assembles them in Unity. `Scripts/Characters/PuppetAnimator.cs` poses the joints in code every frame, so there are no animation clips or Animator controllers:
+
+| Move | Used for |
+| --- | --- |
+| Idle (breathing), Still | Everyone at rest; Tomas's body |
+| Walk | Automatic whenever a character is moved (cutscenes), cadence follows speed |
+| Kneel, Cpr | Maren and Okafor in Ch.7 (compressions at 110 BPM, slowed to 0.55/s in the floor scene) |
+| BagValve, Carry | Lind with the bag; young Maren carrying her books |
+| HandsOverMouth | Maren when Okafor takes over; Maren hearing the news in Ch.4 |
+| ReachDown | Elio pulling you out of the lake |
+| Laugh, Wave | Young Maren when you catch the scarf, and from the train window |
+| SitFloorDraw, HoldUp, ArmsUp, Held | Wren drawing, showing her drawing, asking to be picked up, being held |
+| Sit, SitTalk, Reach | Maren in the hospital chair (secret ending), reaching for your hand |
+| Lean | Maren at the kitchen counter |
+
+Characters also turn their heads toward the player (per-character weight). Cutscenes switch moves with a `PoseTrack` on the Timeline; directors call `PuppetAnimator.Play`. Check poses without Unity: `python tools/procgen/pose_preview.py out.png Maren_tonight`.
+
+The clip list below is the original wish list for hand-keyed or mocap animation; the moves above cover it in a simpler style.
+
 ## Character animation list
 
 All humans use one shared humanoid rig (Mixamo-compatible bone names) so animations retarget.
