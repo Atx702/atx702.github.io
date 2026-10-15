@@ -5,6 +5,9 @@
 2. **Blender:** import → check scale (1 unit = 1 m) → Decimate or retopologize to the triangle budget → fix UVs → bake textures to a 1024² (props) or 2048² (hero) atlas → apply the project's desaturation (see color rules) → export FBX to `Unity/Assets/_Project/Art/Models/<Chapter>/`.
 3. **Unity:** URP Lit material, enable GPU instancing, set the LOD group (LOD0 100%, LOD1 50%, cull at 2%).
 
+## Batch generation
+`tools/meshy_generate.py` makes every model in the prompt tables below through the Meshy API (mesh, then PBR textures) and saves GLB + FBX to `Unity/Assets/_Project/Art/Models/<Section>/`. It needs `MESHY_API_KEY` set. Run `--dry-run` first to see the list (53 models, about 1,600 credits). It can be stopped and re-run safely; progress is in `tools/meshy_tasks.json`. It makes one take per model; re-roll any you don't like with `--only "<Section>/<Asset>"` after deleting its entry.
+
 ## Triangle budgets (Quest 3)
 | Type | Budget |
 | --- | --- |

@@ -30,7 +30,7 @@ He's actually refusing to be saved: the thing hunting him is his wife, doing CPR
 | --- | --- |
 | Story, script, dialogue | ✅ Written (v1) |
 | Level design, cutscenes, menus, secrets | ✅ Designed (v1) |
-| Art list + Meshy prompts | ✅ Written; models not generated yet |
+| Art list + Meshy prompts | ✅ Written; `tools/meshy_generate.py` makes all 53 models once a Meshy API key is set |
 | Voice casting + recording | ✅ All 11 roles cast; all 212 lines recorded and in `Audio/Resources/VO` |
 | Sound effects + music | ✅ 30 SFX in `Audio/SFX`, 6 music cues in `Audio/Music` (ElevenLabs) |
 | Core systems (save, scenes, beat, dialogue, subtitles) | ✅ Code written |
