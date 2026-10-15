@@ -21,6 +21,7 @@ namespace LastNight.UI
 
         void OnEnable()
         {
+            if (head == null && Camera.main != null) head = Camera.main.transform;
             forward = Vector3.ProjectOnPlane(head.forward, Vector3.up).normalized;
             for (int i = 0; i < pages.Length; i++)
             {

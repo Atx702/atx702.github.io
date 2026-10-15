@@ -24,7 +24,9 @@ namespace LastNight.UI
         void Awake()
         {
             interactable = GetComponent<XRBaseInteractable>();
+            // Grip (select) or trigger (activate) both work: players try either.
             interactable.activated.AddListener(_ => Run());
+            interactable.selectEntered.AddListener(_ => Run());
         }
 
         void Start()
@@ -34,8 +36,12 @@ namespace LastNight.UI
             if (action == Action.LucidMode) gameObject.SetActive(state != null && state.endingsSeen.Count > 0);
         }
 
+        float lastRun = -10f;
+
         void Run()
         {
+            if (Time.unscaledTime - lastRun < 0.6f) return; // grip + trigger together count once
+            lastRun = Time.unscaledTime;
             var gm = GameManager.Instance;
             switch (action)
             {
@@ -46,6 +52,13 @@ namespace LastNight.UI
                     break;
                 case Action.LucidMode: gm.NewGame(lucid: true); break;
                 case Action.Settings:
+                    if (panelToOpen != null) panelToOpen.SetActive(!panelToOpen.activeSelf);
+                    else if (SettingsMenu.Instance != null)
+                    {
+                        if (SettingsMenu.Instance.gameObject.activeSelf) SettingsMenu.Instance.Back();
+                        else SettingsMenu.Instance.OpenInFrontOfPlayer();
+                    }
+                    break;
                 case Action.Extras:
                     if (panelToOpen != null) panelToOpen.SetActive(!panelToOpen.activeSelf);
                     break;

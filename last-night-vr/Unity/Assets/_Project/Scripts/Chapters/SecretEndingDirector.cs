@@ -29,7 +29,8 @@ namespace LastNight.Chapters
         protected override IEnumerator Run()
         {
             BeatClock.Instance?.StopBeat();
-            handRing.SetActive(false);
+            if (handRing == null && PlayerRig.Instance != null) handRing = PlayerRig.Instance.HandRing;
+            if (handRing != null) handRing.SetActive(false);
             if (monitorSteady != null) monitorSteady.Play();
             yield return Wait(4f);
 
@@ -40,7 +41,7 @@ namespace LastNight.Chapters
             yield return Until(() => handOut);
             if (marenAnimator != null) marenAnimator.SetTrigger("RingOn");
             yield return Wait(2.5f);
-            handRing.SetActive(true);
+            if (handRing != null) handRing.SetActive(true);
             yield return Wait(3f);
 
             // Everything after this runs on the GameManager, because this scene is about to unload.

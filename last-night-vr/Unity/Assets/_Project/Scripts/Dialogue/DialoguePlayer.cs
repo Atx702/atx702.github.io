@@ -37,7 +37,29 @@ namespace LastNight.Dialogue
 
         public bool IsPlaying => running != null;
 
-        void Awake() => Instance = this;
+        /// <summary>
+        /// Low-pass cutoff for leak lines when no mixer is assigned (filters on the sources themselves).
+        /// The Ch.7 reveal raises this to 20 kHz.
+        /// </summary>
+        public float LeakCutoff { get; set; } = 900f;
+
+        AudioLowPassFilter voiceFilter, worldFilter;
+
+        void Awake()
+        {
+            Instance = this;
+            voiceFilter = FilterOn(voiceSource);
+            worldFilter = FilterOn(worldSource);
+        }
+
+        static AudioLowPassFilter FilterOn(AudioSource source)
+        {
+            if (source == null) return null;
+            var f = source.GetComponent<AudioLowPassFilter>();
+            if (f == null) f = source.gameObject.AddComponent<AudioLowPassFilter>();
+            f.enabled = false;
+            return f;
+        }
 
         public void Play(string id, Transform speakerPosition = null, Action onDone = null)
         {
@@ -89,8 +111,16 @@ namespace LastNight.Dialogue
                 var source = line.speaker == "VOICE" || from == null ? voiceSource : worldSource;
                 if (source == worldSource) worldSource.transform.position = from.position;
 
-                source.outputAudioMixerGroup = line.leak && !LeaksUnmuffled ? leakGroup
+                bool muffled = line.leak && !LeaksUnmuffled;
+                source.outputAudioMixerGroup = muffled ? leakGroup
                     : line.speaker == "VOICE" ? voiceGroup : memoryGroup;
+                var filter = source == voiceSource ? voiceFilter : worldFilter;
+                if (filter != null)
+                {
+                    // Without a mixer, the muffling happens on the source.
+                    filter.enabled = muffled && leakGroup == null && LeakCutoff < 19000f;
+                    filter.cutoffFrequency = LeakCutoff;
+                }
 
                 var settings = GameManager.Instance != null ? GameManager.Instance.Settings : null;
                 if (settings != null)

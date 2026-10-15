@@ -26,6 +26,9 @@ namespace LastNight.World
         [SerializeField] float holdToStaySeconds = 20f;
         [SerializeField] float sitToStaySeconds = 3f;
         [SerializeField] float hesitateSeconds = 15f;
+        [Tooltip("CS_08: Wren holds up her drawing. Played after the intro (or after the lantern song).")]
+        [SerializeField] PlayableDirector drawingCutscene;
+        [SerializeField] float drawingDelay = 25f;
 
         bool choiceOpen, ended, everHeld, playerOnBed;
         float holdTimer, sitTimer, waitTimer;
@@ -37,11 +40,26 @@ namespace LastNight.World
             yield return d.PlayAndWait("CH8_001", wrenSpeaker);
             yield return d.PlayAndWait("CH8_002", wrenSpeaker);
             yield return d.PlayAndWait("CH8_003", wrenSpeaker);
-            // CH8_004/005 (the lantern song) play from LanternInteraction if the player picks it up.
+            // CH8_004/005 (the lantern song) play from WrensRoomToys if the player picks up the lantern.
+            // Give the player time to play, then Wren shows her drawing.
+            for (float t = 0; t < drawingDelay || d.IsPlaying; t += Time.deltaTime) yield return null;
+            if (drawingCutscene != null)
+            {
+                drawingCutscene.Play();
+                yield return new WaitForSeconds(Mathf.Min(4f, (float)drawingCutscene.duration));
+            }
+            OnDrawingShown();
         }
 
         /// <summary>Called by Wren's drawing timeline (CS_08) when she holds up the drawing.</summary>
-        public void OnDrawingShown() => StartCoroutine(DrawingConversation());
+        public void OnDrawingShown()
+        {
+            if (drawingStarted) return;
+            drawingStarted = true;
+            StartCoroutine(DrawingConversation());
+        }
+
+        bool drawingStarted;
 
         IEnumerator DrawingConversation()
         {

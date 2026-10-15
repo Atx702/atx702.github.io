@@ -330,7 +330,11 @@ def main():
         args += [f"-r:{x}" for x in netstd + engine_refs + refs + pre]
         args += [str(s) for s in a.sources]
         rsp = OUT / f"{a.name}.rsp"
-        rsp.write_text("\n".join(f'"{x}"' if " " in x else x for x in args))
+        content = "\n".join(f'"{x}"' if " " in x else x for x in args)
+        if a.pkg is not None and out.exists() and rsp.exists() and rsp.read_text() == content:
+            built[a.name] = str(out)  # package unchanged since last run
+            continue
+        rsp.write_text(content)
         res = subprocess.run([DOTNET, csc, f"@{rsp}"], capture_output=True, text=True)
         errs = [l for l in res.stdout.splitlines() if ": error " in l]
         if res.returncode == 0 and out.exists():

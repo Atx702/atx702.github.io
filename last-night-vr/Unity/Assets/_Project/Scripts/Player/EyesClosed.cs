@@ -35,6 +35,7 @@ namespace LastNight.Player
         MaterialPropertyBlock block;
         bool toggledClosed;
         bool buttonWasDown;
+        AudioLowPassFilter listenerFilter;
 
         void Awake()
         {
@@ -91,6 +92,21 @@ namespace LastNight.Player
             }
             if (mixer != null)
                 mixer.SetFloat(muffleParameter, Mathf.Lerp(22000f, 700f, Amount));
+            else
+            {
+                // No mixer: muffle everything the listener hears.
+                if (listenerFilter == null && head != null)
+                {
+                    listenerFilter = head.GetComponent<AudioLowPassFilter>();
+                    if (listenerFilter == null && head.GetComponent<AudioListener>() != null)
+                        listenerFilter = head.gameObject.AddComponent<AudioLowPassFilter>();
+                }
+                if (listenerFilter != null)
+                {
+                    listenerFilter.enabled = Amount > 0.001f;
+                    listenerFilter.cutoffFrequency = Mathf.Lerp(22000f, 700f, Amount);
+                }
+            }
         }
     }
 }

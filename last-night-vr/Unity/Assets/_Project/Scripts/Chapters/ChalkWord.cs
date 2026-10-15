@@ -18,6 +18,7 @@ namespace LastNight.Chapters
 
         static readonly int RevealId = Shader.PropertyToID("_Reveal");
         MaterialPropertyBlock block;
+        TMPro.TMP_Text text;
         bool writing;
 
         public bool Revealed { get; private set; }
@@ -57,6 +58,10 @@ namespace LastNight.Chapters
 
         void SetReveal(float v)
         {
+            // TextMeshPro words write themselves letter by letter.
+            if (text == null) text = GetComponentInChildren<TMPro.TMP_Text>();
+            if (text != null) text.maxVisibleCharacters = Mathf.CeilToInt(v * text.text.Length);
+            if (chalk == null) return;
             chalk.GetPropertyBlock(block);
             block.SetFloat(RevealId, v);
             chalk.SetPropertyBlock(block);

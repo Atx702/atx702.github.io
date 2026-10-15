@@ -79,6 +79,7 @@ namespace LastNight.UI
                 SetVolume("LeakVolume", s.leaks);
             }
 
+            else AudioListener.volume = s.master; // no mixer: master volume only
             UnityEngine.XR.XRSettings.eyeTextureResolutionScale = s.renderScale;
         }
 

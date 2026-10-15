@@ -18,6 +18,8 @@ namespace LastNight.UI
 
         IEnumerator Start()
         {
+            // Editor testing: a chapter scene opened next to Core plays straight away.
+            if (UnityEngine.SceneManagement.SceneManager.sceneCount > 1) yield break;
             confirm.action.Enable();
 
             warningCard.SetActive(true);

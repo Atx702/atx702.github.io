@@ -64,7 +64,18 @@ namespace LastNight.World
 
         IEnumerator OpenLeakFilter(float seconds)
         {
-            if (mixer == null) yield break;
+            if (mixer == null)
+            {
+                // No mixer: open the filter on the dialogue sources instead.
+                var d = DialoguePlayer.Instance;
+                for (float t = 0; t < seconds && d != null; t += Time.deltaTime)
+                {
+                    d.LeakCutoff = Mathf.Lerp(900f, 20000f, t / seconds);
+                    yield return null;
+                }
+                if (d != null) d.LeakCutoff = 20000f;
+                yield break;
+            }
             for (float t = 0; t < seconds; t += Time.deltaTime)
             {
                 mixer.SetFloat(leakLowpassParam, Mathf.Lerp(900f, 20000f, t / seconds));

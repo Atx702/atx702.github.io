@@ -61,6 +61,10 @@ namespace LastNight.Chapters
 
         protected override IEnumerator Run()
         {
+            var rig = Player.PlayerRig.Instance;
+            if (mouth == null && rig != null) mouth = rig.Mouth;
+            if (handRing == null && rig != null) handRing = rig.HandRing;
+
             // ----- Tea -----
             yield return Say("CH4_001");
             yield return Say("CH4_002", marenMem);
@@ -76,7 +80,7 @@ namespace LastNight.Chapters
             yield return Say("CH4_006", marenMem);
             while (!onSong)
             {
-                if (!honeyEaten && honey.IsHeld && Vector3.Distance(honey.transform.position, mouth.position) < 0.15f)
+                if (!honeyEaten && mouth != null && honey.IsHeld && Vector3.Distance(honey.transform.position, mouth.position) < 0.15f)
                 {
                     honeyEaten = true;
                     Queue("EGG_005");
@@ -125,7 +129,7 @@ namespace LastNight.Chapters
             yield return Say("CH4_019", "CH4_020");
 
             // ----- The ring -----
-            handRing.SetActive(false);
+            if (handRing != null) handRing.SetActive(false);
             tableRing.SetActive(true);
             var ringGrab = tableRing.GetComponent<GrabSignal>();
             yield return Until(() => ringGrab.WasGrabbed || atDoor);
@@ -134,7 +138,7 @@ namespace LastNight.Chapters
                 yield return Say("CH4_021");
                 yield return Say("CH4_022", "CH4_023");
                 // Putting the ring back on: holding it near the ring finger re-shows the hand ring.
-                handRing.SetActive(true);
+                if (handRing != null) handRing.SetActive(true);
             }
 
             yield return Until(() => atDoor);

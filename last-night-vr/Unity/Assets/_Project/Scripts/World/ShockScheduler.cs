@@ -41,6 +41,7 @@ namespace LastNight.World
             shocks++;
             BeatClock.Instance?.Jolt(1f, 0.25f);
 
+            if (playerCamera == null) playerCamera = Camera.main;
             if (shocks == 2 && playerCamera != null)
             {
                 int oldMask = playerCamera.cullingMask;

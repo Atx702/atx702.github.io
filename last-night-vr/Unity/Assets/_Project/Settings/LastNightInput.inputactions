@@ -1,0 +1,50 @@
+{
+    "name": "LastNightInput",
+    "maps": [
+        {
+            "name": "Game",
+            "id": "6f3f8a5e-7a51-4d0e-9a8b-0d4b2f1c9a01",
+            "actions": [
+                {
+                    "name": "CloseEyes",
+                    "type": "Button",
+                    "id": "1b2f5a77-0c1e-4a7a-9d3e-6a2b9b4c1e11",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Menu",
+                    "type": "Button",
+                    "id": "2c3e6b88-1d2f-4b8b-8e4f-7b3c0c5d2f22",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Confirm",
+                    "type": "Button",
+                    "id": "3d4f7c99-2e30-4c9c-9f50-8c4d1d6e3033",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                { "name": "", "id": "a1000001-0000-4000-8000-000000000001", "path": "<XRController>{RightHand}/secondaryButton", "interactions": "", "processors": "", "groups": "", "action": "CloseEyes", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "a1000001-0000-4000-8000-000000000002", "path": "<Keyboard>/e", "interactions": "", "processors": "", "groups": "", "action": "CloseEyes", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "a1000001-0000-4000-8000-000000000003", "path": "<XRController>{LeftHand}/menuButton", "interactions": "", "processors": "", "groups": "", "action": "Menu", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "a1000001-0000-4000-8000-000000000004", "path": "<XRController>{LeftHand}/menu", "interactions": "", "processors": "", "groups": "", "action": "Menu", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "a1000001-0000-4000-8000-000000000005", "path": "<Keyboard>/escape", "interactions": "", "processors": "", "groups": "", "action": "Menu", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "a1000001-0000-4000-8000-000000000006", "path": "<XRController>{RightHand}/primaryButton", "interactions": "", "processors": "", "groups": "", "action": "Confirm", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "a1000001-0000-4000-8000-000000000007", "path": "<XRController>{RightHand}/triggerPressed", "interactions": "", "processors": "", "groups": "", "action": "Confirm", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "a1000001-0000-4000-8000-000000000008", "path": "<XRController>{LeftHand}/triggerPressed", "interactions": "", "processors": "", "groups": "", "action": "Confirm", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "a1000001-0000-4000-8000-000000000009", "path": "<Keyboard>/space", "interactions": "", "processors": "", "groups": "", "action": "Confirm", "isComposite": false, "isPartOfComposite": false }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

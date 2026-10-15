@@ -56,7 +56,8 @@ namespace LastNight.UI
         {
             Paused = false;
             card.SetActive(false);
-            settingsPanel.SetActive(false);
+            if (settingsPanel != null) settingsPanel.SetActive(false);
+            else if (SettingsMenu.Instance != null) SettingsMenu.Instance.gameObject.SetActive(false);
             if (chapterSelectPanel != null) chapterSelectPanel.SetActive(false);
             Time.timeScale = 1f;
             AudioListener.pause = false;
@@ -64,7 +65,11 @@ namespace LastNight.UI
             if (pendingVoiceLine) { pendingVoiceLine = false; DialoguePlayer.Instance?.PlayOnce("SYS_PAUSE_001"); }
         }
 
-        public void OpenSettings() => settingsPanel.SetActive(true);
+        public void OpenSettings()
+        {
+            if (settingsPanel != null) settingsPanel.SetActive(true);
+            else SettingsMenu.Instance?.OpenInFrontOfPlayer();
+        }
         public void OpenChapterSelect() { if (chapterSelectPanel != null) chapterSelectPanel.SetActive(true); }
 
         public void RestartFromAnchor()

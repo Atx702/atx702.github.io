@@ -23,6 +23,16 @@ namespace LastNight.Player
 
         float held;
         bool fired;
+
+        void Awake()
+        {
+            // Chapter scenes can't point at the rig in Core, so fill in from PlayerRig.
+            var rig = PlayerRig.Instance;
+            if (rig == null) return;
+            if (head == null) head = rig.Head;
+            if (leftHand == null) leftHand = rig.LeftHand;
+            if (rightHand == null) rightHand = rig.RightHand;
+        }
         int waveCount;
         float lastX;
         int lastDir;
@@ -37,7 +47,7 @@ namespace LastNight.Player
 
         void Update()
         {
-            if (fired) return;
+            if (fired || head == null || leftHand == null || rightHand == null) return;
             bool active = kind switch
             {
                 Kind.RaiseHand => leftHand.position.y > head.position.y + 0.1f || rightHand.position.y > head.position.y + 0.1f,

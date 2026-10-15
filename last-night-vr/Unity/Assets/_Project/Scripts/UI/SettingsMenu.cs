@@ -43,6 +43,37 @@ namespace LastNight.UI
         [SerializeField] SettingsApplier applier;
 
         static readonly int[] SnapAngles = { 15, 30, 45, 90 };
+
+        /// <summary>The one settings panel (in Core). The bed menu and pause card both open it.</summary>
+        public static SettingsMenu Instance
+        {
+            get
+            {
+                // The panel starts hidden, so Awake hasn't run yet: find it even while inactive.
+                if (instance == null) instance = FindAnyObjectByType<SettingsMenu>(FindObjectsInactive.Include);
+                return instance;
+            }
+        }
+        static SettingsMenu instance;
+
+        void Awake()
+        {
+            instance = this;
+            if (applier == null) applier = FindAnyObjectByType<SettingsApplier>();
+        }
+
+        /// <summary>Shows the panel in front of the player, at chest height.</summary>
+        public void OpenInFrontOfPlayer()
+        {
+            var head = Camera.main != null ? Camera.main.transform : null;
+            if (head != null)
+            {
+                var fwd = Vector3.ProjectOnPlane(head.forward, Vector3.up).normalized;
+                transform.position = head.position + fwd * 0.9f + Vector3.down * 0.15f;
+                transform.rotation = Quaternion.LookRotation(fwd);
+            }
+            gameObject.SetActive(true);
+        }
         GameSettings s;
         bool loading;
 
