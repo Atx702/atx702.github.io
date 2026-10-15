@@ -1,0 +1,213 @@
+id,chapter,speaker,leak,direction,text
+PRO_001,CHAPTER_0,VOICE,0,"close, gentle",There you are.
+PRO_002,CHAPTER_0,VOICE,0,softly,Take your time. Look around. Nothing here can hurt you.
+PRO_003,CHAPTER_0,VOICE,0,,"Hold out your hands, Tomas."
+PRO_004,CHAPTER_0,VOICE,0,warm,Good. Still yours.
+PRO_005,CHAPTER_0,VOICE,0,,You're dreaming. That's all this is. A long dream at the end of a long night.
+PRO_006,CHAPTER_0,VOICE,0,,Walk with me. Just follow the boards.
+PRO_007,CHAPTER_0,VOICE,0,if player stands still 20 s,It's all right. There's no hurry here. There's never any hurry here.
+PRO_008,CHAPTER_0,VOICE,0,,Every place you ever lived is out there. Some of them are a little worn.
+PRO_009,CHAPTER_0,VOICE,0,,Walk to each one. Say goodbye properly. Then the door at the center will open.
+TOMAS_001,CHAPTER_0,TOMAS,0,barely audible,What door?
+PRO_010,CHAPTER_0,VOICE,0,"pause, then kindly",The one you've been walking toward for a long time.
+PRO_011,CHAPTER_0,VOICE,0,,Pick that up. You made that with your father. Remember?
+PRO_012,CHAPTER_0,VOICE,0,,That's how this works. Hold something. Remember it. Let it go.
+PRO_013,CHAPTER_0,VOICE,0,,Start wherever you like. The house is closest.
+PRO_014,CHAPTER_0,VOICE,0,if player looks back,Don't worry about the bed. You won't need it.
+CH1_001,CHAPTER_1,VOICE,0,,That's the house on Calle Verda. You were six.
+CH1_002,CHAPTER_1,LUCIA,0,"far away, calling",¡Tomás! ¡A cenar!
+CH1_003,CHAPTER_1,VOICE,0,,Your mother. She always called you in too early.
+CH1_004,CHAPTER_1,VOICE,0,,Ah. It's shy. Memories are like that. Don't stare at it.
+CH1_005,CHAPTER_1,VOICE,0,,"Look away. Or close your eyes, if you like. Cover them with your hands."
+CH1_006,CHAPTER_1,VOICE,0,pleased,"There. See? When you close your eyes, everything gets easier."
+CH1_007,CHAPTER_1,VOICE,0,,Your father carved the hull from a fence post. You painted it the wrong blue.
+CH1_008,CHAPTER_1,VOICE,0,when player finds the sail drawing,You drew that. The sun has a face. Every sun you drew had a face.
+CH1_009,CHAPTER_1,VOICE,0,boat complete,"There. Now take it to the water. That was the day, wasn't it?"
+CH1_010,CHAPTER_1,VOICE,0,"calm, too calm",You went in after it. You couldn't swim yet.
+CH1_011,CHAPTER_1,VOICE,0,,It was very quiet down there. Do you remember how quiet?
+CH1_012,CHAPTER_1,VOICE,0,,You weren't scared. Not really. It was almost peaceful.
+CH1_013,CHAPTER_1,ELIO,0,"desperate, rhythmic, pressing","Breathe, mijo. Breathe. Come on. Come on."
+CH1_014,CHAPTER_1,ELIO,0,breaking,Don't you do this to me. Breathe!
+CH1_015,CHAPTER_1,VOICE,0,"over him, gently",He was always so loud. You'd have been fine.
+CH1_016,CHAPTER_1,VOICE,0,,"That's one. Say goodbye to the house, Tomas."
+CH1_017,CHAPTER_1,VOICE,0,"if picked up, slight hesitation",Hm. That doesn't belong to this one. Leave it.
+CH1_018,CHAPTER_1,MAREN,1,"leak, muffled, under her breath","...okay, okay, okay..."
+CH2_001,CHAPTER_2,VOICE,0,,Ms. Adair's class. You sat by the window so you could look at the buildings.
+CH2_002,CHAPTER_2,ADAIR,0,"echoing, warm","Settle down, everyone. Roll call."
+CH2_003,CHAPTER_2,ADAIR,0,,"Alvarez."" *(pause)* ""Bennett."" *(pause)* ""Cho."
+CH2_004,CHAPTER_2,VOICE,0,irritated,"That noise. It's been following you. Find it, turn it off."
+CH2_005,CHAPTER_2,VOICE,0,,One. Good. You always hated loud rooms.
+CH2_006,CHAPTER_2,VOICE,0,,Two. Listen. Can you hear her again?
+CH2_007,CHAPTER_2,ADAIR,0,,"Okafor."" *(pause)* ""Lind."
+CH2_008,CHAPTER_2,VOICE,0,quickly,Those weren't your classmates. Ignore that.
+CH2_009,CHAPTER_2,VOICE,0,,Three. Quiet now.
+CH2_010,CHAPTER_2,ADAIR,0,,Reyes? Tomas Reyes?
+CH2_011,CHAPTER_2,ADAIR,0,,"There you are. Your speech, Tomas. Come up."
+CH2_012,CHAPTER_2,VOICE,0,,You stuttered all the way through it. Everybody laughed.
+CH2_013,CHAPTER_2,VOICE,0,"reading, slow",When I grow up... I want to build houses...
+CH2_014,CHAPTER_2,VOICE,0,,...that keep people safe.
+CH2_015,CHAPTER_2,VOICE,0,soft,"You built a lot of houses, Tomas. And you couldn't keep her safe in any of them."
+CH2_016,CHAPTER_2,VOICE,0,,Don't think about that yet. One thing at a time.
+CH2_017,CHAPTER_2,VOICE,0,curt,Put that down.
+CH2_018,CHAPTER_2,DISPATCH,1,"leak, phone speaker, calm","Is he breathing? Ma'am, is he breathing?"
+CH2_019,CHAPTER_2,MAREN,1,leak,"No. No, he's not. I'm starting compressions."
+CH2_020,CHAPTER_2,VOICE,0,low,Don't look at that. Come away. Let's go somewhere warmer.
+CH3_001,CHAPTER_3,VOICE,0,"lighter, almost happy",Oh. This one I like.
+CH3_002,CHAPTER_3,VOICE,0,,Line 4. 7:40. You were late for an exam.
+CH3_003,CHAPTER_3,VOICE,0,,"The board's broken. It always was, in your head. Fix it, and she'll come."
+CH3_004,CHAPTER_3,VOICE,0,tile 1,You noticed her before she noticed you.
+CH3_005,CHAPTER_3,VOICE,0,tile 2,Red scarf. Library books. Laughing at something on her phone.
+CH3_006,CHAPTER_3,VOICE,0,tile 3,You practiced a sentence to say to her. You never said it.
+CH3_007,CHAPTER_3,VOICE,0,tile 4,There. 7:40.
+CH3_008,CHAPTER_3,MAREN_MEM,0,"laughing, surprised",Oh! Good catch.
+CH3_009,CHAPTER_3,MAREN_MEM,0,,Thank you. That's my grandmother's. She'd have killed me.
+TOMAS_002,CHAPTER_3,TOMAS,0,"young, nervous",It's... it's a nice scarf.
+CH3_010,CHAPTER_3,MAREN_MEM,0,amused,It's a nice scarf? That's what you're going with?
+CH3_011,CHAPTER_3,MAREN_MEM,0,,"I'm Maren. You're going to miss your train, scarf guy."
+CH3_012,CHAPTER_3,MAREN_MEM,0,"through the window, laughing",Keep it! You'll have to give it back to me tomorrow!
+CH3_013,CHAPTER_3,VOICE,0,quietly,You gave it back to her every day for twenty years.
+CH3_014,CHAPTER_3,VOICE,0,,Sit with me a minute.
+CH3_015,CHAPTER_3,VOICE,0,,"You know what this is, don't you? You've known since the field."
+CH3_016,CHAPTER_3,VOICE,0,,"You went to sleep, and your heart got tired, and it stopped."
+CH3_017,CHAPTER_3,VOICE,0,gentle,"You died, Tomas. In your sleep. It didn't hurt."
+CH3_018,CHAPTER_3,VOICE,0,,"This is the part where you get to see it all, once more. Then you rest."
+TOMAS_003,CHAPTER_3,TOMAS,0,quiet,Maren...
+CH3_019,CHAPTER_3,VOICE,0,,She'll be all right. She was always the strong one. You know that.
+CH3_020,CHAPTER_3,VOICE,0,uneasy,That's not the same one. That one's... older.
+CH3_021,CHAPTER_3,MAREN,1,"leak, close, breathless",Twenty-eight. Twenty-nine. Thirty.
+CH3_022,CHAPTER_3,MAREN,1,leak,"Come on, Tom. Come on."
+CH3_023,CHAPTER_3,VOICE,0,,Leave it on the bench. Please.
+CH3_024,CHAPTER_3,VOICE,0,firm,Don't let it near you. It's the thing that erases. It takes everything you are and wipes it white.
+CH3_025,CHAPTER_3,VOICE,0,,"If it gets close, close your eyes. It can't find you when you're not looking."
+CH4_001,CHAPTER_4,VOICE,0,content,The yellow kitchen. You painted it yourself. Two coats.
+CH4_002,CHAPTER_4,MAREN_MEM,0,"from the dark hallway, playful",Is that tea for me or are you just holding the kettle?
+CH4_003,CHAPTER_4,VOICE,0,,Make her tea. She takes it with too much honey.
+CH4_004,CHAPTER_4,MAREN_MEM,0,,"You know what I like about you, Tomas? You never rush anything."
+CH4_005,CHAPTER_4,MAREN_MEM,0,,Even the tea. Even me.
+CH4_006,CHAPTER_4,MAREN_MEM,0,laughing,Not that station. Find ours.
+CH4_007,CHAPTER_4,DISPATCH,1,"leak, wrong station 1",You're doing great. Push hard. Push fast. Let it come all the way back up.
+CH4_008,CHAPTER_4,LIND,1,"leak, wrong station 2, distant siren",Two minutes out. Tell her to keep going.
+CH4_009,CHAPTER_4,VOICE,0,quickly,Just static. Keep turning.
+CH4_010,CHAPTER_4,MAREN_MEM,0,soft,"Oh, I love this one."
+CH4_011,CHAPTER_4,MAREN_MEM,0,"hesitant, happy",Tomas. Sit down. I have to tell you something.
+CH4_012,CHAPTER_4,MAREN_MEM,0,laughing and crying a little,We're going to need a third mug.
+CH4_013,CHAPTER_4,VOICE,0,very quietly,And you dropped the honey. All over the floor. You didn't care.
+CH4_014,CHAPTER_4,VOICE,0,urgent whisper,It found us. Don't look at it. Keep the lights on. It doesn't like the warm places.
+CH4_015,CHAPTER_4,VOICE,0,,"When the lights fail, close your eyes. Wait for the kettle."
+CH4_016,CHAPTER_4,MAREN,1,"leak, very clear for one second","Tomas, look at me!"
+CH4_017,CHAPTER_4,VOICE,0,sharp,No. Eyes closed. Now.
+CH4_018,CHAPTER_4,VOICE,0,"after a catch, shaken",That was close. Too close. Did you feel that? Like being torn.
+OKAFOR_001,CHAPTER_4,OKAFOR,1,"leak, under the white flash",Clear!
+CH4_019,CHAPTER_4,VOICE,0,,It's gone. It's gone. You're safe.
+CH4_020,CHAPTER_4,VOICE,0,,"You see why we can't let it near you, don't you? It would take this away."
+CH4_021,CHAPTER_4,VOICE,0,"lying, gently","It slipped off. Your hands are tired. Put it back on, if you like."
+CH4_022,CHAPTER_4,MAREN,1,leak,"I took it off, I'm sorry, I'm sorry, I needed to, your hand was—"
+CH4_023,CHAPTER_4,DISPATCH,1,leak,"Ma'am, stay with him. Keep going."
+CH4_024,CHAPTER_4,VOICE,0,dread,Not that door. Not yet.
+CH4_025,CHAPTER_4,VOICE,0,resigned,...All right. All right. We'll do it together.
+CH5_001,CHAPTER_5,VOICE,0,flat,St. Alder's. Fourth floor. Pediatrics.
+CH5_002,CHAPTER_5,VOICE,0,,Nine days. You slept in the chair. You learned every sound the machines make.
+CH5_003,CHAPTER_5,NURSE,0,"memory, distant","Mr. Reyes, she's resting. Go get something to eat."
+CH5_004,CHAPTER_5,WREN,0,"memory, little, proud",That's our house. The sun is happy.
+CH5_005,CHAPTER_5,WREN,0,memory,"That's the lantern song, daddy. You sing it wrong."
+CH5_006,CHAPTER_5,WREN,0,memory,That's the boat. It's going somewhere nice.
+CH5_007,CHAPTER_5,WREN,0,"memory, sleepy",That's a bird. It flew out the window because it was finished.
+CH5_008,CHAPTER_5,WREN,0,"memory, very small",That's my door. Number seven. Same as me.
+CH5_009,CHAPTER_5,VOICE,0,if reset,Again. You never could find your way in here.
+CH5_010,CHAPTER_5,VOICE,0,tight,You were so tired. You went for coffee. Four minutes.
+CH5_011,CHAPTER_5,VOICE,0,,"Four minutes, Tomas."
+CH5_012,CHAPTER_5,VOICE,0,,Of course. You did it again.
+CH5_013,CHAPTER_5,VOICE,0,cracking,It doesn't matter now. Walking past it now doesn't change anything.
+CH5_014,CHAPTER_5,NURSE,0,"memory, gentle",Mr. Reyes. I'm so sorry. She went very peacefully.
+CH5_015,CHAPTER_5,NURSE,0,,She asked for you. Right at the end. I told her you were coming.
+TOMAS_004,CHAPTER_5,TOMAS,0,breaking,I was coming.
+CH5_016,CHAPTER_5,VOICE,0,"tender, cruel","But you weren't there. And ever since, you've been the one who wasn't there."
+CH5_017,CHAPTER_5,VOICE,0,,That's why you're tired. That's why it's all right to stop.
+CH5_018,CHAPTER_5,VOICE,0,fast,That's hers. That's Wren's bracelet.
+CH5_019,CHAPTER_5,VOICE,0,after the player turns it over,"...Put it down, Tomas."
+CH5_020,CHAPTER_5,OKAFOR,1,"leak, clearer than ever",We've got a rhythm— no. Lost it. Back on the chest.
+CH5_021,CHAPTER_5,MAREN,1,leak,"He's forty-four. He's forty-four, he's got a daughter— had— he's—"
+CH5_022,CHAPTER_5,VOICE,0,frightened,Run. Don't look back. Don't look at it. Run.
+CH5_023,CHAPTER_5,MAREN,1,"leak, inside the Pull's sound",Tomas. Tomas. Please.
+CH5_024,CHAPTER_5,VOICE,0,over her,That's not her. It uses her voice. It uses everything.
+CH6_001,CHAPTER_6,VOICE,0,breathless,It's falling apart. It's all falling toward the center. That's fine. That's what's supposed to happen.
+CH6_002,CHAPTER_6,VOICE,0,,The door's right there. Go to the light. The yellow one. Not the white one.
+CH6_003,CHAPTER_6,DISPATCH,1,"leak, loud now",The ambulance is outside. Keep going until they take over.
+CH6_004,CHAPTER_6,VOICE,0,pleading,Don't listen. Don't listen. Close your eyes and walk.
+CH6_005,CHAPTER_6,OKAFOR,1,leak,Charging. Clear.
+CH6_006,CHAPTER_6,VOICE,0,in pain,Ah— That. That's what it does. Do you see?
+CH6_007,CHAPTER_6,VOICE,0,,You didn't see anything.
+CH7_001,CHAPTER_7,VOICE,0,very quiet,Don't look down.
+CH7_002,CHAPTER_7,MAREN,0,"counting, crying, exhausted","...twenty-six, twenty-seven, twenty-eight, twenty-nine, thirty."
+CH7_003,CHAPTER_7,MAREN,0,,"Tomas Reyes, you do not get to do this."
+CH7_004,CHAPTER_7,MAREN,0,,You do not get to leave me too.
+CH7_005,CHAPTER_7,MAREN,0,breaking,"I lost her too. I lost her too, and I stayed. I stayed for you. Come back."
+CH7_006,CHAPTER_7,OKAFOR,0,,"Ma'am, we've got him. Let us take over. You did good."
+CH7_007,CHAPTER_7,MAREN,0,"refusing, then letting go",No— okay. Okay. Thirty. He's— okay.
+CH7_008,CHAPTER_7,VOICE,0,after a long silence,...I didn't want you to see that.
+TOMAS_005,CHAPTER_7,TOMAS,0,,You knew.
+CH7_009,CHAPTER_7,VOICE,0,,"I'm you, Tomas. Of course I knew."
+CH7_010,CHAPTER_7,VOICE,0,,I'm the part of you that sat in the chair outside room seven and never got up.
+CH7_011,CHAPTER_7,VOICE,0,,Six years I've been asking you to stop. Tonight you finally did.
+CH7_012,CHAPTER_7,VOICE,0,"pleading, softer than ever",And she's in there. Wren's in there. Right behind that door. You can see her. You can be there this time.
+CH7_013,CHAPTER_7,VOICE,0,,"Out there, she's gone. In here, she's waiting."
+CH7_014,CHAPTER_7,VOICE,0,,Don't make me let her go twice.
+CH8_001,CHAPTER_8,WREN,0,"not looking up, happy",Daddy! You came.
+CH8_002,CHAPTER_8,WREN,0,,I'm drawing you. Hold still.
+CH8_003,CHAPTER_8,WREN,0,,You're really bad at holding still.
+CH8_004,CHAPTER_8,WREN,0,,Sing it. You promised you'd sing it right one time.
+CH8_005,CHAPTER_8,WREN,0,singing softly,"Little lantern, little light, keep me company tonight..."
+CH8_006,CHAPTER_8,WREN,0,,That's you. And that's mommy. She's waiting for you.
+TOMAS_006,CHAPTER_8,TOMAS,0,barely,"I wasn't there, Wren. I wasn't there."
+CH8_007,CHAPTER_8,WREN,0,simply,"You were getting coffee, silly. That's okay."
+CH8_008,CHAPTER_8,WREN,0,,Mommy was there. She held my hand. She said you'd come right back.
+CH8_009,CHAPTER_8,WREN,0,a little sad,But you didn't come back. Not really. Not for a long time.
+CH8_010,CHAPTER_8,VOICE,0,"if player hesitates > 15 s, whispering","Pick her up. Just pick her up, Tomas. Nobody would blame you."
+END_S_001,CHAPTER_8,WREN,0,"sleepy, content","Okay, daddy. You can stay."
+END_S_002,CHAPTER_8,VOICE,0,"relieved, almost crying",There. There. No more hurry.
+END_S_003,CHAPTER_8,MAREN,1,"leak, fading, very far",...Tomas? ...Tomas...
+END_S_004,CHAPTER_8,OKAFOR,1,"leak, flat",Time of death...
+END_W_001,CHAPTER_8,WREN,0,smiling,Go on. Mommy's tired. She's been pushing really hard.
+END_W_002,CHAPTER_8,WREN,0,gives the player her drawing,Give her this.
+END_W_003,CHAPTER_8,WREN,0,,"And sing it right, okay? For her."
+TOMAS_007,CHAPTER_8,TOMAS,0,crying,"I love you, little lantern."
+END_W_004,CHAPTER_8,WREN,0,,I know. Go.
+END_W_005,CHAPTER_8,VOICE,0,"defeated, quiet, kind for the first time",...She's right. She was always right.
+END_W_006,CHAPTER_8,VOICE,0,,"Go on, then. I'll stay here with her. Someone should."
+END_W_007,CHAPTER_8,VOICE,0,,"Goodbye, Tomas."
+END_W_008,CHAPTER_8,OKAFOR,0,,"We've got a pulse. We've got him. Tomas, can you hear me?"
+END_W_009,CHAPTER_8,MAREN,0,laughing and sobbing,Hi. Hi. There you are. Don't you ever—
+TOMAS_008,CHAPTER_8,TOMAS,0,hoarse,...Maren. She... said to give you...
+SEC_001,SECRET_ENDING,MAREN,0,,They said you might not remember any of it. The doctor said it's normal.
+SEC_002,SECRET_ENDING,MAREN,0,,So I'm going to tell you what I said. Because I said a lot of things on that floor.
+SEC_003,SECRET_ENDING,MAREN,0,,I said I was angry at you. I am. For six years you were in the house and you weren't in the house.
+SEC_004,SECRET_ENDING,MAREN,0,,I said I lost her too. I needed you to know that I lost her too.
+SEC_005,SECRET_ENDING,MAREN,0,,And I said you don't get to leave. Not because I can't do it alone. I can. I'm good at alone now.
+SEC_006,SECRET_ENDING,MAREN,0,softer,But I don't want to be. I want you. The slow version. The tea version.
+SEC_007,SECRET_ENDING,MAREN,0,,You were humming. When you came back. The lantern song. You haven't hummed that since...
+SEC_008,SECRET_ENDING,MAREN,0,laughing through tears,You still sing it wrong.
+SYS_CATCH_001,IDLE,VOICE,0,,"No, no. Not yet. Back you go."
+SYS_CATCH_002,IDLE,VOICE,0,,That's what it does. It pulls. Don't let it.
+SYS_CATCH_003,IDLE,VOICE,0,"Act 3 only, shaken",I felt that. I felt your chest.
+SYS_CATCH_004,IDLE,VOICE,0,,It almost had you. Close your eyes sooner.
+SYS_EYES_001,IDLE,VOICE,0,,That's right. Just rest your eyes.
+SYS_EYES_002,IDLE,VOICE,0,,You could stay like this. It's so much quieter.
+SYS_EYES_003,IDLE,MAREN,1,"leak, faint, Act 2+","Open your eyes. Tom, open your eyes."
+SYS_IDLE_001,IDLE,VOICE,0,,No hurry. There's never any hurry here.
+SYS_IDLE_002,IDLE,VOICE,0,,"You used to stand like that in doorways. Halfway in, halfway out."
+SYS_IDLE_003,IDLE,VOICE,0,,You can wait as long as you like. She can't.
+SYS_EDGE_001,IDLE,VOICE,0,,"Nothing out there, Tomas. You never went anywhere else."
+SYS_EDGE_002,IDLE,VOICE,0,,That way's just fog. All the way down.
+SYS_THROW_001,IDLE,VOICE,0,,Careful with that. It's the only one.
+SYS_THROW_002,IDLE,VOICE,0,mild,Well. It was yours to throw.
+SYS_PAUSE_001,IDLE,VOICE,0,,Taking a breath? Good. Somebody should.
+EGG_001,EASTER_EGG,VOICE,0,Biscuit the dog found,Biscuit. You forgot about Biscuit. He waited at the door every day after she was gone.
+EGG_002,EASTER_EGG,VOICE,0,all 12 Wren drawings found,She drew every day. You kept every single one. In the nightstand. You never looked at them.
+EGG_003,EASTER_EGG,VOICE,0,player hums the Lantern tune in Ch.1 via mic,Where'd you learn that? Oh. You made it up. Later.
+EGG_004,EASTER_EGG,VOICE,0,player stares at the 3:12 clock for 60 s,It's not going to move. Not until somebody makes it.
+EGG_005,EASTER_EGG,VOICE,0,player tries to eat the honey in Ch.4,...Really? Now?
+EGG_006,EASTER_EGG,WREN,0,rubber duck squeezed 7 times in Ch.8,Quack quack quack! That's his name. Quack-quack the Seventh.
+EGG_007,EASTER_EGG,VOICE,0,"Lucid Mode, New Game+, first line","Oh. You again. You know how this ends, don't you? ...Then why are you still walking?"
+EGG_008,EASTER_EGG,VOICE,0,"Lucid Mode, Pull first seen",You know what that is now. You can't un-know it.
+EGG_009,EASTER_EGG,ELIO,0,"Lucid Mode, lake, after the rescue","You'll do the same for somebody someday, mijo."
+EGG_010,EASTER_EGG,MAREN_MEM,0,"platform, if the player waves at Maren's train 3 times","Okay, okay, I see you, scarf guy!"
