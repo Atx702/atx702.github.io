@@ -1,0 +1,1274 @@
+[
+ {
+  "id": "PRO_001",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[gentle] There you are."
+ },
+ {
+  "id": "PRO_002",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[softly] Take your time. Look around. Nothing here can hurt you."
+ },
+ {
+  "id": "PRO_003",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Hold out your hands, Tomas."
+ },
+ {
+  "id": "PRO_004",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[warm] Good. Still yours."
+ },
+ {
+  "id": "PRO_005",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "You're dreaming. That's all this is. A long dream at the end of a long night."
+ },
+ {
+  "id": "PRO_006",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Walk with me. Just follow the boards."
+ },
+ {
+  "id": "PRO_007",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "It's all right. There's no hurry here. There's never any hurry here."
+ },
+ {
+  "id": "PRO_008",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Every place you ever lived is out there. Some of them are a little worn."
+ },
+ {
+  "id": "PRO_009",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Walk to each one. Say goodbye properly. Then the door at the center will open."
+ },
+ {
+  "id": "TOMAS_001",
+  "speaker": "TOMAS",
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "prompt": "[barely audible] What door?"
+ },
+ {
+  "id": "PRO_010",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[pause] [then kindly] The one you've been walking toward for a long time."
+ },
+ {
+  "id": "PRO_011",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Pick that up. You made that with your father. Remember?"
+ },
+ {
+  "id": "PRO_012",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "That's how this works. Hold something. Remember it. Let it go."
+ },
+ {
+  "id": "PRO_013",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Start wherever you like. The house is closest."
+ },
+ {
+  "id": "PRO_014",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Don't worry about the bed. You won't need it."
+ },
+ {
+  "id": "CH1_001",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "That's the house on Calle Verda. You were six."
+ },
+ {
+  "id": "CH1_002",
+  "speaker": "LUCIA",
+  "voice_id": "7DTpboyigwqXiCkvQjMX",
+  "prompt": "[calling from far away] ¡Tomás! ¡A cenar!"
+ },
+ {
+  "id": "CH1_003",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Your mother. She always called you in too early."
+ },
+ {
+  "id": "CH1_004",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Ah. It's shy. Memories are like that. Don't stare at it."
+ },
+ {
+  "id": "CH1_005",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Look away. Or close your eyes, if you like. Cover them with your hands."
+ },
+ {
+  "id": "CH1_006",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[pleased] There. See? When you close your eyes, everything gets easier."
+ },
+ {
+  "id": "CH1_007",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Your father carved the hull from a fence post. You painted it the wrong blue."
+ },
+ {
+  "id": "CH1_008",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "You drew that. The sun has a face. Every sun you drew had a face."
+ },
+ {
+  "id": "CH1_009",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "There. Now take it to the water. That was the day, wasn't it?"
+ },
+ {
+  "id": "CH1_010",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[calm] [too calm] You went in after it. You couldn't swim yet."
+ },
+ {
+  "id": "CH1_011",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "It was very quiet down there. Do you remember how quiet?"
+ },
+ {
+  "id": "CH1_012",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "You weren't scared. Not really. It was almost peaceful."
+ },
+ {
+  "id": "CH1_013",
+  "speaker": "ELIO",
+  "voice_id": "IP2syKL31S2JthzSSfZH",
+  "prompt": "[desperate] [rhythmic] [pressing] Breathe, mijo. Breathe. Come on. Come on."
+ },
+ {
+  "id": "CH1_014",
+  "speaker": "ELIO",
+  "voice_id": "IP2syKL31S2JthzSSfZH",
+  "prompt": "[breaking] Don't you do this to me. Breathe!"
+ },
+ {
+  "id": "CH1_015",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[gently] He was always so loud. You'd have been fine."
+ },
+ {
+  "id": "CH1_016",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "That's one. Say goodbye to the house, Tomas."
+ },
+ {
+  "id": "CH1_017",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[slight hesitation] Hm. That doesn't belong to this one. Leave it."
+ },
+ {
+  "id": "CH1_018",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "[muffled] [under her breath] ...okay, okay, okay..."
+ },
+ {
+  "id": "CH2_001",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Ms. Adair's class. You sat by the window so you could look at the buildings."
+ },
+ {
+  "id": "CH2_002",
+  "speaker": "ADAIR",
+  "voice_id": "CH8NA3Iu30hBBcNIzv9I",
+  "prompt": "[echoing] [warm] Settle down, everyone. Roll call."
+ },
+ {
+  "id": "CH2_003",
+  "speaker": "ADAIR",
+  "voice_id": "CH8NA3Iu30hBBcNIzv9I",
+  "prompt": "Alvarez. ... Bennett. ... Cho."
+ },
+ {
+  "id": "CH2_004",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[irritated] That noise. It's been following you. Find it, turn it off."
+ },
+ {
+  "id": "CH2_005",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "One. Good. You always hated loud rooms."
+ },
+ {
+  "id": "CH2_006",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Two. Listen. Can you hear her again?"
+ },
+ {
+  "id": "CH2_007",
+  "speaker": "ADAIR",
+  "voice_id": "CH8NA3Iu30hBBcNIzv9I",
+  "prompt": "Okafor. ... Lind."
+ },
+ {
+  "id": "CH2_008",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[quickly] Those weren't your classmates. Ignore that."
+ },
+ {
+  "id": "CH2_009",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Three. Quiet now."
+ },
+ {
+  "id": "CH2_010",
+  "speaker": "ADAIR",
+  "voice_id": "CH8NA3Iu30hBBcNIzv9I",
+  "prompt": "Reyes? Tomas Reyes?"
+ },
+ {
+  "id": "CH2_011",
+  "speaker": "ADAIR",
+  "voice_id": "CH8NA3Iu30hBBcNIzv9I",
+  "prompt": "There you are. Your speech, Tomas. Come up."
+ },
+ {
+  "id": "CH2_012",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "You stuttered all the way through it. Everybody laughed."
+ },
+ {
+  "id": "CH2_013",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[reading slowly] [slow] When I grow up... I want to build houses..."
+ },
+ {
+  "id": "CH2_014",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "...that keep people safe."
+ },
+ {
+  "id": "CH2_015",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[soft] You built a lot of houses, Tomas. And you couldn't keep her safe in any of them."
+ },
+ {
+  "id": "CH2_016",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Don't think about that yet. One thing at a time."
+ },
+ {
+  "id": "CH2_017",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[curt] Put that down."
+ },
+ {
+  "id": "CH2_018",
+  "speaker": "DISPATCH",
+  "voice_id": "iGjiBXtLd3IyXUaAQk6M",
+  "prompt": "[calm] Is he breathing? Ma'am, is he breathing?"
+ },
+ {
+  "id": "CH2_019",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "No. No, he's not. I'm starting compressions."
+ },
+ {
+  "id": "CH2_020",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[low] Don't look at that. Come away. Let's go somewhere warmer."
+ },
+ {
+  "id": "CH3_001",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[lighter] [almost happy] Oh. This one I like."
+ },
+ {
+  "id": "CH3_002",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Line 4. 7:40. You were late for an exam."
+ },
+ {
+  "id": "CH3_003",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "The board's broken. It always was, in your head. Fix it, and she'll come."
+ },
+ {
+  "id": "CH3_004",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "You noticed her before she noticed you."
+ },
+ {
+  "id": "CH3_005",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Red scarf. Library books. Laughing at something on her phone."
+ },
+ {
+  "id": "CH3_006",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "You practiced a sentence to say to her. You never said it."
+ },
+ {
+  "id": "CH3_007",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "There. 7:40."
+ },
+ {
+  "id": "CH3_008",
+  "speaker": "MAREN_MEM",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "[laughing] [surprised] Oh! Good catch."
+ },
+ {
+  "id": "CH3_009",
+  "speaker": "MAREN_MEM",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "Thank you. That's my grandmother's. She'd have killed me."
+ },
+ {
+  "id": "TOMAS_002",
+  "speaker": "TOMAS",
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "prompt": "[nervous] It's... it's a nice scarf."
+ },
+ {
+  "id": "CH3_010",
+  "speaker": "MAREN_MEM",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "[amused] It's a nice scarf? That's what you're going with?"
+ },
+ {
+  "id": "CH3_011",
+  "speaker": "MAREN_MEM",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "I'm Maren. You're going to miss your train, scarf guy."
+ },
+ {
+  "id": "CH3_012",
+  "speaker": "MAREN_MEM",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "[laughing] Keep it! You'll have to give it back to me tomorrow!"
+ },
+ {
+  "id": "CH3_013",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[quietly] You gave it back to her every day for twenty years."
+ },
+ {
+  "id": "CH3_014",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Sit with me a minute."
+ },
+ {
+  "id": "CH3_015",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "You know what this is, don't you? You've known since the field."
+ },
+ {
+  "id": "CH3_016",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "You went to sleep, and your heart got tired, and it stopped."
+ },
+ {
+  "id": "CH3_017",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[gentle] You died, Tomas. In your sleep. It didn't hurt."
+ },
+ {
+  "id": "CH3_018",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "This is the part where you get to see it all, once more. Then you rest."
+ },
+ {
+  "id": "TOMAS_003",
+  "speaker": "TOMAS",
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "prompt": "[quiet] Maren..."
+ },
+ {
+  "id": "CH3_019",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "She'll be all right. She was always the strong one. You know that."
+ },
+ {
+  "id": "CH3_020",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[uneasy] That's not the same one. That one's... older."
+ },
+ {
+  "id": "CH3_021",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "[breathless] Twenty-eight. Twenty-nine. Thirty."
+ },
+ {
+  "id": "CH3_022",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "Come on, Tom. Come on."
+ },
+ {
+  "id": "CH3_023",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Leave it on the bench. Please."
+ },
+ {
+  "id": "CH3_024",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[firm] Don't let it near you. It's the thing that erases. It takes everything you are and wipes it white."
+ },
+ {
+  "id": "CH3_025",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "If it gets close, close your eyes. It can't find you when you're not looking."
+ },
+ {
+  "id": "CH4_001",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[content] The yellow kitchen. You painted it yourself. Two coats."
+ },
+ {
+  "id": "CH4_002",
+  "speaker": "MAREN_MEM",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "[playful] Is that tea for me or are you just holding the kettle?"
+ },
+ {
+  "id": "CH4_003",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Make her tea. She takes it with too much honey."
+ },
+ {
+  "id": "CH4_004",
+  "speaker": "MAREN_MEM",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "You know what I like about you, Tomas? You never rush anything."
+ },
+ {
+  "id": "CH4_005",
+  "speaker": "MAREN_MEM",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "Even the tea. Even me."
+ },
+ {
+  "id": "CH4_006",
+  "speaker": "MAREN_MEM",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "[laughing] Not that station. Find ours."
+ },
+ {
+  "id": "CH4_007",
+  "speaker": "DISPATCH",
+  "voice_id": "iGjiBXtLd3IyXUaAQk6M",
+  "prompt": "You're doing great. Push hard. Push fast. Let it come all the way back up."
+ },
+ {
+  "id": "CH4_008",
+  "speaker": "LIND",
+  "voice_id": "GxGSne3qX4QsbtuEIkbJ",
+  "prompt": "Two minutes out. Tell her to keep going."
+ },
+ {
+  "id": "CH4_009",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[quickly] Just static. Keep turning."
+ },
+ {
+  "id": "CH4_010",
+  "speaker": "MAREN_MEM",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "[soft] Oh, I love this one."
+ },
+ {
+  "id": "CH4_011",
+  "speaker": "MAREN_MEM",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "[hesitant] [happy] Tomas. Sit down. I have to tell you something."
+ },
+ {
+  "id": "CH4_012",
+  "speaker": "MAREN_MEM",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "[laughing and crying a little] We're going to need a third mug."
+ },
+ {
+  "id": "CH4_013",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[very quietly] And you dropped the honey. All over the floor. You didn't care."
+ },
+ {
+  "id": "CH4_014",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[urgent whisper] It found us. Don't look at it. Keep the lights on. It doesn't like the warm places."
+ },
+ {
+  "id": "CH4_015",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "When the lights fail, close your eyes. Wait for the kettle."
+ },
+ {
+  "id": "CH4_016",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "Tomas, look at me!"
+ },
+ {
+  "id": "CH4_017",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[sharp] No. Eyes closed. Now."
+ },
+ {
+  "id": "CH4_018",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[shaken] That was close. Too close. Did you feel that? Like being torn."
+ },
+ {
+  "id": "OKAFOR_001",
+  "speaker": "OKAFOR",
+  "voice_id": "QZA1myOcnbLYY9uuhixV",
+  "prompt": "Clear!"
+ },
+ {
+  "id": "CH4_019",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "It's gone. It's gone. You're safe."
+ },
+ {
+  "id": "CH4_020",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "You see why we can't let it near you, don't you? It would take this away."
+ },
+ {
+  "id": "CH4_021",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[lying] [gently] It slipped off. Your hands are tired. Put it back on, if you like."
+ },
+ {
+  "id": "CH4_022",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "I took it off, I'm sorry, I'm sorry, I needed to, your hand was—"
+ },
+ {
+  "id": "CH4_023",
+  "speaker": "DISPATCH",
+  "voice_id": "iGjiBXtLd3IyXUaAQk6M",
+  "prompt": "Ma'am, stay with him. Keep going."
+ },
+ {
+  "id": "CH4_024",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[dread] Not that door. Not yet."
+ },
+ {
+  "id": "CH4_025",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[resigned] ...All right. All right. We'll do it together."
+ },
+ {
+  "id": "CH5_001",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[flat] St. Alder's. Fourth floor. Pediatrics."
+ },
+ {
+  "id": "CH5_002",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Nine days. You slept in the chair. You learned every sound the machines make."
+ },
+ {
+  "id": "CH5_003",
+  "speaker": "NURSE",
+  "voice_id": "qY71f9HwmIHc4kJb8RLH",
+  "prompt": "Mr. Reyes, she's resting. Go get something to eat."
+ },
+ {
+  "id": "CH5_004",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "[little] [proud] That's our house. The sun is happy."
+ },
+ {
+  "id": "CH5_005",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "That's the lantern song, daddy. You sing it wrong."
+ },
+ {
+  "id": "CH5_006",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "That's the boat. It's going somewhere nice."
+ },
+ {
+  "id": "CH5_007",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "[sleepy] That's a bird. It flew out the window because it was finished."
+ },
+ {
+  "id": "CH5_008",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "[very small] That's my door. Number seven. Same as me."
+ },
+ {
+  "id": "CH5_009",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Again. You never could find your way in here."
+ },
+ {
+  "id": "CH5_010",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[tight] You were so tired. You went for coffee. Four minutes."
+ },
+ {
+  "id": "CH5_011",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Four minutes, Tomas."
+ },
+ {
+  "id": "CH5_012",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Of course. You did it again."
+ },
+ {
+  "id": "CH5_013",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[cracking] It doesn't matter now. Walking past it now doesn't change anything."
+ },
+ {
+  "id": "CH5_014",
+  "speaker": "NURSE",
+  "voice_id": "qY71f9HwmIHc4kJb8RLH",
+  "prompt": "[gentle] Mr. Reyes. I'm so sorry. She went very peacefully."
+ },
+ {
+  "id": "CH5_015",
+  "speaker": "NURSE",
+  "voice_id": "qY71f9HwmIHc4kJb8RLH",
+  "prompt": "She asked for you. Right at the end. I told her you were coming."
+ },
+ {
+  "id": "TOMAS_004",
+  "speaker": "TOMAS",
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "prompt": "[breaking] I was coming."
+ },
+ {
+  "id": "CH5_016",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[tender] [cruel] But you weren't there. And ever since, you've been the one who wasn't there."
+ },
+ {
+  "id": "CH5_017",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "That's why you're tired. That's why it's all right to stop."
+ },
+ {
+  "id": "CH5_018",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[fast] That's hers. That's Wren's bracelet."
+ },
+ {
+  "id": "CH5_019",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "...Put it down, Tomas."
+ },
+ {
+  "id": "CH5_020",
+  "speaker": "OKAFOR",
+  "voice_id": "QZA1myOcnbLYY9uuhixV",
+  "prompt": "We've got a rhythm— no. Lost it. Back on the chest."
+ },
+ {
+  "id": "CH5_021",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "He's forty-four. He's forty-four, he's got a daughter— had— he's—"
+ },
+ {
+  "id": "CH5_022",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[frightened] Run. Don't look back. Don't look at it. Run."
+ },
+ {
+  "id": "CH5_023",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "Tomas. Tomas. Please."
+ },
+ {
+  "id": "CH5_024",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "That's not her. It uses her voice. It uses everything."
+ },
+ {
+  "id": "CH6_001",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[breathless] It's falling apart. It's all falling toward the center. That's fine. That's what's supposed to happen."
+ },
+ {
+  "id": "CH6_002",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "The door's right there. Go to the light. The yellow one. Not the white one."
+ },
+ {
+  "id": "CH6_003",
+  "speaker": "DISPATCH",
+  "voice_id": "iGjiBXtLd3IyXUaAQk6M",
+  "prompt": "The ambulance is outside. Keep going until they take over."
+ },
+ {
+  "id": "CH6_004",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[pleading] Don't listen. Don't listen. Close your eyes and walk."
+ },
+ {
+  "id": "CH6_005",
+  "speaker": "OKAFOR",
+  "voice_id": "QZA1myOcnbLYY9uuhixV",
+  "prompt": "Charging. Clear."
+ },
+ {
+  "id": "CH6_006",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[in pain] Ah— That. That's what it does. Do you see?"
+ },
+ {
+  "id": "CH6_007",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "You didn't see anything."
+ },
+ {
+  "id": "CH7_001",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[very quiet] Don't look down."
+ },
+ {
+  "id": "CH7_002",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "[counting] [crying] [exhausted] ...twenty-six, twenty-seven, twenty-eight, twenty-nine, thirty."
+ },
+ {
+  "id": "CH7_003",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "Tomas Reyes, you do not get to do this."
+ },
+ {
+  "id": "CH7_004",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "You do not get to leave me too."
+ },
+ {
+  "id": "CH7_005",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "[breaking] I lost her too. I lost her too, and I stayed. I stayed for you. Come back."
+ },
+ {
+  "id": "CH7_006",
+  "speaker": "OKAFOR",
+  "voice_id": "QZA1myOcnbLYY9uuhixV",
+  "prompt": "Ma'am, we've got him. Let us take over. You did good."
+ },
+ {
+  "id": "CH7_007",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "[refusing] [then letting go] No— okay. Okay. Thirty. He's— okay."
+ },
+ {
+  "id": "CH7_008",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "...I didn't want you to see that."
+ },
+ {
+  "id": "TOMAS_005",
+  "speaker": "TOMAS",
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "prompt": "You knew."
+ },
+ {
+  "id": "CH7_009",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "I'm you, Tomas. Of course I knew."
+ },
+ {
+  "id": "CH7_010",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "I'm the part of you that sat in the chair outside room seven and never got up."
+ },
+ {
+  "id": "CH7_011",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Six years I've been asking you to stop. Tonight you finally did."
+ },
+ {
+  "id": "CH7_012",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[pleading] [softer than ever] And she's in there. Wren's in there. Right behind that door. You can see her. You can be there this time."
+ },
+ {
+  "id": "CH7_013",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Out there, she's gone. In here, she's waiting."
+ },
+ {
+  "id": "CH7_014",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Don't make me let her go twice."
+ },
+ {
+  "id": "CH8_001",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "[happy] Daddy! You came."
+ },
+ {
+  "id": "CH8_002",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "I'm drawing you. Hold still."
+ },
+ {
+  "id": "CH8_003",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "You're really bad at holding still."
+ },
+ {
+  "id": "CH8_004",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "Sing it. You promised you'd sing it right one time."
+ },
+ {
+  "id": "CH8_005",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "[singing softly] Little lantern, little light, keep me company tonight..."
+ },
+ {
+  "id": "CH8_006",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "That's you. And that's mommy. She's waiting for you."
+ },
+ {
+  "id": "TOMAS_006",
+  "speaker": "TOMAS",
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "prompt": "[barely] I wasn't there, Wren. I wasn't there."
+ },
+ {
+  "id": "CH8_007",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "[simply] You were getting coffee, silly. That's okay."
+ },
+ {
+  "id": "CH8_008",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "Mommy was there. She held my hand. She said you'd come right back."
+ },
+ {
+  "id": "CH8_009",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "[a little sad] But you didn't come back. Not really. Not for a long time."
+ },
+ {
+  "id": "CH8_010",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[whispering] Pick her up. Just pick her up, Tomas. Nobody would blame you."
+ },
+ {
+  "id": "END_S_001",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "[sleepy] [content] Okay, daddy. You can stay."
+ },
+ {
+  "id": "END_S_002",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[relieved] [almost crying] There. There. No more hurry."
+ },
+ {
+  "id": "END_S_003",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "[fading] [very far] ...Tomas? ...Tomas..."
+ },
+ {
+  "id": "END_S_004",
+  "speaker": "OKAFOR",
+  "voice_id": "QZA1myOcnbLYY9uuhixV",
+  "prompt": "[flat] Time of death..."
+ },
+ {
+  "id": "END_W_001",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "[smiling] Go on. Mommy's tired. She's been pushing really hard."
+ },
+ {
+  "id": "END_W_002",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "Give her this."
+ },
+ {
+  "id": "END_W_003",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "And sing it right, okay? For her."
+ },
+ {
+  "id": "TOMAS_007",
+  "speaker": "TOMAS",
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "prompt": "[crying] I love you, little lantern."
+ },
+ {
+  "id": "END_W_004",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "I know. Go."
+ },
+ {
+  "id": "END_W_005",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[defeated] [quiet] [kind for the first time] ...She's right. She was always right."
+ },
+ {
+  "id": "END_W_006",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Go on, then. I'll stay here with her. Someone should."
+ },
+ {
+  "id": "END_W_007",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Goodbye, Tomas."
+ },
+ {
+  "id": "END_W_008",
+  "speaker": "OKAFOR",
+  "voice_id": "QZA1myOcnbLYY9uuhixV",
+  "prompt": "We've got a pulse. We've got him. Tomas, can you hear me?"
+ },
+ {
+  "id": "END_W_009",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "[laughing and sobbing] Hi. Hi. There you are. Don't you ever—"
+ },
+ {
+  "id": "TOMAS_008",
+  "speaker": "TOMAS",
+  "voice_id": "cjVigY5qzO86Huf0OWal",
+  "prompt": "[hoarse] ...Maren. She... said to give you..."
+ },
+ {
+  "id": "SEC_001",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "They said you might not remember any of it. The doctor said it's normal."
+ },
+ {
+  "id": "SEC_002",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "So I'm going to tell you what I said. Because I said a lot of things on that floor."
+ },
+ {
+  "id": "SEC_003",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "I said I was angry at you. I am. For six years you were in the house and you weren't in the house."
+ },
+ {
+  "id": "SEC_004",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "I said I lost her too. I needed you to know that I lost her too."
+ },
+ {
+  "id": "SEC_005",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "And I said you don't get to leave. Not because I can't do it alone. I can. I'm good at alone now."
+ },
+ {
+  "id": "SEC_006",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "[softer] But I don't want to be. I want you. The slow version. The tea version."
+ },
+ {
+  "id": "SEC_007",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "You were humming. When you came back. The lantern song. You haven't hummed that since..."
+ },
+ {
+  "id": "SEC_008",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "[laughing through tears] You still sing it wrong."
+ },
+ {
+  "id": "SYS_CATCH_001",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "No, no. Not yet. Back you go."
+ },
+ {
+  "id": "SYS_CATCH_002",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "That's what it does. It pulls. Don't let it."
+ },
+ {
+  "id": "SYS_CATCH_003",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[shaken] I felt that. I felt your chest."
+ },
+ {
+  "id": "SYS_CATCH_004",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "It almost had you. Close your eyes sooner."
+ },
+ {
+  "id": "SYS_EYES_001",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "That's right. Just rest your eyes."
+ },
+ {
+  "id": "SYS_EYES_002",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "You could stay like this. It's so much quieter."
+ },
+ {
+  "id": "SYS_EYES_003",
+  "speaker": "MAREN",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "[faint] Open your eyes. Tom, open your eyes."
+ },
+ {
+  "id": "SYS_IDLE_001",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "No hurry. There's never any hurry here."
+ },
+ {
+  "id": "SYS_IDLE_002",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "You used to stand like that in doorways. Halfway in, halfway out."
+ },
+ {
+  "id": "SYS_IDLE_003",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "You can wait as long as you like. She can't."
+ },
+ {
+  "id": "SYS_EDGE_001",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Nothing out there, Tomas. You never went anywhere else."
+ },
+ {
+  "id": "SYS_EDGE_002",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "That way's just fog. All the way down."
+ },
+ {
+  "id": "SYS_THROW_001",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Careful with that. It's the only one."
+ },
+ {
+  "id": "SYS_THROW_002",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "[mild] Well. It was yours to throw."
+ },
+ {
+  "id": "SYS_PAUSE_001",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Taking a breath? Good. Somebody should."
+ },
+ {
+  "id": "EGG_001",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Biscuit. You forgot about Biscuit. He waited at the door every day after she was gone."
+ },
+ {
+  "id": "EGG_002",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "She drew every day. You kept every single one. In the nightstand. You never looked at them."
+ },
+ {
+  "id": "EGG_003",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Where'd you learn that? Oh. You made it up. Later."
+ },
+ {
+  "id": "EGG_004",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "It's not going to move. Not until somebody makes it."
+ },
+ {
+  "id": "EGG_005",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "...Really? Now?"
+ },
+ {
+  "id": "EGG_006",
+  "speaker": "WREN",
+  "voice_id": "MkTSSXNgnBULS6ek4pon",
+  "prompt": "Quack quack quack! That's his name. Quack-quack the Seventh."
+ },
+ {
+  "id": "EGG_007",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "Oh. You again. You know how this ends, don't you? ...Then why are you still walking?"
+ },
+ {
+  "id": "EGG_008",
+  "speaker": "VOICE",
+  "voice_id": "OKqOM06abBsLyb8k3fXw",
+  "prompt": "You know what that is now. You can't un-know it."
+ },
+ {
+  "id": "EGG_009",
+  "speaker": "ELIO",
+  "voice_id": "IP2syKL31S2JthzSSfZH",
+  "prompt": "You'll do the same for somebody someday, mijo."
+ },
+ {
+  "id": "EGG_010",
+  "speaker": "MAREN_MEM",
+  "voice_id": "U7QdEsfRT6SXMGfRQbyN",
+  "prompt": "Okay, okay, I see you, scarf guy!"
+ }
+]

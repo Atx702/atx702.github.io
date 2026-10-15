@@ -6,28 +6,29 @@
 | --- | --- | --- | --- |
 | The Voice | Yogi – Calm & Meditative | `OKqOM06abBsLyb8k3fXw` | Close, warm, unhurried. Always sounds a little too sure. |
 | Maren (tonight + memories) | Heather Faith Cubed | `U7QdEsfRT6SXMGfRQbyN` | Intimate, restrained, breaks under pressure. Memory lines brighter and younger. |
-| Wren | *not cast yet* | — | Sweet, soft, natural child voice. Sample generation was declined; pick a voice before Chapter 5 work. |
-| Tomas | *to cast* | — | Quiet, few lines. Different from the Voice but same age. |
-| Elio | *to cast* | — | Gruff, Spanish accent, desperate. |
-| Lucia | *to cast* | — | Spanish, calling from far away. |
-| Ms. Adair | *to cast* | — | Patient teacher, 50s. |
-| Nurse | *to cast* | — | Gentle, tired, kind. |
-| Dispatcher | *to cast* | — | Calm, professional 911 operator. |
-| Okafor | *to cast* | — | Steady, confident male paramedic. |
-| Lind | *to cast* | — | Brisk female paramedic. |
+| Wren | Tilly – Bright, Spirited, Naive | `MkTSSXNgnBULS6ek4pon` | Sweet, soft, natural child voice. |
+| Tomas | Eric – Smooth, Trustworthy | `cjVigY5qzO86Huf0OWal` | Quiet, few lines. Different from the Voice but same age. |
+| Elio | Ivan (Latin American accent) | `IP2syKL31S2JthzSSfZH` | Gruff, desperate. |
+| Lucia | Carli – Calm, Warm and Expressive | `7DTpboyigwqXiCkvQjMX` | Calling from far away. |
+| Ms. Adair | Marilyn – Warm, Clear British | `CH8NA3Iu30hBBcNIzv9I` | Patient teacher. |
+| Nurse | Faye – Warm, Confident & Comforting | `qY71f9HwmIHc4kJb8RLH` | Gentle, tired, kind. |
+| Dispatcher | Kathryn – Public Announce | `iGjiBXtLd3IyXUaAQk6M` | Calm, professional 911 operator. |
+| Okafor | Dean – steady American | `QZA1myOcnbLYY9uuhixV` | Steady, confident male paramedic. |
+| Lind | Isabelle – Articulate & Trustworthy | `GxGSne3qX4QsbtuEIkbJ` | Brisk female paramedic. |
 
-Model: `eleven_v4` (supports direction tags like `[whispering]`). Export **WAV 44.1 kHz mono**.
+Model: `eleven_v4` (supports direction tags like `[whispering]`).
 
-Sample takes already generated (flow "Last Night - voice samples" in ElevenLabs):
-- The Voice: opening line (4 takes)
-- The Voice: "Don't look at it… close your eyes" (4 takes)
-- Maren: "Tomas, please. Come back." (4 takes)
+## Recorded
 
-## Batch workflow
-1. Run `python tools/extract_lines.py` to regenerate `Unity/Assets/_Project/Data/dialogue.csv` from the script.
-2. Generate each line in ElevenLabs with the character's voice. Name the file exactly `<LINE_ID>.wav` (for example `PRO_001.wav`).
-3. Put files in `Unity/Assets/_Project/Audio/Resources/VO/`. The `DialogueDatabase` loads them by ID automatically.
-4. Leak lines: export clean. Unity applies the leak filter at runtime so the same file can be clear in Ch.7.
+**All 212 lines are recorded** (one take each) and saved in `Unity/Assets/_Project/Audio/Resources/VO/<LINE_ID>.mp3` (MP3, 128 kbps, 44.1 kHz mono, about 17 MB total). `DialogueDatabase` loads them by line ID, so no wiring is needed.
+
+Every take also lives in the ElevenLabs flow "Last Night - voice samples" (`4xeFnJuRsauJwGI4FStd`), where you can re-roll any line you don't like.
+
+## Re-recording a line
+1. Edit the line in `docs/02_Script.md`, then run `python tools/extract_lines.py` and `python tools/build_vo_prompts.py`.
+2. Generate it in ElevenLabs with the prompt and voice from `tools/vo_prompts.json`.
+3. Replace its row in `tools/vo_sessions.txt` with the new session ID, delete the old `.mp3`, and run `python tools/fetch_vo.py <saved status json>` (links expire about 2 hours after the status call).
+4. Leak lines are recorded clean. Unity applies the leak filter at runtime, so the same file plays clear in Ch.7.
 
 ## Audio processing (Unity mixer)
 

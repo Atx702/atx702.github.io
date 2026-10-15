@@ -30,7 +30,7 @@ He's actually refusing to be saved: the thing hunting him is his wife, doing CPR
 | Story, script, dialogue | ✅ Written (v1) |
 | Level design, cutscenes, menus, secrets | ✅ Designed (v1) |
 | Art list + Meshy prompts | ✅ Written; models not generated yet |
-| Voice casting | 🟡 Voice + Maren cast and sampled; 9 roles to cast (including Wren) |
+| Voice casting + recording | ✅ All 11 roles cast; all 212 lines recorded and in `Audio/Resources/VO` |
 | Core systems (save, scenes, beat, dialogue, subtitles) | ✅ Code written |
 | Player mechanics (eyes closed, gaze, gestures, mic humming) | ✅ Code written |
 | The Pull AI (sighting, stalk, chase, circle, doorway) | ✅ Code written |
@@ -39,7 +39,7 @@ He's actually refusing to be saved: the thing hunting him is his wife, doing CPR
 | Menus (boot, bed menu, settings, pause, extras, gallery, achievements, credits, easel) | ✅ Code written; the panels themselves still need laying out in Unity |
 | Easter eggs and achievements | ✅ Code written |
 | **Compile check** | 🟡 All scripts parse cleanly (Roslyn syntax check). Not yet compiled against Unity, so expect a handful of small API fixes on first import. |
-| Scenes, models, animation, VO recording | 🔴 To do (needs the Unity editor, Meshy, Blender) |
+| Scenes, models, animation | 🔴 To do (needs the Unity editor, Meshy, Blender) |
 
 ## Script map
 
@@ -105,7 +105,7 @@ Project Settings → Script Execution Order: `GameManager` (-100), `BeatClock` (
 python tools/extract_lines.py
 ```
 
-This writes `Unity/Assets/_Project/Data/dialogue.csv`. Generate each line in ElevenLabs with the voice from `docs/08_Audio_ElevenLabs.md`, and save as `<LINE_ID>.wav` into `Unity/Assets/_Project/Audio/Resources/VO/`. Lines without audio still work: they show subtitles for a reading-time duration, so you can play the whole game before any recording exists.
+All 212 lines are already recorded and saved as `Unity/Assets/_Project/Audio/Resources/VO/<LINE_ID>.mp3`; the game loads them by ID. The command above regenerates `Data/dialogue.csv` after script edits. To re-record a line, see `docs/08_Audio_ElevenLabs.md`. A line with no audio file still works: it shows subtitles for a reading-time duration.
 
 ## Roadmap
 
@@ -114,7 +114,7 @@ This writes `Unity/Assets/_Project/Data/dialogue.csv`. Generate each line in Ele
 | **M1 Graybox** | Core scene, Field with primitive anchors, Prologue playable with placeholder VO | You can walk from the bed to the rise and pick up the boat in a headset |
 | **M2 Mechanics** | Eyes closed, shy house, the Pull (stalk mode), save/load | Ch.1 and the Pull work in graybox |
 | **M3 All chapters graybox** | Directors for Ch.1–5, Ch.6–8 hooked up | Whole game playable start to finish in graybox (~65 min) |
-| **M4 Voice** | All 212 lines recorded in ElevenLabs | No placeholder subtitles left |
+| **M4 Voice** ✅ | All 212 lines recorded in ElevenLabs | Done |
 | **M5 Art** | Meshy assets cleaned in Blender, characters rigged, shaders | Every chapter dressed |
 | **M6 Cutscenes + animation** | All 14 timelines, character animation, lip-sync | All story beats staged |
 | **M7 Menus + settings** | Bed menu, pause, settings, extras, achievements | Every setting works |
