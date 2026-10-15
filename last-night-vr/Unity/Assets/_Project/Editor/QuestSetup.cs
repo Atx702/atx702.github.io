@@ -34,6 +34,7 @@ namespace LastNight.EditorTools
             TagsAndLayers();
             XR(BuildTargetGroup.Android);
             XR(BuildTargetGroup.Standalone); // Quest Link: press Play in the editor with the headset on
+            ExecutionOrder();
             bool restart = InputBackend();
             AssetDatabase.SaveAssets();
             Debug.Log("[Last Night] Quest 2 project settings applied.");
@@ -166,6 +167,22 @@ namespace LastNight.EditorTools
             if (feature == null) { Debug.LogWarning($"[Last Night] OpenXR feature {featureId} not found for {group}."); return; }
             feature.enabled = true;
             EditorUtility.SetDirty(feature);
+        }
+
+        /// <summary>Singletons first, so everything that subscribes to them in OnEnable finds them.</summary>
+        static void ExecutionOrder()
+        {
+            void Order(System.Type t, int order)
+            {
+                foreach (var s in MonoImporter.GetAllRuntimeMonoScripts())
+                    if (s != null && s.GetClass() == t && MonoImporter.GetExecutionOrder(s) != order)
+                        MonoImporter.SetExecutionOrder(s, order);
+            }
+            Order(typeof(LastNight.Core.GameManager), -100);
+            Order(typeof(LastNight.Player.PlayerRig), -95);
+            Order(typeof(LastNight.Audio.BeatClock), -90);
+            Order(typeof(LastNight.Dialogue.DialoguePlayer), -90);
+            Order(typeof(LastNight.Player.EyesClosed), -80);
         }
 
         /// <summary>Both input backends: XRI uses the Input System, a few Unity bits still poll the old one.</summary>

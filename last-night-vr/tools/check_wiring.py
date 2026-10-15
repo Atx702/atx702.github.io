@@ -35,7 +35,10 @@ def classes():
             nxt = re.search(r"\n    (?:public|internal)\s+(?:abstract\s+|static\s+|sealed\s+)*class\s", src[start:])
             body = src[start: start + nxt.start()] if nxt else src[start:]
             fields = set()
-            for d in re.finditer(r"(?:\[SerializeField\][^;\n]*?|public\s+)([\w.<>\[\],]+)\s+([\w\s,=.\-+f{}\"()]+?);", body):
+            pattern = (r"(?:\[SerializeField\]\s*(?:\[[^\]]*\]\s*)*(?:protected\s+|private\s+|internal\s+)?"
+                       r"|public\s+(?!static|const|override|abstract|virtual|event|class|enum|readonly))"
+                       r"([\w.<>\[\],]+)\s+([\w\s,=.\-+f{}\"()]+?);")
+            for d in re.finditer(pattern, body):
                 decl = d.group(2)
                 for part in re.split(r",(?![^{]*})", decl):
                     n = part.split("=")[0].strip()

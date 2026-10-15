@@ -161,6 +161,13 @@ namespace LastNight.EditorTools
         public static GameObject Floor(string name, Transform parent, Vector3 center, Vector2 size, Color color)
             => Block(name, parent, center - new Vector3(0, 0.05f, 0), new Vector3(size.x, 0.1f, size.y), color);
 
+        /// <summary>Clears static flags on an object and its children (anything that moves, is grabbed or animated).</summary>
+        public static void Dynamic(GameObject go)
+        {
+            foreach (var t in go.GetComponentsInChildren<Transform>(true))
+                GameObjectUtility.SetStaticEditorFlags(t.gameObject, 0);
+        }
+
         public static void Static(GameObject go)
         {
             GameObjectUtility.SetStaticEditorFlags(go, StaticEditorFlags.BatchingStatic | StaticEditorFlags.OccluderStatic | StaticEditorFlags.OccludeeStatic);
@@ -319,6 +326,7 @@ namespace LastNight.EditorTools
 
         public static XRGrabInteractable Grabbable(GameObject go, float mass = 0.4f, bool gravity = true, bool kinematic = false)
         {
+            Dynamic(go);
             if (go.GetComponent<Collider>() == null) FitCollider(go);
             var rb = Add<Rigidbody>(go);
             rb.mass = mass;
@@ -335,6 +343,7 @@ namespace LastNight.EditorTools
 
         public static XRSimpleInteractable Simple(GameObject go)
         {
+            Dynamic(go);
             if (go.GetComponent<Collider>() == null) FitCollider(go);
             return Add<XRSimpleInteractable>(go);
         }
@@ -530,10 +539,16 @@ namespace LastNight.EditorTools
 
         // ---------------------------------------------------------------- game pieces
 
-        public static PlayerSpawnPoint Spawn(Transform parent, Vector3 pos, float yaw, bool isDefault = true, Chapter? returnFrom = null, string name = "Spawn")
+        public static PlayerSpawnPoint Spawn(Transform parent, Vector3 pos, float yaw, bool isDefault = true, Chapter? returnFrom = null,
+            string name = "Spawn", Chapter? startOf = null)
         {
             var sp = Go(name, parent, pos, yaw).AddComponent<PlayerSpawnPoint>();
             Set(sp, "isDefault", isDefault);
+            if (startOf.HasValue)
+            {
+                Set(sp, "isChapterStart", true);
+                Set(sp, "startOf", startOf.Value);
+            }
             if (returnFrom.HasValue)
             {
                 Set(sp, "isReturnPoint", true);
@@ -605,6 +620,62 @@ namespace LastNight.EditorTools
             Set(d, "beatVolume", beatVolume);
             Set(d, "beatIntensity", beatIntensity);
             return d;
+        }
+
+        /// <summary>A tall column of light that shows through the fog (anchor markers). Additive, ignores fog.</summary>
+        public static GameObject Beacon(string name, Transform parent, Vector3 pos, Color color, float height = 60f, float width = 1.2f)
+        {
+            var go = Shape(PrimitiveType.Cylinder, name, parent, pos + Vector3.up * height / 2, new Vector3(width, height / 2, width), color);
+            var key = "Beacon_" + ColorUtility.ToHtmlStringRGB(color);
+            go.GetComponent<Renderer>().sharedMaterial = ShaderMat("LastNight/PullBody", key, m =>
+            {
+                m.SetColor("_Color", color);
+                m.SetFloat("_Shimmer", 0f);
+            });
+            return go;
+        }
+
+        /// <summary>Makes an object grabbable (or just pokeable) and adds a GrabSignal the directors can poll.</summary>
+        public static Interaction.GrabSignal Signal(GameObject go, bool grabbable = true, float mass = 0.3f, bool gravity = true, bool kinematic = false)
+        {
+            if (grabbable) Grabbable(go, mass, gravity, kinematic);
+            else Simple(go);
+            return Add<Interaction.GrabSignal>(go);
+        }
+
+        /// <summary>Scatters low grass tufts (thin blocks) in a ring, for parallax while walking.</summary>
+        public static void Tufts(Transform parent, Vector3 center, float innerRadius, float outerRadius, int count, Color color, int seed)
+        {
+            var root = Go("Grass Tufts", parent, center);
+            var rnd = new System.Random(seed);
+            var mat = Mat(color);
+            for (int i = 0; i < count; i++)
+            {
+                float a = (float)(rnd.NextDouble() * Mathf.PI * 2);
+                float r = Mathf.Lerp(innerRadius, outerRadius, Mathf.Sqrt((float)rnd.NextDouble()));
+                float h = 0.25f + (float)rnd.NextDouble() * 0.5f;
+                var t = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                t.name = "Tuft";
+                Object.DestroyImmediate(t.GetComponent<Collider>());
+                t.transform.SetParent(root.transform, false);
+                t.transform.localPosition = new Vector3(Mathf.Cos(a) * r, h / 2, Mathf.Sin(a) * r);
+                t.transform.localRotation = Quaternion.Euler(0, (float)rnd.NextDouble() * 180f, ((float)rnd.NextDouble() - 0.5f) * 20f);
+                t.transform.localScale = new Vector3(0.05f, h, 0.3f + (float)rnd.NextDouble() * 0.4f);
+                t.GetComponent<Renderer>().sharedMaterial = mat;
+                Static(t);
+            }
+        }
+
+        /// <summary>Invisible walls on a square, so nobody walks off the edge of the world.</summary>
+        public static void Bounds(Transform parent, Vector3 center, float halfSize, float height = 6f)
+        {
+            var root = Go("World Bounds", parent, center);
+            for (int i = 0; i < 4; i++)
+            {
+                var w = Go("Wall", root.transform, Quaternion.Euler(0, i * 90, 0) * new Vector3(0, height / 2, halfSize));
+                w.transform.localRotation = Quaternion.Euler(0, i * 90, 0);
+                Add<BoxCollider>(w).size = new Vector3(halfSize * 2, height, 1f);
+            }
         }
 
         /// <summary>A flat image (a drawing on paper) with a procedural texture from Art/Drawings, if present.</summary>

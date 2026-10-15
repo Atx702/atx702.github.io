@@ -15,9 +15,13 @@ namespace LastNight.Core
         [Tooltip("In the Field scene: use this spawn when returning from this chapter's anchor.")]
         [SerializeField] bool isReturnPoint;
         [SerializeField] Chapter returnFrom;
+        [Tooltip("Use this spawn when this chapter starts in a scene shared by several chapters (the Field).")]
+        [SerializeField] bool isChapterStart;
+        [SerializeField] Chapter startOf;
 
         public bool IsDefault => isDefault;
         public bool IsReturnPointFor(Chapter c) => isReturnPoint && returnFrom == c;
+        public bool IsStartFor(Chapter c) => isChapterStart && startOf == c;
 
         void OnEnable()
         {

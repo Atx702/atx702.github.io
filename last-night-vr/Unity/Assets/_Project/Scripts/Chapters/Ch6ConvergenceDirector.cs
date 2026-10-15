@@ -15,6 +15,7 @@ namespace LastNight.Chapters
     /// </summary>
     public class Ch6ConvergenceDirector : ChapterDirector
     {
+        [SerializeField] GameObject convergenceRoot;      // fragments and lamp, hidden on ordinary field visits
         [SerializeField] DriftingFragment[] fragments;
         [SerializeField] ShockScheduler shocks;
         [SerializeField] Transform center;
@@ -31,6 +32,7 @@ namespace LastNight.Chapters
 
         protected override IEnumerator Run()
         {
+            if (convergenceRoot != null) convergenceRoot.SetActive(true);
             BeatClock.Instance?.StartBeat(0.9f, 0.6f);
             bedroomLamp.SetActive(true);
             foreach (var f in fragments) f.Begin(center.position);

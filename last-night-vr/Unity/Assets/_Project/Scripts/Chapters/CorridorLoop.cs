@@ -18,6 +18,7 @@ namespace LastNight.Chapters
         [SerializeField] Collider loopEndTrigger;           // at the end of the looping section
         [SerializeField] Transform loopStart, loopEnd;      // identical points in two modules
         [SerializeField] GameObject exitModule;             // enabled when solved
+        [SerializeField] GameObject loopBlocker;            // the wall at the end of the loop, removed when solved
         [SerializeField] GameObject[] extraModules;         // enabled by Lengthen() after coffee
         [SerializeField] AudioSource resetHum;
 
@@ -50,6 +51,7 @@ namespace LastNight.Chapters
             {
                 Solved = true;
                 exitModule.SetActive(true);
+                if (loopBlocker != null) loopBlocker.SetActive(false);
                 loopEndTrigger.enabled = false;
             }
         }

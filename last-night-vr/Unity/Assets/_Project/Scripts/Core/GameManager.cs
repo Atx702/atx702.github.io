@@ -179,11 +179,15 @@ namespace LastNight.Core
             loadedScene = sceneName;
 
             PlayerSpawnPoint spawn = null;
-            foreach (var s in FindObjectsByType<PlayerSpawnPoint>(FindObjectsSortMode.None))
+            var spawns = FindObjectsByType<PlayerSpawnPoint>(FindObjectsSortMode.None);
+            foreach (var s in spawns)
             {
                 if (lastCompleted.HasValue && s.IsReturnPointFor(lastCompleted.Value)) { spawn = s; break; }
-                if (s.IsDefault && spawn == null) spawn = s;
+                if (!lastCompleted.HasValue && s.IsStartFor(State.currentChapter)) { spawn = s; break; }
             }
+            if (spawn == null)
+                foreach (var s in spawns)
+                    if (s.IsDefault) { spawn = s; break; }
             if (spawn != null)
             {
                 spawn.SetAsCheckpoint();

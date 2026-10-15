@@ -4,8 +4,8 @@ Shader "LastNight/World"
 {
     Properties
     {
-        _BaseMap ("Base Map", 2D) = "white" {}
-        _BaseColor ("Base Color", Color) = (1, 1, 1, 1)
+        [MainTexture] _BaseMap ("Base Map", 2D) = "white" {}
+        [MainColor] _BaseColor ("Base Color", Color) = (1, 1, 1, 1)
         [HDR] _EmissionColor ("Emission", Color) = (0, 0, 0, 1)
         _Decay ("Decay", Range(0, 1)) = 0
         [Enum(UnityEngine.Rendering.CullMode)] _Cull ("Cull", Float) = 2
@@ -77,14 +77,15 @@ Shader "LastNight/World"
                 UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);
                 half4 albedo = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, i.uv) * _BaseColor;
 
-                // Memory decay: grains of the surface vanish and the colour drains out.
+                // Memory decay: below 0.5 the colour slowly drains (the creep while you're in a memory);
+                // above 0.5 grains of the surface vanish (Dissolve when you leave).
                 if (_Decay > 0.001)
                 {
-                    float3 cell = floor(i.positionWS * 14.0);
-                    float n = frac(sin(dot(cell, float3(12.9898, 78.233, 37.719))) * 43758.5453);
-                    clip(n + 0.001 - _Decay);
                     half lum = dot(albedo.rgb, half3(0.299, 0.587, 0.114));
                     albedo.rgb = lerp(albedo.rgb, lum.xxx, saturate(_Decay * 1.6));
+                    float3 cell = floor(i.positionWS * 14.0);
+                    float n = frac(sin(dot(cell, float3(12.9898, 78.233, 37.719))) * 43758.5453);
+                    clip(n + 0.001 - saturate((_Decay - 0.5) * 2.0));
                 }
 
                 float3 n3 = normalize(i.normalWS);

@@ -11,6 +11,8 @@ namespace LastNight.World
     public class TriggerRelay : MonoBehaviour
     {
         [SerializeField] bool once = true;
+        [Tooltip("If set, fires when this object enters (e.g. the toy boat dropped in the lake) instead of the player.")]
+        [SerializeField] GameObject requiredObject;
         [SerializeField] UnityEvent onEnter;
         [SerializeField] UnityEvent onExit;
 
@@ -18,16 +20,20 @@ namespace LastNight.World
 
         void Reset() => GetComponent<Collider>().isTrigger = true;
 
+        bool Matches(Collider other) => requiredObject != null
+            ? other.attachedRigidbody != null ? other.attachedRigidbody.gameObject == requiredObject : other.gameObject == requiredObject
+            : other.CompareTag("Player");
+
         void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("Player") || (once && fired)) return;
+            if (!Matches(other) || (once && fired)) return;
             fired = true;
             onEnter?.Invoke();
         }
 
         void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Player")) onExit?.Invoke();
+            if (Matches(other)) onExit?.Invoke();
         }
     }
 }

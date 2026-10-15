@@ -20,7 +20,8 @@ namespace LastNight.World
         {
             var state = GameManager.Instance != null ? GameManager.Instance.State : new GameState();
             bool done = state.IsComplete(chapter);
-            bool available = !done && (chapter != Chapter.Convergence || state.AllMemoryAnchorsComplete);
+            bool available = !done && (chapter != Chapter.Convergence || state.AllMemoryAnchorsComplete)
+                             && state.currentChapter != chapter; // already inside it (Convergence lives in the Field)
             if (visualsWhenAvailable != null) visualsWhenAvailable.SetActive(available);
             if (visualsWhenDone != null) visualsWhenDone.SetActive(done);
             enabled = available;

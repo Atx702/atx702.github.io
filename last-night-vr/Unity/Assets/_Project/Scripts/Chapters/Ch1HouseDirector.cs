@@ -23,6 +23,7 @@ namespace LastNight.Chapters
         [SerializeField] SocketSet boatParts;           // hull, mast, sail sockets on the kitchen table
         [SerializeField] GrabSignal sailDrawing;        // fridge drawing (Wren's drawing #1 is also here)
         [SerializeField] GameObject assembledBoat;      // replaces the three parts when complete
+        [SerializeField] GameObject[] boatPartObjects;  // hidden when the assembled boat appears
         [SerializeField] GameObject backDoorLocked, backDoorOpen;
 
         [Header("Lake")]
@@ -75,6 +76,7 @@ namespace LastNight.Chapters
                 yield return null;
             }
             yield return Wait(0.5f);
+            if (boatPartObjects != null) foreach (var p in boatPartObjects) if (p != null) p.SetActive(false);
             assembledBoat.SetActive(true);
             Achievement("WRONG_BLUE");
             yield return Say("CH1_009");
